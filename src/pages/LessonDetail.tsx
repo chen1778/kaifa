@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useStore } from '../store';
-import { ChevronLeft, Play, CheckCircle2, RotateCcw, Save, Code, Terminal, Copy, Check } from 'lucide-react';
+import { ChevronLeft, Play, CheckCircle2, RotateCcw, Save, Code, Terminal, Copy, Check, AlertCircle } from 'lucide-react';
 
 const LessonDetail: React.FC = () => {
   const { id, lessonId } = useParams<{ id: string; lessonId: string }>();
@@ -15,6 +15,7 @@ const LessonDetail: React.FC = () => {
   const pyodideRef = useRef<any>(null);
   const [pyodideLoaded, setPyodideLoaded] = useState(false);
   const [pyodideLoading, setPyodideLoading] = useState(true);
+  const [useJudge0, setUseJudge0] = useState(false);
 
   // 练习题目数据
   const practiceQuestions = [
@@ -89,17 +90,17 @@ sales_data = {
 print("销售数据:", sales_data)
 
 # 4. 循环
-print("\\n每日销售额明细:")
+print("\n每日销售额明细:")
 for i, sale in enumerate(daily_sales):
     print(f"第{i+1}天: {sale}元")
 
 # 5. 函数
 def calculate_total(sales_list):
-    \"\"\"计算总销售额\"\"\"
+    """计算总销售额"""
     return sum(sales_list)
 
 total = calculate_total(daily_sales)
-print("\\n函数计算的总销售额:", total)
+print("\n函数计算的总销售额:", total)
 `,
     learning_points: [
       "掌握Python变量和数据类型",
@@ -111,21 +112,31 @@ print("\\n函数计算的总销售额:", total)
 
   const lesson = currentLesson || mockLesson;
 
-  // Load Pyodide from CDN
+  // Load Pyodide from CDN with fallback to Judge0
   useEffect(() => {
     const loadPyodide = async () => {
       setPyodideLoading(true);
+      setOutput('正在加载Python环境...');
+      
       try {
-        // Create script tag to load Pyodide
+        // 尝试加载Pyodide
         const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
+        script.src = 'https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js';
         script.async = true;
         
+        const loadTimeout = setTimeout(() => {
+          // 超时后切换到Judge0
+          setUseJudge0(true);
+          setPyodideLoading(false);
+          setOutput('Pyodide加载超时，已切换到Judge0 API');
+        }, 10000); // 10秒超时
+        
         script.onload = async () => {
+          clearTimeout(loadTimeout);
           try {
             // @ts-ignore
             const pyodideInstance = await window.loadPyodide({
-              indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
+              indexURL: "https://cdn.jsdelivr.net/pyodide/v0.23.4/full/"
             });
             pyodideRef.current = pyodideInstance;
             setPyodideLoaded(true);
@@ -133,21 +144,28 @@ print("\\n函数计算的总销售额:", total)
             setOutput('Python环境已就绪！开始编写代码吧。');
           } catch (err) {
             console.error('Failed to initialize Pyodide:', err);
-            setOutput('Python环境加载失败，请刷新页面重试。');
+            // 初始化失败，切换到Judge0
+            setUseJudge0(true);
             setPyodideLoading(false);
+            setOutput('Pyodide初始化失败，已切换到Judge0 API');
           }
         };
         
         script.onerror = () => {
-          setOutput('Python环境加载失败，请刷新页面重试。');
+          clearTimeout(loadTimeout);
+          // 加载失败，切换到Judge0
+          setUseJudge0(true);
           setPyodideLoading(false);
+          setOutput('Pyodide加载失败，已切换到Judge0 API');
         };
         
         document.head.appendChild(script);
       } catch (error) {
         console.error('Failed to load Pyodide:', error);
-        setOutput('Python环境加载失败，请刷新页面重试。');
+        // 任何错误都切换到Judge0
+        setUseJudge0(true);
         setPyodideLoading(false);
+        setOutput('Pyodide加载失败，已切换到Judge0 API');
       }
     };
 
@@ -168,7 +186,8 @@ print("\\n函数计算的总销售额:", total)
     setShowAnswer(false);
   };
 
-  const runCode = async () => {
+  // 使用Pyodide运行代码
+  const runCodeWithPyodide = async () => {
     if (!pyodideRef.current || !pyodideLoaded) {
       setOutput('Python环境正在加载中，请稍候...');
       return;
@@ -197,6 +216,61 @@ print("\\n函数计算的总销售额:", total)
       setOutput(`错误: ${error}`);
     } finally {
       setIsRunning(false);
+    }
+  };
+
+  // 使用Judge0 API运行代码
+  const runCodeWithJudge0 = async () => {
+    setIsRunning(true);
+    setOutput('正在运行...');
+
+    try {
+      const response = await fetch('https://api.judge0.com/submissions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-Key': 'anonymous'
+        },
+        body: JSON.stringify({
+          source_code: code,
+          language_id: 71, // Python 3
+          stdin: ''
+        })
+      });
+
+      const submission = await response.json();
+      
+      // 轮询结果
+      const checkStatus = async () => {
+        const statusResponse = await fetch(`https://api.judge0.com/submissions/${submission.token}`);
+        const status = await statusResponse.json();
+        
+        if (status.status.id === 3) { // 完成
+          setOutput(status.stdout || '代码执行完成，没有输出。');
+          if (status.stderr) {
+            setOutput(prev => prev + '\n错误: ' + status.stderr);
+          }
+          setIsRunning(false);
+        } else if (status.status.id >= 4) { // 错误
+          setOutput(`错误: ${status.stderr || '执行失败'}`);
+          setIsRunning(false);
+        } else { // 等待
+          setTimeout(checkStatus, 1000);
+        }
+      };
+      
+      setTimeout(checkStatus, 1000);
+    } catch (error) {
+      setOutput(`错误: ${error}`);
+      setIsRunning(false);
+    }
+  };
+
+  const runCode = async () => {
+    if (useJudge0) {
+      await runCodeWithJudge0();
+    } else {
+      await runCodeWithPyodide();
     }
   };
 
@@ -374,6 +448,12 @@ print("\\n函数计算的总销售额:", total)
               <div className="flex items-center bg-gray-800 px-4 py-2">
                 <Terminal className="h-4 w-4 text-gray-400 mr-2" />
                 <span className="text-gray-400 text-sm">运行结果</span>
+                {useJudge0 && (
+                  <span className="ml-auto text-yellow-400 text-xs flex items-center">
+                    <AlertCircle className="h-3 w-3 mr-1" />
+                    使用Judge0 API
+                  </span>
+                )}
               </div>
               <div className="h-80 overflow-auto p-4 font-mono text-sm">
                 <pre className="text-gray-800 whitespace-pre-wrap">{output || (pyodideLoading ? 'Python环境加载中...' : '点击"运行"按钮执行代码')}</pre>
@@ -390,6 +470,9 @@ print("\\n函数计算的总销售额:", total)
               <li>• 点击"运行"按钮执行代码并查看结果</li>
               <li>• 如需查看答案，点击"答案"按钮</li>
               <li>• 可以随时点击"重置"恢复到初始代码</li>
+              {useJudge0 && (
+                <li className="text-red-800">• 当前使用Judge0 API运行代码，可能会有一定延迟</li>
+              )}
             </ul>
           </div>
         </div>
