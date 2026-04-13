@@ -25,19 +25,19 @@ const Navbar: React.FC = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             <Link to="/" className="text-gray-700 hover:text-blue-600 transition-colors">
-              <Home className="h-5 w-5 inline mr-1" /> Home
+              <Home className="h-5 w-5 inline mr-1" /> 首页
             </Link>
             <Link to="/courses" className="text-gray-700 hover:text-blue-600 transition-colors">
-              <BookOpen className="h-5 w-5 inline mr-1" /> Courses
+              <BookOpen className="h-5 w-5 inline mr-1" /> 课程
             </Link>
             <Link to="/practice" className="text-gray-700 hover:text-blue-600 transition-colors">
-              <Code className="h-5 w-5 inline mr-1" /> Practice
+              <Code className="h-5 w-5 inline mr-1" /> 练习
             </Link>
             <Link to="/projects" className="text-gray-700 hover:text-blue-600 transition-colors">
-              <Briefcase className="h-5 w-5 inline mr-1" /> Projects
+              <Briefcase className="h-5 w-5 inline mr-1" /> 项目
             </Link>
             <Link to="/achievements" className="text-gray-700 hover:text-blue-600 transition-colors">
-              <Trophy className="h-5 w-5 inline mr-1" /> Achievements
+              <Trophy className="h-5 w-5 inline mr-1" /> 成就
             </Link>
 
             {user ? (
@@ -50,13 +50,13 @@ const Navbar: React.FC = () => {
                   className="text-gray-700 hover:text-red-600 transition-colors flex items-center"
                   disabled={isLoading}
                 >
-                  <LogOut className="h-5 w-5 inline mr-1" /> Logout
+                  <LogOut className="h-5 w-5 inline mr-1" /> 退出
                 </button>
               </div>
             ) : (
               <div className="flex items-center space-x-4">
-                <Link to="/auth/login" className="text-gray-700 hover:text-blue-600 transition-colors">Login</Link>
-                <Link to="/auth/register" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">Register</Link>
+                <Link to="/auth/login" className="text-gray-700 hover:text-blue-600 transition-colors">登录</Link>
+                <Link to="/auth/register" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">注册</Link>
               </div>
             )}
           </div>
@@ -75,27 +75,27 @@ const Navbar: React.FC = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 space-y-3">
-            <Link to="/" className="block text-gray-700 hover:text-blue-600 transition-colors">Home</Link>
-            <Link to="/courses" className="block text-gray-700 hover:text-blue-600 transition-colors">Courses</Link>
-            <Link to="/practice" className="block text-gray-700 hover:text-blue-600 transition-colors">Practice</Link>
-            <Link to="/projects" className="block text-gray-700 hover:text-blue-600 transition-colors">Projects</Link>
-            <Link to="/achievements" className="block text-gray-700 hover:text-blue-600 transition-colors">Achievements</Link>
+            <Link to="/" className="block text-gray-700 hover:text-blue-600 transition-colors">首页</Link>
+            <Link to="/courses" className="block text-gray-700 hover:text-blue-600 transition-colors">课程</Link>
+            <Link to="/practice" className="block text-gray-700 hover:text-blue-600 transition-colors">练习</Link>
+            <Link to="/projects" className="block text-gray-700 hover:text-blue-600 transition-colors">项目</Link>
+            <Link to="/achievements" className="block text-gray-700 hover:text-blue-600 transition-colors">成就</Link>
 
             {user ? (
               <div className="pt-3 border-t border-gray-200">
-                <Link to="/dashboard" className="block text-gray-700 hover:text-blue-600 transition-colors">Dashboard</Link>
+                <Link to="/dashboard" className="block text-gray-700 hover:text-blue-600 transition-colors">仪表盘</Link>
                 <button
                   onClick={handleLogout}
                   className="w-full text-left text-gray-700 hover:text-red-600 transition-colors"
                   disabled={isLoading}
                 >
-                  Logout
+                  退出
                 </button>
               </div>
             ) : (
               <div className="pt-3 border-t border-gray-200 space-y-2">
-                <Link to="/auth/login" className="block text-gray-700 hover:text-blue-600 transition-colors">Login</Link>
-                <Link to="/auth/register" className="block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-center">Register</Link>
+                <Link to="/auth/login" className="block text-gray-700 hover:text-blue-600 transition-colors">登录</Link>
+                <Link to="/auth/register" className="block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-center">注册</Link>
               </div>
             )}
           </div>

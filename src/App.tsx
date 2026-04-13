@@ -7,6 +7,9 @@ import Home from './pages/Home';
 import Courses from './pages/Courses';
 import CourseDetail from './pages/CourseDetail';
 import LessonDetail from './pages/LessonDetail';
+import Practice from './pages/Practice';
+import Projects from './pages/Projects';
+import Achievements from './pages/Achievements';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 
@@ -27,6 +30,9 @@ const App: React.FC = () => {
             <Route path="/courses" element={<Courses />} />
             <Route path="/courses/:id" element={<CourseDetail />} />
             <Route path="/courses/:id/lessons/:lessonId" element={<LessonDetail />} />
+            <Route path="/practice" element={<Practice />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/achievements" element={<Achievements />} />
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
             <Route path="*" element={<Navigate to="/" replace />} />
