@@ -1,6 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Projects: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleViewProject = (projectId: string) => {
+    // 这里可以根据项目ID导航到相应的项目详情页
+    // 目前暂时导航到课程页面作为示例
+    navigate(`/courses/${projectId}`);
+  };
+
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-3xl mx-auto">
@@ -43,7 +52,10 @@ const Projects: React.FC = () => {
               </p>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500">难度：中级</span>
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                <button 
+                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                  onClick={() => handleViewProject('2')}
+                >
                   查看项目
                 </button>
               </div>
@@ -56,7 +68,10 @@ const Projects: React.FC = () => {
               </p>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500">难度：高级</span>
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                <button 
+                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                  onClick={() => handleViewProject('2')}
+                >
                   查看项目
                 </button>
               </div>
@@ -69,7 +84,10 @@ const Projects: React.FC = () => {
               </p>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500">难度：中级</span>
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                <button 
+                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                  onClick={() => handleViewProject('2')}
+                >
                   查看项目
                 </button>
               </div>

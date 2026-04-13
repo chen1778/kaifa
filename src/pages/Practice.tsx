@@ -1,6 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Practice: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleStartPractice = (courseId: string) => {
+    navigate(`/courses/${courseId}`);
+  };
+
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-3xl mx-auto">
@@ -38,21 +45,30 @@ const Practice: React.FC = () => {
             <div className="border-b border-gray-200 pb-4">
               <h3 className="font-medium text-gray-800 mb-2">数据分析入门练习</h3>
               <p className="text-gray-600 text-sm mb-3">完成10个基础Python数据分析任务，掌握核心概念</p>
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+              <button 
+                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                onClick={() => handleStartPractice('1')}
+              >
                 开始练习
               </button>
             </div>
             <div className="border-b border-gray-200 pb-4">
               <h3 className="font-medium text-gray-800 mb-2">销售数据可视化挑战</h3>
               <p className="text-gray-600 text-sm mb-3">使用Matplotlib创建销售数据图表，分析销售趋势</p>
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+              <button 
+                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                onClick={() => handleStartPractice('1')}
+              >
                 开始练习
               </button>
             </div>
             <div>
               <h3 className="font-medium text-gray-800 mb-2">市场分析项目</h3>
               <p className="text-gray-600 text-sm mb-3">分析市场数据，识别潜在商机，提供商业建议</p>
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+              <button 
+                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                onClick={() => handleStartPractice('1')}
+              >
                 开始练习
               </button>
             </div>
