@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useStore } from '../store';
-import { ChevronLeft, Play, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ChevronLeft, Play, CheckCircle2, RotateCcw, Save, Code, Terminal, Copy, Check } from 'lucide-react';
 
 const LessonDetail: React.FC = () => {
   const { id, lessonId } = useParams<{ id: string; lessonId: string }>();
@@ -10,8 +10,49 @@ const LessonDetail: React.FC = () => {
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
   const pyodideRef = useRef<any>(null);
   const [pyodideLoaded, setPyodideLoaded] = useState(false);
+  const [pyodideLoading, setPyodideLoading] = useState(true);
+
+  // 练习题目数据
+  const practiceQuestions = [
+    {
+      id: 1,
+      title: "练习1：打印问候语",
+      description: "编写一个程序，打印 'Hello, 数据分析世界！'",
+      template: "# 在这里编写代码\nprint('Hello, World!')",
+      answer: "print('Hello, 数据分析世界！')",
+      difficulty: "简单"
+    },
+    {
+      id: 2,
+      title: "练习2：计算销售总额",
+      description: "给定销售数据，计算总销售额",
+      template: "# 销售数据\nsales = [1000, 1200, 900, 1500, 1300]\n\n# 在这里计算总销售额\ntotal = \nprint('总销售额:', total)",
+      answer: "# 销售数据\nsales = [1000, 1200, 900, 1500, 1300]\n\n# 在这里计算总销售额\ntotal = sum(sales)\nprint('总销售额:', total)",
+      difficulty: "中等"
+    },
+    {
+      id: 3,
+      title: "练习3：创建字典数据",
+      description: "创建一个包含日期和销售额的字典，然后打印出来",
+      template: "# 创建销售数据字典\nsales_data = {\n    '日期': ['2023-01-01', '2023-01-02'],\n    '销售额': [1000, 1200]\n}\n\n# 打印数据\nprint(sales_data)",
+      answer: "# 创建销售数据字典\nsales_data = {\n    '日期': ['2023-01-01', '2023-01-02', '2023-01-03'],\n    '销售额': [1000, 1200, 900]\n}\n\n# 打印数据\nfor date, sale in zip(sales_data['日期'], sales_data['销售额']):\n    print(f'{date}: {sale}元')",
+      difficulty: "中等"
+    },
+    {
+      id: 4,
+      title: "练习4：使用列表推导式",
+      description: "将销售数据转换为万元单位（除以10000）",
+      template: "# 原始销售数据（元）\nsales = [10000, 25000, 18000, 32000]\n\n# 使用列表推导式转换为万元\nsales_wan = [x / 10000 for x in sales]\nprint('销售额（万元）:', sales_wan)",
+      answer: "# 原始销售数据（元）\nsales = [10000, 25000, 18000, 32000, 45000]\n\n# 使用列表推导式转换为万元\nsales_wan = [x / 10000 for x in sales]\nprint('销售额（万元）:', sales_wan)\nprint('平均销售额（万元）:', sum(sales_wan) / len(sales_wan))",
+      difficulty: "中等"
+    }
+  ];
+
+  const [currentQuestion, setCurrentQuestion] = useState(0);
 
   useEffect(() => {
     if (lessonId) {
@@ -22,59 +63,91 @@ const LessonDetail: React.FC = () => {
   // Mock lesson data for demonstration
   const mockLesson = {
     id: 1,
-    title: "Python环境搭建",
-    content: "学习如何安装和配置Python环境，包括Anaconda的使用。",
-    business_scenario: "你是一家电商公司的数据分析实习生，需要搭建Python环境来分析销售数据。",
-    code_example: `# 安装必要的库
-!pip install pandas matplotlib
+    title: "Python基础语法与数据结构",
+    content: "掌握Python的基本语法和常用数据结构，为后续的数据分析打下基础。",
+    business_scenario: "你是一家电商公司的数据分析实习生，需要使用Python处理销售数据。",
+    code_example: `# Python基础语法示例
+# 1. 变量和数据类型
+name = "数据分析"
+sales = 10000
+is_active = True
 
-# 导入库
-import pandas as pd
-import matplotlib.pyplot as plt
+print("项目名称:", name)
+print("销售额:", sales)
 
-# 创建示例销售数据
+# 2. 列表
+daily_sales = [1000, 1200, 900, 1500, 1300]
+print("日销售额:", daily_sales)
+print("总销售额:", sum(daily_sales))
+print("平均值:", sum(daily_sales) / len(daily_sales))
+
+# 3. 字典
 sales_data = {
-    '日期': ['2023-01-01', '2023-01-02', '2023-01-03', '2023-01-04', '2023-01-05'],
-    '销售额': [1000, 1200, 900, 1500, 1300]
+    '日期': ['2023-01-01', '2023-01-02', '2023-01-03'],
+    '销售额': [1000, 1200, 900]
 }
+print("销售数据:", sales_data)
 
-# 创建DataFrame
-df = pd.DataFrame(sales_data)
+# 4. 循环
+print("\\n每日销售额明细:")
+for i, sale in enumerate(daily_sales):
+    print(f"第{i+1}天: {sale}元")
 
-# 显示数据
-print(df)
+# 5. 函数
+def calculate_total(sales_list):
+    \"\"\"计算总销售额\"\"\"
+    return sum(sales_list)
 
-# 绘制销售额趋势图
-plt.figure(figsize=(10, 6))
-plt.plot(df['日期'], df['销售额'], marker='o')
-plt.title('每日销售额趋势')
-plt.xlabel('日期')
-plt.ylabel('销售额')
-plt.grid(True)
-plt.show()
+total = calculate_total(daily_sales)
+print("\\n函数计算的总销售额:", total)
 `,
     learning_points: [
-      "了解Python的安装方法",
-      "掌握Anaconda的使用",
-      "学习如何安装和管理Python包",
-      "了解数据分析的基本流程"
+      "掌握Python变量和数据类型",
+      "熟悉列表和字典的使用",
+      "学习循环和函数的编写",
+      "能够进行简单的数据分析"
     ]
   };
 
   const lesson = currentLesson || mockLesson;
 
-  // Load Pyodide
+  // Load Pyodide from CDN
   useEffect(() => {
     const loadPyodide = async () => {
+      setPyodideLoading(true);
       try {
-        const pyodide = await import('pyodide');
-        const pyodideInstance = await pyodide.loadPyodide({
-          indexURL: "https://cdn.jsdelivr.net/pyodide/v0.23.4/full/"
-        });
-        pyodideRef.current = pyodideInstance;
-        setPyodideLoaded(true);
+        // Create script tag to load Pyodide
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
+        script.async = true;
+        
+        script.onload = async () => {
+          try {
+            // @ts-ignore
+            const pyodideInstance = await window.loadPyodide({
+              indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
+            });
+            pyodideRef.current = pyodideInstance;
+            setPyodideLoaded(true);
+            setPyodideLoading(false);
+            setOutput('Python环境已就绪！开始编写代码吧。');
+          } catch (err) {
+            console.error('Failed to initialize Pyodide:', err);
+            setOutput('Python环境加载失败，请刷新页面重试。');
+            setPyodideLoading(false);
+          }
+        };
+        
+        script.onerror = () => {
+          setOutput('Python环境加载失败，请刷新页面重试。');
+          setPyodideLoading(false);
+        };
+        
+        document.head.appendChild(script);
       } catch (error) {
         console.error('Failed to load Pyodide:', error);
+        setOutput('Python环境加载失败，请刷新页面重试。');
+        setPyodideLoading(false);
       }
     };
 
@@ -82,31 +155,65 @@ plt.show()
   }, []);
 
   useEffect(() => {
-    setCode(lesson.code_example || '');
-  }, [lesson]);
+    // 设置初始代码为第一个练习
+    if (practiceQuestions.length > 0) {
+      setCode(practiceQuestions[0].template);
+    }
+  }, []);
+
+  const handleQuestionChange = (index: number) => {
+    setCurrentQuestion(index);
+    setCode(practiceQuestions[index].template);
+    setOutput('');
+    setShowAnswer(false);
+  };
 
   const runCode = async () => {
     if (!pyodideRef.current || !pyodideLoaded) {
-      setOutput('Pyodide is still loading...');
+      setOutput('Python环境正在加载中，请稍候...');
       return;
     }
 
     setIsRunning(true);
-    setOutput('Running...');
+    setOutput('正在运行...');
 
     try {
-      // Redirect stdout to capture output
-      pyodideRef.current.stdout = (text: string) => {
-        setOutput(prev => prev + text);
-      };
+      // Clear previous output
+      let outputText = '';
+      
+      // Setup stdout capture
+      pyodideRef.current.globals.set('print', (text: string) => {
+        outputText += text + '\n';
+        setOutput(outputText);
+      });
 
       // Run the code
       await pyodideRef.current.runPythonAsync(code);
+      
+      if (outputText === '') {
+        setOutput('代码执行完成，没有输出。');
+      }
     } catch (error) {
-      setOutput(`Error: ${error}`);
+      setOutput(`错误: ${error}`);
     } finally {
       setIsRunning(false);
     }
+  };
+
+  const resetCode = () => {
+    setCode(practiceQuestions[currentQuestion].template);
+    setOutput('');
+  };
+
+  const copyCode = async () => {
+    await navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const showAnswerCode = () => {
+    setCode(practiceQuestions[currentQuestion].answer);
+    setShowAnswer(true);
   };
 
   const handleComplete = async () => {
@@ -147,51 +254,143 @@ plt.show()
           </div>
         </div>
 
-        {/* Interactive Code Editor */}
+        {/* Example Code */}
         <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">交互式练习</h2>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            {/* Business Scenario */}
-            <div className="lg:col-span-1 bg-gray-100 p-4 rounded-lg">
-              <h3 className="font-semibold mb-2">商业场景</h3>
-              <p className="text-gray-700">{lesson.business_scenario}</p>
-            </div>
-
-            {/* Code Editor */}
-            <div className="lg:col-span-1 bg-gray-900 rounded-lg overflow-hidden">
-              <div className="flex justify-between items-center bg-gray-800 px-4 py-2">
-                <span className="text-gray-400 text-sm">Python</span>
+          <h2 className="text-xl font-semibold mb-4">示例代码</h2>
+          <div className="bg-gray-900 rounded-lg overflow-hidden">
+            <div className="flex justify-between items-center bg-gray-800 px-4 py-2">
+              <span className="text-gray-400 text-sm">示例代码</span>
+              <div className="flex space-x-2">
                 <button
-                  onClick={runCode}
-                  disabled={isRunning}
-                  className="flex items-center bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors disabled:bg-gray-600"
+                  onClick={copyCode}
+                  className="flex items-center text-gray-400 hover:text-white text-sm"
                 >
-                  {isRunning ? (
-                    <span>Running...</span>
+                  {copied ? (
+                    <>
+                      <Check className="h-4 w-4 mr-1" />
+                      <span>已复制</span>
+                    </>
                   ) : (
                     <>
-                      <Play className="h-4 w-4 mr-1" />
-                      <span>Run</span>
+                      <Copy className="h-4 w-4 mr-1" />
+                      <span>复制</span>
                     </>
                   )}
                 </button>
               </div>
+            </div>
+            <pre className="p-4 text-green-400 font-mono text-sm overflow-x-auto">
+              <code>{lesson.code_example}</code>
+            </pre>
+          </div>
+        </div>
+
+        {/* Practice Questions */}
+        <div className="mb-8">
+          <h2 className="text-xl font-semibold mb-4">交互式练习</h2>
+          
+          {/* Question Selector */}
+          <div className="mb-4 flex flex-wrap gap-2">
+            {practiceQuestions.map((q, index) => (
+              <button
+                key={q.id}
+                onClick={() => handleQuestionChange(index)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  currentQuestion === index
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                {q.title}
+              </button>
+            ))}
+          </div>
+
+          {/* Question Details */}
+          <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4 rounded">
+            <h3 className="font-semibold text-blue-900 mb-2">
+              {practiceQuestions[currentQuestion].title}
+            </h3>
+            <p className="text-blue-800 mb-2">{practiceQuestions[currentQuestion].description}</p>
+            <span className="inline-block bg-blue-200 text-blue-800 text-xs px-2 py-1 rounded">
+              难度: {practiceQuestions[currentQuestion].difficulty}
+            </span>
+          </div>
+
+          {/* Code Editor Area */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {/* Code Editor */}
+            <div className="bg-gray-900 rounded-lg overflow-hidden">
+              <div className="flex justify-between items-center bg-gray-800 px-4 py-2">
+                <div className="flex items-center space-x-2">
+                  <Code className="h-4 w-4 text-gray-400" />
+                  <span className="text-gray-400 text-sm">Python 编辑器</span>
+                </div>
+                <div className="flex space-x-2">
+                  <button
+                    onClick={resetCode}
+                    className="flex items-center text-gray-400 hover:text-white text-sm"
+                    title="重置代码"
+                  >
+                    <RotateCcw className="h-4 w-4 mr-1" />
+                    重置
+                  </button>
+                  <button
+                    onClick={showAnswerCode}
+                    className="flex items-center text-gray-400 hover:text-yellow-400 text-sm"
+                    title="显示答案"
+                  >
+                    <CheckCircle2 className="h-4 w-4 mr-1" />
+                    答案
+                  </button>
+                  <button
+                    onClick={runCode}
+                    disabled={isRunning || pyodideLoading}
+                    className="flex items-center bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700 transition-colors disabled:bg-gray-600"
+                  >
+                    {isRunning ? (
+                      <span>运行中...</span>
+                    ) : pyodideLoading ? (
+                      <span>加载中...</span>
+                    ) : (
+                      <>
+                        <Play className="h-4 w-4 mr-1" />
+                        <span>运行</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
               <textarea
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
-                className="w-full h-80 bg-gray-900 text-green-400 p-4 font-mono text-sm resize-none focus:outline-none"
-                placeholder="Write your Python code here..."
+                className="w-full h-80 bg-gray-900 text-green-400 p-4 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="# 在这里编写Python代码\nprint('Hello, 数据分析世界!')"
               />
             </div>
 
-            {/* Output */}
-            <div className="lg:col-span-1 bg-white border border-gray-200 rounded-lg p-4">
-              <h3 className="font-semibold mb-2">运行结果</h3>
-              <div className="h-80 overflow-auto bg-gray-50 p-4 rounded font-mono text-sm">
-                {output || "Run the code to see output here..."}
+            {/* Output Panel */}
+            <div className="bg-gray-100 rounded-lg overflow-hidden">
+              <div className="flex items-center bg-gray-800 px-4 py-2">
+                <Terminal className="h-4 w-4 text-gray-400 mr-2" />
+                <span className="text-gray-400 text-sm">运行结果</span>
+              </div>
+              <div className="h-80 overflow-auto p-4 font-mono text-sm">
+                <pre className="text-gray-800 whitespace-pre-wrap">{output || (pyodideLoading ? 'Python环境加载中...' : '点击"运行"按钮执行代码')}</pre>
               </div>
             </div>
+          </div>
+
+          {/* Tips */}
+          <div className="mt-4 bg-amber-50 border-l-4 border-amber-500 p-4 rounded">
+            <h4 className="font-semibold text-amber-900 mb-2">💡 提示</h4>
+            <ul className="text-amber-800 space-y-1 text-sm">
+              <li>• 点击题目按钮切换不同的练习</li>
+              <li>• 在编辑器中编写你的Python代码</li>
+              <li>• 点击"运行"按钮执行代码并查看结果</li>
+              <li>• 如需查看答案，点击"答案"按钮</li>
+              <li>• 可以随时点击"重置"恢复到初始代码</li>
+            </ul>
           </div>
         </div>
 
