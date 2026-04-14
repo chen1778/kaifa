@@ -1,17 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useStore } from '../store';
 import { Clock, BookOpen, CheckCircle2, ChevronRight } from 'lucide-react';
 
 const CourseDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { loadCourse, currentCourse, isLoading } = useStore();
-
-  useEffect(() => {
-    if (id) {
-      loadCourse(Number(id));
-    }
-  }, [id]);
 
   // Mock course data for demonstration
   const mockCourses = [
