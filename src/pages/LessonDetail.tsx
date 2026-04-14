@@ -61,13 +61,51 @@ const LessonDetail: React.FC = () => {
     }
   }, [lessonId]);
 
-  // Mock lesson data for demonstration
-  const mockLesson = {
-    id: 1,
-    title: "Python基础语法与数据结构",
-    content: "掌握Python的基本语法和常用数据结构，为后续的数据分析打下基础。",
-    business_scenario: "你是一家电商公司的数据分析实习生，需要使用Python处理销售数据。",
-    code_example: `# Python基础语法示例
+  // Mock lesson data for different courses
+  const mockLessons = {
+    // 课程1: Python基础与数据科学入门
+    "1": [
+      {
+        id: 1,
+        title: "Python环境搭建",
+        content: "学习如何安装和配置Python环境，包括Anaconda的使用。",
+        business_scenario: "你是一家电商公司的数据分析实习生，需要搭建Python环境来处理销售数据。",
+        code_example: `# Python环境搭建示例
+# 1. 检查Python版本
+import sys
+print("Python版本:", sys.version)
+
+# 2. 导入常用库
+import numpy as np
+import pandas as pd
+
+# 3. 测试基本功能
+print("NumPy版本:", np.__version__)
+print("Pandas版本:", pd.__version__)
+
+# 4. 创建测试数据
+data = {
+    '日期': ['2023-01-01', '2023-01-02', '2023-01-03'],
+    '销售额': [1000, 1200, 900]
+}
+
+df = pd.DataFrame(data)
+print("\n测试数据:")
+print(df)
+`,
+        learning_points: [
+          "了解Python环境的搭建方法",
+          "掌握Anaconda的安装和使用",
+          "熟悉NumPy和Pandas库的导入",
+          "能够创建和查看基本数据结构"
+        ]
+      },
+      {
+        id: 2,
+        title: "Python基础语法",
+        content: "掌握Python的基本语法，包括变量、数据类型、运算符和控制流。",
+        business_scenario: "你需要使用Python处理销售数据，首先需要掌握基本语法。",
+        code_example: `# Python基础语法示例
 # 1. 变量和数据类型
 name = "数据分析"
 sales = 10000
@@ -102,15 +140,232 @@ def calculate_total(sales_list):
 total = calculate_total(daily_sales)
 print("\n函数计算的总销售额:", total)
 `,
-    learning_points: [
-      "掌握Python变量和数据类型",
-      "熟悉列表和字典的使用",
-      "学习循环和函数的编写",
-      "能够进行简单的数据分析"
+        learning_points: [
+          "掌握Python变量和数据类型",
+          "熟悉列表和字典的使用",
+          "学习循环和函数的编写",
+          "能够进行简单的数据分析"
+        ]
+      }
+    ],
+    // 课程8: 商业数据分析
+    "8": [
+      {
+        id: 1,
+        title: "商业数据分析概述",
+        content: "了解商业数据分析的基本概念和方法。",
+        business_scenario: "你是一家企业的数据分析专员，需要为管理层提供数据驱动的决策支持。",
+        code_example: `# 商业数据分析概述示例
+import pandas as pd
+import numpy as np
+
+# 模拟销售数据
+data = {
+    '日期': pd.date_range('2023-01-01', periods=30),
+    '销售额': np.random.randint(800, 1500, 30),
+    '客户数': np.random.randint(20, 50, 30),
+    '产品类别': np.random.choice(['A', 'B', 'C'], 30)
+}
+
+df = pd.DataFrame(data)
+
+# 基本统计分析
+print("销售数据基本统计:")
+print(df.describe())
+
+# 按产品类别分析
+print("\n按产品类别销售分析:")
+print(df.groupby('产品类别')['销售额'].sum())
+
+# 计算日均销售额
+print("\n日均销售额:", df['销售额'].mean())
+print("日均客户数:", df['客户数'].mean())
+`,
+        learning_points: [
+          "了解商业数据分析的基本概念",
+          "掌握销售数据的基本统计分析",
+          "学习按类别分组分析数据",
+          "能够计算关键业务指标"
+        ]
+      },
+      {
+        id: 2,
+        title: "销售数据分析",
+        content: "学习如何分析销售数据，识别销售趋势。",
+        business_scenario: "你需要分析公司的销售数据，识别销售趋势和季节性模式。",
+        code_example: `# 销售数据分析示例
+import pandas as pd
+import numpy as np
+
+# 模拟销售数据
+dates = pd.date_range('2022-01-01', '2023-12-31', freq='D')
+sales = []
+
+# 创建有季节性模式的数据
+for date in dates:
+    # 基础销售额
+    base_sale = 1000
+    # 月度季节性
+    month_factor = {1: 0.8, 2: 0.9, 3: 1.0, 4: 1.1, 5: 1.2, 6: 1.1, 
+                   7: 1.0, 8: 0.9, 9: 1.0, 10: 1.1, 11: 1.3, 12: 1.5}[date.month]
+    # 随机波动
+    random_factor = np.random.normal(1, 0.1)
+    # 计算最终销售额
+    sale = base_sale * month_factor * random_factor
+    sales.append(round(sale))
+
+df = pd.DataFrame({'日期': dates, '销售额': sales})
+
+# 按月聚合
+monthly_sales = df.resample('M', on='日期')['销售额'].sum()
+print("月度销售额:")
+print(monthly_sales)
+
+# 计算同比增长率
+print("\n月度销售额同比增长率:")
+print(monthly_sales.pct_change(12) * 100)
+
+# 识别销售高峰
+print("\n销售高峰月份:")
+print(monthly_sales.idxmax())
+print("最高销售额:", monthly_sales.max())
+`,
+        learning_points: [
+          "掌握销售数据的时间序列分析",
+          "识别销售的季节性模式",
+          "计算销售增长率",
+          "识别销售高峰和低谷"
+        ]
+      }
+    ],
+    // 课程9: 商业数据可视化与预测
+    "9": [
+      {
+        id: 1,
+        title: "数据可视化基础",
+        content: "学习数据可视化的基本原理和方法。",
+        business_scenario: "你需要将销售数据可视化，以便更直观地展示销售趋势。",
+        code_example: `# 数据可视化基础示例
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 模拟销售数据
+dates = pd.date_range('2023-01-01', '2023-12-31', freq='M')
+sales = [12000, 13500, 11800, 14200, 15600, 14800, 
+         16200, 17500, 16800, 18200, 19500, 21000]
+
+# 创建DataFrame
+df = pd.DataFrame({'月份': dates, '销售额': sales})
+
+# 设置中文字体
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+
+# 折线图
+plt.figure(figsize=(10, 6))
+plt.plot(df['月份'], df['销售额'], marker='o', linestyle='-', color='b')
+plt.title('2023年销售趋势')
+plt.xlabel('月份')
+plt.ylabel('销售额')
+plt.grid(True)
+plt.tight_layout()
+
+# 柱状图
+plt.figure(figsize=(10, 6))
+plt.bar(df['月份'], df['销售额'], color='g')
+plt.title('2023年月度销售额')
+plt.xlabel('月份')
+plt.ylabel('销售额')
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+print("数据可视化示例代码已执行")
+print("在实际环境中，这将生成销售趋势图和月度销售额柱状图")
+`,
+        learning_points: [
+          "了解数据可视化的基本原理",
+          "掌握Matplotlib库的基本使用",
+          "学习创建折线图和柱状图",
+          "能够设置图表标题和标签"
+        ]
+      },
+      {
+        id: 2,
+        title: "Matplotlib高级应用",
+        content: "学习Matplotlib的高级功能，创建复杂的图表。",
+        business_scenario: "你需要创建更复杂的可视化图表，展示多维度的销售数据。",
+        code_example: `# Matplotlib高级应用示例
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 模拟多产品销售数据
+products = ['产品A', '产品B', '产品C', '产品D']
+quarters = ['Q1', 'Q2', 'Q3', 'Q4']
+
+# 创建销售数据
+sales_data = {
+    '产品A': [12000, 13500, 14200, 15800],
+    '产品B': [9500, 10200, 11800, 12500],
+    '产品C': [8800, 9400, 10100, 11200],
+    '产品D': [7200, 8500, 9300, 10500]
+}
+
+df = pd.DataFrame(sales_data, index=quarters)
+
+# 设置中文字体
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+
+# 堆叠柱状图
+plt.figure(figsize=(10, 6))
+df.plot(kind='bar', stacked=True, figsize=(10, 6))
+plt.title('2023年各季度产品销售额')
+plt.xlabel('季度')
+plt.ylabel('销售额')
+plt.legend(title='产品')
+plt.tight_layout()
+
+# 饼图 - Q4销售额分布
+plt.figure(figsize=(8, 8))
+plt.pie(df.loc['Q4'], labels=products, autopct='%1.1f%%', startangle=90)
+plt.title('Q4产品销售分布')
+plt.axis('equal')
+plt.tight_layout()
+
+# 多子图
+fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+fig.suptitle('2023年产品销售分析', fontsize=16)
+
+# 每个产品的销售趋势
+for i, product in enumerate(products):
+    row = i // 2
+    col = i % 2
+    axes[row, col].plot(quarters, df[product], marker='o')
+    axes[row, col].set_title(f'{product}销售趋势')
+    axes[row, col].set_xlabel('季度')
+    axes[row, col].set_ylabel('销售额')
+    axes[row, col].grid(True)
+
+plt.tight_layout(rect=[0, 0, 1, 0.95])
+
+print("高级数据可视化示例代码已执行")
+print("在实际环境中，这将生成堆叠柱状图、饼图和多子图销售趋势")
+`,
+        learning_points: [
+          "掌握Matplotlib的高级功能",
+          "学习创建堆叠柱状图和饼图",
+          "能够创建多子图布局",
+          "掌握图表的美化和定制"
+        ]
+      }
     ]
   };
 
-  const lesson = currentLesson || mockLesson;
+  // 根据课程ID和课时ID获取对应的课程内容
+  const courseLessons = mockLessons[id] || mockLessons["1"];
+  const lesson = currentLesson || courseLessons.find(l => l.id === Number(lessonId)) || courseLessons[0];
 
   // Load Pyodide from CDN with fallback to Judge0
   useEffect(() => {
