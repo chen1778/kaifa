@@ -319,7 +319,14 @@ export const useStore = create<AppState>((set, get) => ({
         return;
       }
       
-      set({ currentLesson: lesson, isLoading: false });
+      // 添加缺失的属性以满足TypeScript类型要求
+      const lessonWithRequiredProps = {
+        ...lesson,
+        order_index: lesson.order,
+        created_at: new Date().toISOString()
+      };
+      
+      set({ currentLesson: lessonWithRequiredProps, isLoading: false });
     } catch (error) {
       console.error('加载课时失败:', error);
       set({ isLoading: false });
