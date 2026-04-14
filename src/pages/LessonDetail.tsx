@@ -419,6 +419,16 @@ const LessonDetail: React.FC = () => {
               ))}
             </div>
           </div>
+          {currentLesson.pitfalls && (
+            <div className="mt-6">
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">易错点</h2>
+              <div className="prose max-w-none text-amber-800 bg-amber-50 p-4 rounded-md border-l-4 border-amber-500">
+                {currentLesson.pitfalls.split('\n').map((line, index) => (
+                  <p key={index} className="mb-2">{line}</p>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* 互动练习 */}
