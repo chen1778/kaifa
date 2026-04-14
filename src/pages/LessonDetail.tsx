@@ -383,13 +383,13 @@ const LessonDetail: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 面包屑导航 */}
-        <div className="flex items-center mb-6">
-          <Link to={`/courses/${id}`} className="flex items-center bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-md transition-colors">
-            <ChevronLeft className="h-5 w-5 mr-1" />
+        <div className="flex items-center mb-8">
+          <Link to={`/courses/${id}`} className="flex items-center bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-md transition-colors shadow-md">
+            <ChevronLeft className="h-6 w-6 mr-2" />
             返回课程大纲
           </Link>
-          <span className="mx-2 text-gray-400">/</span>
-          <span className="text-gray-600">{currentLesson.title}</span>
+          <span className="mx-3 text-gray-400">/</span>
+          <span className="text-gray-700 font-medium">{currentLesson.title}</span>
         </div>
 
         {/* 课程内容 */}
