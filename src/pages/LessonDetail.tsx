@@ -412,7 +412,12 @@ const LessonDetail: React.FC = () => {
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">{currentLesson.title}</h1>
           <div className="text-gray-600 mb-6">
-            {currentLesson.content}
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">教学内容</h2>
+            <div className="prose max-w-none">
+              {currentLesson.content.split('\n').map((line, index) => (
+                <p key={index} className="mb-2">{line}</p>
+              ))}
+            </div>
           </div>
         </div>
 
