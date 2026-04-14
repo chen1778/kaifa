@@ -206,7 +206,7 @@ const CourseDetail: React.FC = () => {
     }
   ];
 
-  const course = currentCourse || mockCourses.find(c => c.id === Number(id)) || mockCourses[0];
+  const course = mockCourses.find(c => c.id === Number(id)) || mockCourses[0];
 
   return (
     <div className="pt-20 pb-16">
