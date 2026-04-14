@@ -257,6 +257,68 @@ print("\n函数计算的总销售额:", total)
           "学习循环和函数的编写",
           "能够进行简单的数据分析"
         ]
+      },
+      {
+        id: 7,
+        title: "商业数据分析案例",
+        content: "通过实际商业案例学习数据分析的完整流程，包括数据获取、清洗、分析和可视化。",
+        business_scenario: "你是一家电商公司的数据分析实习生，需要分析销售数据，识别销售趋势和客户行为模式。",
+        code_example: `# 商业数据分析案例：电商销售数据分析
+import pandas as pd
+import numpy as np
+
+# 模拟电商销售数据
+data = {
+    '订单ID': range(1, 101),
+    '日期': pd.date_range('2023-01-01', periods=100),
+    '产品类别': np.random.choice(['电子产品', '服装', '家居用品', '食品'], 100),
+    '销售额': np.random.randint(100, 1000, 100),
+    '客户年龄': np.random.randint(18, 65, 100),
+    '支付方式': np.random.choice(['支付宝', '微信支付', '信用卡'], 100)
+}
+
+df = pd.DataFrame(data)
+
+# 1. 数据概览
+print("数据概览:")
+print(df.head())
+print("\n数据基本统计:")
+print(df.describe())
+
+# 2. 按产品类别分析
+print("\n按产品类别销售分析:")
+category_sales = df.groupby('产品类别')['销售额'].sum()
+print(category_sales)
+
+# 3. 按日期分析销售趋势
+print("\n按日期销售趋势:")
+daily_sales = df.resample('D', on='日期')['销售额'].sum()
+print(daily_sales.head(10))
+
+# 4. 客户年龄分布
+print("\n客户年龄分布:")
+age_distribution = df['客户年龄'].value_counts().sort_index()
+print(age_distribution.head(10))
+
+# 5. 支付方式分析
+print("\n支付方式分析:")
+payment_analysis = df.groupby('支付方式')['销售额'].sum()
+print(payment_analysis)
+
+# 6. 计算关键指标
+print("\n关键业务指标:")
+print(f"总销售额: {df['销售额'].sum()}")
+print(f"平均订单金额: {df['销售额'].mean():.2f}")
+print(f"订单数量: {len(df)}")
+print(f"销售额最高的产品类别: {category_sales.idxmax()}")
+print(f"销售额最高的日期: {daily_sales.idxmax()}")
+`,
+        learning_points: [
+          "掌握商业数据分析的完整流程",
+          "学习如何分析销售数据和客户行为",
+          "能够计算关键业务指标",
+          "了解数据可视化的基本方法"
+        ]
       }
     ],
     // 课程8: 商业数据分析
@@ -346,6 +408,73 @@ print("最高销售额:", monthly_sales.max())
           "识别销售的季节性模式",
           "计算销售增长率",
           "识别销售高峰和低谷"
+        ]
+      },
+      {
+        id: 7,
+        title: "案例分析",
+        content: "通过实际商业案例学习如何应用数据分析方法解决业务问题，包括市场分析、竞争分析和客户分析。",
+        business_scenario: "你是一家零售企业的数据分析经理，需要分析销售数据和客户行为，为市场营销策略提供数据支持。",
+        code_example: `# 商业数据分析案例：零售企业市场分析
+import pandas as pd
+import numpy as np
+
+# 模拟零售企业数据
+data = {
+    '日期': pd.date_range('2023-01-01', periods=365),
+    '销售额': np.random.randint(5000, 20000, 365),
+    '客流量': np.random.randint(100, 500, 365),
+    '促销活动': np.random.choice(['无', '节日促销', '会员日', '清仓活动'], 365, p=[0.6, 0.15, 0.15, 0.1]),
+    '天气': np.random.choice(['晴', '阴', '雨', '雪'], 365, p=[0.6, 0.2, 0.15, 0.05]),
+    '竞争对手促销': np.random.choice([0, 1], 365, p=[0.7, 0.3])
+}
+
+df = pd.DataFrame(data)
+
+# 1. 销售趋势分析
+print("1. 销售趋势分析:")
+monthly_sales = df.resample('M', on='日期')['销售额'].sum()
+print("月度销售额:")
+print(monthly_sales)
+
+# 2. 促销活动效果分析
+print("\n2. 促销活动效果分析:")
+promotion_analysis = df.groupby('促销活动')['销售额'].mean()
+print("不同促销活动的平均销售额:")
+print(promotion_analysis)
+
+# 3. 客流量与销售额关系
+print("\n3. 客流量与销售额关系:")
+correlation = df['客流量'].corr(df['销售额'])
+print(f"客流量与销售额的相关系数: {correlation:.4f}")
+
+# 4. 天气对销售的影响
+print("\n4. 天气对销售的影响:")
+weather_analysis = df.groupby('天气')['销售额'].mean()
+print("不同天气条件下的平均销售额:")
+print(weather_analysis)
+
+# 5. 竞争对手促销的影响
+print("\n5. 竞争对手促销的影响:")
+competitor_analysis = df.groupby('竞争对手促销')['销售额'].mean()
+print("竞争对手促销对销售额的影响:")
+print(f"竞争对手无促销时平均销售额: {competitor_analysis[0]:.2f}")
+print(f"竞争对手有促销时平均销售额: {competitor_analysis[1]:.2f}")
+
+# 6. 综合分析
+print("\n6. 综合分析:")
+print(f"年度总销售额: {df['销售额'].sum()}")
+print(f"日均销售额: {df['销售额'].mean():.2f}")
+print(f"日均客流量: {df['客流量'].mean():.2f}")
+print(f"平均客单价: {df['销售额'].mean() / df['客流量'].mean():.2f}")
+print(f"销售额最高的月份: {monthly_sales.idxmax().strftime('%Y-%m')}")
+print(f"销售额最低的月份: {monthly_sales.idxmin().strftime('%Y-%m')}")
+`,
+        learning_points: [
+          "掌握多维度数据分析方法",
+          "学习如何分析促销活动效果",
+          "了解外部因素对销售的影响",
+          "能够进行综合商业分析并提出建议"
         ]
       }
     ],
@@ -469,6 +598,110 @@ print("在实际环境中，这将生成堆叠柱状图、饼图和多子图销�
           "学习创建堆叠柱状图和饼图",
           "能够创建多子图布局",
           "掌握图表的美化和定制"
+        ]
+      },
+      {
+        id: 7,
+        title: "案例分析",
+        content: "通过实际商业案例学习如何应用数据可视化和预测技术解决业务问题，包括销售预测和库存管理。",
+        business_scenario: "你是一家制造企业的数据分析专家，需要分析销售数据并预测未来销售趋势，为生产和库存决策提供支持。",
+        code_example: `# 商业数据可视化与预测案例：销售预测分析
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 模拟历史销售数据
+historical_dates = pd.date_range('2022-01-01', '2023-12-31', freq='M')
+
+# 创建有季节性模式的销售数据
+historical_sales = []
+for date in historical_dates:
+    # 基础销售额
+    base_sale = 10000
+    # 月度季节性
+    month_factor = {1: 0.8, 2: 0.9, 3: 1.0, 4: 1.1, 5: 1.2, 6: 1.1, 
+                   7: 1.0, 8: 0.9, 9: 1.0, 10: 1.1, 11: 1.3, 12: 1.5}[date.month]
+    # 增长趋势
+    trend_factor = 1 + (date.year - 2022) * 0.1 + (date.month - 1) / 12 * 0.1
+    # 随机波动
+    random_factor = np.random.normal(1, 0.05)
+    # 计算最终销售额
+    sale = base_sale * month_factor * trend_factor * random_factor
+    historical_sales.append(round(sale))
+
+# 创建历史数据DataFrame
+df = pd.DataFrame({'日期': historical_dates, '销售额': historical_sales})
+
+# 1. 销售趋势可视化
+print("1. 销售趋势分析:")
+plt.figure(figsize=(12, 6))
+plt.plot(df['日期'], df['销售额'], marker='o', linestyle='-', color='b')
+plt.title('2022-2023年销售趋势')
+plt.xlabel('日期')
+plt.ylabel('销售额')
+plt.grid(True)
+plt.tight_layout()
+
+# 2. 季节性分析
+print("\n2. 季节性分析:")
+df['月份'] = df['日期'].dt.month
+monthly_avg = df.groupby('月份')['销售额'].mean()
+
+plt.figure(figsize=(10, 6))
+plt.bar(monthly_avg.index, monthly_avg.values, color='g')
+plt.title('月度平均销售额（季节性分析）')
+plt.xlabel('月份')
+plt.ylabel('平均销售额')
+plt.xticks(range(1, 13))
+plt.grid(axis='y')
+plt.tight_layout()
+
+# 3. 简单线性回归预测
+print("\n3. 销售预测:")
+# 准备预测数据
+df['时间索引'] = range(len(df))
+
+# 简单线性回归
+from sklearn.linear_model import LinearRegression
+
+X = df['时间索引'].values.reshape(-1, 1)
+y = df['销售额'].values
+
+model = LinearRegression()
+model.fit(X, y)
+
+# 预测未来6个月
+future_dates = pd.date_range('2024-01-01', '2024-06-30', freq='M')
+future_index = range(len(df), len(df) + len(future_dates))
+future_X = np.array(future_index).reshape(-1, 1)
+future_y = model.predict(future_X)
+
+# 创建预测数据DataFrame
+forecast_df = pd.DataFrame({'日期': future_dates, '预测销售额': future_y.round()})
+
+print("未来6个月销售预测:")
+print(forecast_df)
+
+# 4. 可视化预测结果
+plt.figure(figsize=(12, 6))
+plt.plot(df['日期'], df['销售额'], marker='o', linestyle='-', color='b', label='历史销售额')
+plt.plot(forecast_df['日期'], forecast_df['预测销售额'], marker='o', linestyle='--', color='r', label='预测销售额')
+plt.title('销售趋势与预测')
+plt.xlabel('日期')
+plt.ylabel('销售额')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+
+print("\n4. 预测结果分析:")
+print(f"预测模型R²值: {model.score(X, y):.4f}")
+print(f"销售增长率: {((forecast_df['预测销售额'].iloc[-1] - df['销售额'].iloc[-1]) / df['销售额'].iloc[-1]) * 100:.2f}%")
+`,
+        learning_points: [
+          "掌握销售数据的时间序列分析",
+          "学习如何识别和分析季节性模式",
+          "能够使用简单线性回归进行销售预测",
+          "掌握数据可视化和预测结果的展示方法"
         ]
       }
     ]
