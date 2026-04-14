@@ -10,6 +10,7 @@ import LessonDetail from './pages/LessonDetail';
 import Practice from './pages/Practice';
 import Projects from './pages/Projects';
 import Achievements from './pages/Achievements';
+import TestEditor from './pages/TestEditor';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 
@@ -33,6 +34,7 @@ const App: React.FC = () => {
             <Route path="/practice" element={<Practice />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/achievements" element={<Achievements />} />
+            <Route path="/test-editor" element={<TestEditor />} />
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
             <Route path="*" element={<Navigate to="/" replace />} />

@@ -13,6 +13,7 @@ const LessonDetail: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const pyodideRef = useRef<any>(null);
+  const codeEditorRef = useRef<HTMLTextAreaElement>(null);
   const [pyodideLoaded, setPyodideLoaded] = useState(false);
   const [pyodideLoading, setPyodideLoading] = useState(true);
   const [useJudge0, setUseJudge0] = useState(false);
@@ -274,14 +275,29 @@ const LessonDetail: React.FC = () => {
   // 初始化代码编辑器
   useEffect(() => {
     if (currentQuestion) {
-      setCode(currentQuestion.template);
+      // 只在第一次加载时设置代码，避免后续重置
+      if (code === '') {
+        setCode(currentQuestion.template);
+      }
+      // 延迟聚焦，确保DOM已更新
+      setTimeout(() => {
+        codeEditorRef.current?.focus();
+      }, 100);
     }
-  }, [currentQuestion]);
+  }, [currentQuestion, code]);
+
+  // 组件挂载时聚焦
+  useEffect(() => {
+    setTimeout(() => {
+      codeEditorRef.current?.focus();
+    }, 300);
+  }, []);
 
   // 运行代码
   const runCode = async () => {
     if (!code) return;
 
+    console.log('Running code:', code);
     setIsRunning(true);
     setOutput('');
 
@@ -453,15 +469,15 @@ const LessonDetail: React.FC = () => {
                         </button>
                       </div>
                     </div>
-                    <div className="bg-gray-900 rounded-md overflow-hidden">
-                      <div className="px-4 py-2 bg-gray-800 flex items-center justify-between">
+                    <div className="border border-gray-300 rounded-md">
+                      <div className="bg-gray-100 px-4 py-2 border-b border-gray-300 flex items-center justify-between">
                         <div className="flex space-x-2">
                           <div className="h-3 w-3 rounded-full bg-red-500"></div>
                           <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
                           <div className="h-3 w-3 rounded-full bg-green-500"></div>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <span className="text-xs text-gray-400">Python 3</span>
+                          <span className="text-xs text-gray-600">Python 3</span>
                           <button
                             onClick={runCode}
                             disabled={isRunning}
@@ -482,9 +498,14 @@ const LessonDetail: React.FC = () => {
                         </div>
                       </div>
                       <textarea
+                        ref={codeEditorRef}
                         value={code}
-                        onChange={(e) => setCode(e.target.value)}
-                        className="w-full p-4 bg-gray-900 text-gray-100 font-mono text-sm min-h-[300px] resize-y cursor-text z-10"
+                        onChange={(e) => {
+                          const newValue = e.target.value;
+                          console.log('Input changed to:', newValue);
+                          setCode(newValue);
+                        }}
+                        className="w-full p-4 text-gray-800 font-mono text-sm min-h-[300px] resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"
                         spellCheck={false}
                         autoFocus
                       />
