@@ -31,7 +31,7 @@ const LessonDetail: React.FC = () => {
         setPyodideLoading(true);
         const { loadPyodide } = await import('pyodide');
         const pyodide = await loadPyodide({
-          indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.1/full/"
+          indexURL: "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/"
         });
         await pyodide.loadPackage(["numpy", "pandas", "matplotlib"]);
         pyodideRef.current = pyodide;
