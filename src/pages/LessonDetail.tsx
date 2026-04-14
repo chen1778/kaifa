@@ -484,8 +484,9 @@ const LessonDetail: React.FC = () => {
                       <textarea
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
-                        className="w-full p-4 bg-gray-900 text-gray-100 font-mono text-sm min-h-[300px] resize-y"
+                        className="w-full p-4 bg-gray-900 text-gray-100 font-mono text-sm min-h-[300px] resize-y cursor-text z-10"
                         spellCheck={false}
+                        autoFocus
                       />
                     </div>
                   </div>
