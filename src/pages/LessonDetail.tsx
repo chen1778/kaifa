@@ -420,84 +420,85 @@ const LessonDetail: React.FC = () => {
                   </div>
                 </div>
 
-                {/* 代码编辑器 */}
-                <div className="mb-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <div className="flex items-center">
-                      <Code className="h-5 w-5 text-gray-500 mr-2" />
-                      <span className="text-sm font-medium text-gray-700">代码编辑器</span>
-                    </div>
-                    <div className="flex space-x-2">
-                      <button 
-                        onClick={copyCode}
-                        className="flex items-center px-2 py-1 text-xs text-gray-600 hover:text-gray-900"
-                      >
-                        {copied ? <Check className="h-4 w-4 mr-1" /> : <Copy className="h-4 w-4 mr-1" />}
-                        {copied ? '已复制' : '复制'}
-                      </button>
-                      <button 
-                        onClick={resetCode}
-                        className="flex items-center px-2 py-1 text-xs text-gray-600 hover:text-gray-900"
-                      >
-                        <RotateCcw className="h-4 w-4 mr-1" />
-                        重置
-                      </button>
-                      <button 
-                        onClick={toggleAnswer}
-                        className="flex items-center px-2 py-1 text-xs text-gray-600 hover:text-gray-900"
-                      >
-                        <Code className="h-4 w-4 mr-1" />
-                        {showAnswer ? '隐藏答案' : '显示答案'}
-                      </button>
-                    </div>
-                  </div>
-                  <div className="bg-gray-900 rounded-md overflow-hidden">
-                    <div className="px-4 py-2 bg-gray-800 flex items-center">
-                      <div className="flex space-x-2">
-                        <div className="h-3 w-3 rounded-full bg-red-500"></div>
-                        <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
-                        <div className="h-3 w-3 rounded-full bg-green-500"></div>
+                {/* 代码编辑器和运行结果并排布局 */}
+                <div className="flex flex-col md:flex-row gap-4 mb-4">
+                  {/* 代码编辑器 */}
+                  <div className="flex-1">
+                    <div className="flex justify-between items-center mb-2">
+                      <div className="flex items-center">
+                        <Code className="h-5 w-5 text-gray-500 mr-2" />
+                        <span className="text-sm font-medium text-gray-700">Python 编辑器</span>
                       </div>
-                      <span className="ml-4 text-xs text-gray-400">Python 3</span>
+                      <div className="flex space-x-2">
+                        <button 
+                          onClick={copyCode}
+                          className="flex items-center px-2 py-1 text-xs text-gray-600 hover:text-gray-900"
+                        >
+                          {copied ? <Check className="h-4 w-4 mr-1" /> : <Copy className="h-4 w-4 mr-1" />}
+                          {copied ? '已复制' : '复制'}
+                        </button>
+                        <button 
+                          onClick={resetCode}
+                          className="flex items-center px-2 py-1 text-xs text-gray-600 hover:text-gray-900"
+                        >
+                          <RotateCcw className="h-4 w-4 mr-1" />
+                          重置
+                        </button>
+                        <button 
+                          onClick={toggleAnswer}
+                          className="flex items-center px-2 py-1 text-xs text-gray-600 hover:text-gray-900"
+                        >
+                          <Code className="h-4 w-4 mr-1" />
+                          {showAnswer ? '隐藏答案' : '答案'}
+                        </button>
+                      </div>
                     </div>
-                    <textarea
-                      value={code}
-                      onChange={(e) => setCode(e.target.value)}
-                      className="w-full p-4 bg-gray-900 text-gray-100 font-mono text-sm min-h-[200px] resize-y"
-                      spellCheck={false}
-                    />
+                    <div className="bg-gray-900 rounded-md overflow-hidden">
+                      <div className="px-4 py-2 bg-gray-800 flex items-center justify-between">
+                        <div className="flex space-x-2">
+                          <div className="h-3 w-3 rounded-full bg-red-500"></div>
+                          <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
+                          <div className="h-3 w-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span className="text-xs text-gray-400">Python 3</span>
+                          <button
+                            onClick={runCode}
+                            disabled={isRunning}
+                            className="flex items-center px-3 py-1 bg-green-600 hover:bg-green-700 text-white rounded-md text-xs font-medium transition-colors"
+                          >
+                            {isRunning ? (
+                              <>
+                                <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-1"></div>
+                                运行中...
+                              </>
+                            ) : (
+                              <>
+                                <Play className="h-3 w-3 mr-1" />
+                                运行
+                              </>
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                      <textarea
+                        value={code}
+                        onChange={(e) => setCode(e.target.value)}
+                        className="w-full p-4 bg-gray-900 text-gray-100 font-mono text-sm min-h-[300px] resize-y"
+                        spellCheck={false}
+                      />
+                    </div>
                   </div>
-                </div>
-
-                {/* 运行按钮 */}
-                <div className="mb-4">
-                  <button
-                    onClick={runCode}
-                    disabled={isRunning}
-                    className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium transition-colors"
-                  >
-                    {isRunning ? (
-                      <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                        运行中...
-                      </>
-                    ) : (
-                      <>
-                        <Play className="h-4 w-4 mr-2" />
-                        运行代码
-                      </>
-                    )}
-                  </button>
-                </div>
-
-                {/* 输出结果 */}
-                <div className="mb-4">
-                  <div className="flex items-center mb-2">
-                    <Terminal className="h-5 w-5 text-gray-500 mr-2" />
-                    <span className="text-sm font-medium text-gray-700">运行结果</span>
-                  </div>
-                  <div className="bg-gray-50 border border-gray-200 rounded-md p-4 min-h-[100px] font-mono text-sm">
-                    {output || '运行代码查看结果'}
+                  
+                  {/* 运行结果 */}
+                  <div className="flex-1">
+                    <div className="flex items-center mb-2">
+                      <Terminal className="h-5 w-5 text-gray-500 mr-2" />
+                      <span className="text-sm font-medium text-gray-700">运行结果</span>
+                    </div>
+                    <div className="bg-gray-50 border border-gray-200 rounded-md p-4 min-h-[300px] font-mono text-sm overflow-auto">
+                      {output || 'Python环境已就绪！开始编写代码吧。'}
+                    </div>
                   </div>
                 </div>
 
