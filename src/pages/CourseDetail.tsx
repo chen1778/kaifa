@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Clock, BookOpen, CheckCircle2, ChevronRight } from 'lucide-react';
+import { Clock, BookOpen, CheckCircle2, ChevronRight, ChevronLeft } from 'lucide-react';
 
 const CourseDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -780,6 +780,13 @@ const CourseDetail: React.FC = () => {
   return (
     <div className="pt-20 pb-16">
       <div className="container mx-auto px-4">
+        {/* 返回按钮 */}
+        <div className="mb-6">
+          <Link to="/courses" className="flex items-center text-blue-600 hover:text-blue-800">
+            <ChevronLeft className="h-5 w-5 mr-1" />
+            返回课程列表
+          </Link>
+        </div>
         <div className="flex flex-col md:flex-row gap-8">
           {/* Course Image */}
           <div className="md:w-1/3">
