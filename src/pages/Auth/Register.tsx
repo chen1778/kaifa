@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useStore } from '../../store';
-import { AlertCircle, Eye, EyeOff } from 'lucide-react';
+import { AlertCircle, Eye, EyeOff, ChevronLeft } from 'lucide-react';
 
 const Register: React.FC = () => {
   const [name, setName] = useState('');
@@ -31,6 +31,13 @@ const Register: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
           <div className="p-8">
+            {/* 返回按钮 */}
+            <div className="mb-6">
+              <Link to="/" className="flex items-center text-blue-600 hover:text-blue-800">
+                <ChevronLeft className="h-5 w-5 mr-1" />
+                返回首页
+              </Link>
+            </div>
             <h1 className="text-2xl font-bold text-center mb-6">注册</h1>
             
             {error && (
