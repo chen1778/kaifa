@@ -45,33 +45,83 @@ const Practice: React.FC = () => {
             <div className="border-b border-gray-200 pb-4">
               <h3 className="font-medium text-gray-800 mb-2">数据分析入门练习</h3>
               <p className="text-gray-600 text-sm mb-3">完成10个基础Python数据分析任务，掌握核心概念</p>
-              <button 
-                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
-                onClick={() => handleStartPractice('1')}
-              >
-                开始练习
-              </button>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center">
+                  <span className="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                    成就：初学者
+                  </span>
+                </div>
+                <button 
+                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                  onClick={() => handleStartPractice('1')}
+                >
+                  开始练习
+                </button>
+              </div>
             </div>
             <div className="border-b border-gray-200 pb-4">
               <h3 className="font-medium text-gray-800 mb-2">销售数据可视化挑战</h3>
               <p className="text-gray-600 text-sm mb-3">使用Matplotlib创建销售数据图表，分析销售趋势</p>
-              <button 
-                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
-                onClick={() => handleStartPractice('1')}
-              >
-                开始练习
-              </button>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center">
+                  <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                    成就：可视化大师
+                  </span>
+                </div>
+                <button 
+                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                  onClick={() => handleStartPractice('1')}
+                >
+                  开始练习
+                </button>
+              </div>
             </div>
             <div>
               <h3 className="font-medium text-gray-800 mb-2">市场分析项目</h3>
               <p className="text-gray-600 text-sm mb-3">分析市场数据，识别潜在商机，提供商业建议</p>
-              <button 
-                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
-                onClick={() => handleStartPractice('1')}
-              >
-                开始练习
-              </button>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center">
+                  <span className="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                    成就：商业洞察
+                  </span>
+                </div>
+                <button 
+                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                  onClick={() => handleStartPractice('1')}
+                >
+                  开始练习
+                </button>
+              </div>
             </div>
+          </div>
+        </div>
+        
+        <div className="mt-8 bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">练习成就进度</h2>
+          <div className="space-y-4">
+            <div>
+              <div className="flex justify-between items-center mb-1">
+                <span className="text-sm font-medium text-gray-700">练习达人 (完成10个练习)</span>
+                <span className="text-sm text-gray-500">3/10</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="bg-orange-600 h-2 rounded-full" style={{ width: '30%' }}></div>
+              </div>
+            </div>
+            <div>
+              <div className="flex justify-between items-center mb-1">
+                <span className="text-sm font-medium text-gray-700">项目专家 (完成3个项目)</span>
+                <span className="text-sm text-gray-500">1/3</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="bg-red-600 h-2 rounded-full" style={{ width: '33%' }}></div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-4 text-center">
+            <a href="/achievements" className="text-blue-600 hover:text-blue-800 transition-colors">
+              查看所有成就 →
+            </a>
           </div>
         </div>
       </div>
