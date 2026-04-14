@@ -17,42 +17,141 @@ const LessonDetail: React.FC = () => {
   const [pyodideLoading, setPyodideLoading] = useState(true);
   const [useJudge0, setUseJudge0] = useState(false);
 
-  // 练习题目数据
-  const practiceQuestions = [
-    {
-      id: 1,
-      title: "练习1：打印问候语",
-      description: "编写一个程序，打印 'Hello, 数据分析世界！'",
-      template: "# 在这里编写代码\nprint('Hello, World!')",
-      answer: "print('Hello, 数据分析世界！')",
-      difficulty: "简单"
-    },
-    {
-      id: 2,
-      title: "练习2：计算销售总额",
-      description: "给定销售数据，计算总销售额",
-      template: "# 销售数据\nsales = [1000, 1200, 900, 1500, 1300]\n\n# 在这里计算总销售额\ntotal = \nprint('总销售额:', total)",
-      answer: "# 销售数据\nsales = [1000, 1200, 900, 1500, 1300]\n\n# 在这里计算总销售额\ntotal = sum(sales)\nprint('总销售额:', total)",
-      difficulty: "中等"
-    },
-    {
-      id: 3,
-      title: "练习3：创建字典数据",
-      description: "创建一个包含日期和销售额的字典，然后打印出来",
-      template: "# 创建销售数据字典\nsales_data = {\n    '日期': ['2023-01-01', '2023-01-02'],\n    '销售额': [1000, 1200]\n}\n\n# 打印数据\nprint(sales_data)",
-      answer: "# 创建销售数据字典\nsales_data = {\n    '日期': ['2023-01-01', '2023-01-02', '2023-01-03'],\n    '销售额': [1000, 1200, 900]\n}\n\n# 打印数据\nfor date, sale in zip(sales_data['日期'], sales_data['销售额']):\n    print(f'{date}: {sale}元')",
-      difficulty: "中等"
-    },
-    {
-      id: 4,
-      title: "练习4：使用列表推导式",
-      description: "将销售数据转换为万元单位（除以10000）",
-      template: "# 原始销售数据（元）\nsales = [10000, 25000, 18000, 32000]\n\n# 使用列表推导式转换为万元\nsales_wan = [x / 10000 for x in sales]\nprint('销售额（万元）:', sales_wan)",
-      answer: "# 原始销售数据（元）\nsales = [10000, 25000, 18000, 32000, 45000]\n\n# 使用列表推导式转换为万元\nsales_wan = [x / 10000 for x in sales]\nprint('销售额（万元）:', sales_wan)\nprint('平均销售额（万元）:', sum(sales_wan) / len(sales_wan))",
-      difficulty: "中等"
+  // 根据课程和课时生成练习题目
+  const getPracticeQuestions = () => {
+    // 课程1: Python基础与数据科学入门
+    if (id === '1') {
+      if (lessonId === '1') {
+        // Python环境搭建练习
+        return [
+          {
+            id: 1,
+            title: "练习1：检查Python版本",
+            description: "编写一个程序，检查当前Python版本并打印出来",
+            template: "# 检查Python版本\nimport sys\n\n# 在这里编写代码打印Python版本\nprint('Python版本:')",
+            answer: "# 检查Python版本\nimport sys\n\n# 在这里编写代码打印Python版本\nprint('Python版本:', sys.version)\n\n# 打印Python路径\nprint('Python路径:', sys.executable)",
+            difficulty: "简单"
+          },
+          {
+            id: 2,
+            title: "练习2：测试NumPy和Pandas",
+            description: "导入NumPy和Pandas库，并打印它们的版本",
+            template: "# 测试NumPy和Pandas\n\n# 在这里导入NumPy和Pandas库\n\n# 打印版本信息\nprint('NumPy版本:')\nprint('Pandas版本:')",
+            answer: "# 测试NumPy和Pandas\n\n# 在这里导入NumPy和Pandas库\nimport numpy as np\nimport pandas as pd\n\n# 打印版本信息\nprint('NumPy版本:', np.__version__)\nprint('Pandas版本:', pd.__version__)\n\n# 创建一个简单的DataFrame\ndata = {'名称': ['产品A', '产品B'], '价格': [100, 200]}\ndf = pd.DataFrame(data)\nprint('\n测试DataFrame:')\nprint(df)",
+            difficulty: "简单"
+          }
+        ];
+      } else if (lessonId === '2') {
+        // Python基础语法练习
+        return [
+          {
+            id: 1,
+            title: "练习1：变量和数据类型",
+            description: "创建不同类型的变量并打印它们",
+            template: "# 变量和数据类型\n\n# 创建变量\nname = '数据分析'\nage = 3\nis_active = True\n\n# 打印变量\nprint('名称:', name)\nprint('年龄:', age)\nprint('是否活跃:', is_active)\n\n# 计算并打印类型\nprint('\n类型:')\nprint('name的类型:')\nprint('age的类型:')\nprint('is_active的类型:')",
+            answer: "# 变量和数据类型\n\n# 创建变量\nname = '数据分析'\nage = 3\nis_active = True\n\n# 打印变量\nprint('名称:', name)\nprint('年龄:', age)\nprint('是否活跃:', is_active)\n\n# 计算并打印类型\nprint('\n类型:')\nprint('name的类型:', type(name))\nprint('age的类型:', type(age))\nprint('is_active的类型:', type(is_active))",
+            difficulty: "简单"
+          },
+          {
+            id: 2,
+            title: "练习2：列表操作",
+            description: "创建销售数据列表并进行基本操作",
+            template: "# 列表操作\n\n# 创建销售数据列表\ndaily_sales = [1000, 1200, 900, 1500, 1300]\n\n# 打印列表\nprint('日销售额:', daily_sales)\n\n# 计算总销售额\ntotal = sum(daily_sales)\nprint('总销售额:', total)\n\n# 计算平均值\naverage = total / len(daily_sales)\nprint('平均销售额:', average)\n\n# 添加新数据\ndaily_sales.append(1400)\nprint('添加后:', daily_sales)\n\n# 排序\nsorted_sales = sorted(daily_sales)\nprint('排序后:', sorted_sales)",
+            answer: "# 列表操作\n\n# 创建销售数据列表\ndaily_sales = [1000, 1200, 900, 1500, 1300]\n\n# 打印列表\nprint('日销售额:', daily_sales)\n\n# 计算总销售额\ntotal = sum(daily_sales)\nprint('总销售额:', total)\n\n# 计算平均值\naverage = total / len(daily_sales)\nprint('平均销售额:', average)\n\n# 添加新数据\ndaily_sales.append(1400)\nprint('添加后:', daily_sales)\n\n# 排序\nsorted_sales = sorted(daily_sales)\nprint('排序后:', sorted_sales)\n\n# 计算最大值和最小值\nprint('最大值:', max(daily_sales))\nprint('最小值:', min(daily_sales))",
+            difficulty: "中等"
+          },
+          {
+            id: 3,
+            title: "练习3：字典操作",
+            description: "创建销售数据字典并进行操作",
+            template: "# 字典操作\n\n# 创建销售数据字典\nsales_data = {\n    '日期': ['2023-01-01', '2023-01-02', '2023-01-03'],\n    '销售额': [1000, 1200, 900]\n}\n\n# 打印字典\nprint('销售数据:', sales_data)\n\n# 访问特定键的值\nprint('日期:', sales_data['日期'])\nprint('销售额:', sales_data['销售额'])\n\n# 添加新键值对\nsales_data['客户数'] = [20, 25, 18]\nprint('添加客户数后:', sales_data)\n\n# 遍历字典\nprint('\n遍历字典:')\nfor key, value in sales_data.items():\n    print(f'{key}: {value}')",
+            answer: "# 字典操作\n\n# 创建销售数据字典\nsales_data = {\n    '日期': ['2023-01-01', '2023-01-02', '2023-01-03'],\n    '销售额': [1000, 1200, 900]\n}\n\n# 打印字典\nprint('销售数据:', sales_data)\n\n# 访问特定键的值\nprint('日期:', sales_data['日期'])\nprint('销售额:', sales_data['销售额'])\n\n# 添加新键值对\nsales_data['客户数'] = [20, 25, 18]\nprint('添加客户数后:', sales_data)\n\n# 遍历字典\nprint('\n遍历字典:')\nfor key, value in sales_data.items():\n    print(f'{key}: {value}')\n\n# 计算日均销售额\naverage_sales = sum(sales_data['销售额']) / len(sales_data['销售额'])\nprint('\n日均销售额:', average_sales)\n\n# 计算日均客户数\naverage_customers = sum(sales_data['客户数']) / len(sales_data['客户数'])\nprint('日均客户数:', average_customers)",
+            difficulty: "中等"
+          }
+        ];
+      }
     }
-  ];
+    
+    // 课程8: 商业数据分析
+    if (id === '8') {
+      if (lessonId === '1') {
+        // 商业数据分析概述练习
+        return [
+          {
+            id: 1,
+            title: "练习1：基本统计分析",
+            description: "对销售数据进行基本统计分析",
+            template: "# 基本统计分析\nimport pandas as pd\nimport numpy as np\n\n# 模拟销售数据\ndata = {\n    '日期': pd.date_range('2023-01-01', periods=30),\n    '销售额': np.random.randint(800, 1500, 30),\n    '客户数': np.random.randint(20, 50, 30),\n    '产品类别': np.random.choice(['A', 'B', 'C'], 30)\n}\n\ndf = pd.DataFrame(data)\n\n# 基本统计分析\nprint('销售数据基本统计:')\nprint(df.describe())\n\n# 按产品类别分析\nprint('\n按产品类别销售分析:')\nprint(df.groupby('产品类别')['销售额'].sum())\n\n# 计算日均销售额\nprint('\n日均销售额:')\nprint(df['销售额'].mean())\nprint('日均客户数:')\nprint(df['客户数'].mean())",
+            answer: "# 基本统计分析\nimport pandas as pd\nimport numpy as np\n\n# 模拟销售数据\ndata = {\n    '日期': pd.date_range('2023-01-01', periods=30),\n    '销售额': np.random.randint(800, 1500, 30),\n    '客户数': np.random.randint(20, 50, 30),\n    '产品类别': np.random.choice(['A', 'B', 'C'], 30)\n}\n\ndf = pd.DataFrame(data)\n\n# 基本统计分析\nprint('销售数据基本统计:')\nprint(df.describe())\n\n# 按产品类别分析\nprint('\n按产品类别销售分析:')\nprint(df.groupby('产品类别')['销售额'].sum())\n\n# 计算日均销售额\nprint('\n日均销售额:', df['销售额'].mean())\nprint('日均客户数:', df['客户数'].mean())\n\n# 计算客单价\ndf['客单价'] = df['销售额'] / df['客户数']\nprint('\n日均客单价:', df['客单价'].mean())\n\n# 找出销售额最高的日期\nhighest_sales_date = df.loc[df['销售额'].idxmax(), '日期']\nhighest_sales = df['销售额'].max()\nprint('\n销售额最高的日期:', highest_sales_date)\nprint('最高销售额:', highest_sales)",
+            difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '2') {
+        // 销售数据分析练习
+        return [
+          {
+            id: 1,
+            title: "练习1：时间序列分析",
+            description: "对销售数据进行时间序列分析",
+            template: "# 时间序列分析\nimport pandas as pd\nimport numpy as np\n\n# 模拟销售数据\ndates = pd.date_range('2022-01-01', '2023-12-31', freq='D')\nsales = []\n\n# 创建有季节性模式的数据\nfor date in dates:\n    # 基础销售额\n    base_sale = 1000\n    # 月度季节性\n    month_factor = {1: 0.8, 2: 0.9, 3: 1.0, 4: 1.1, 5: 1.2, 6: 1.1, \n                   7: 1.0, 8: 0.9, 9: 1.0, 10: 1.1, 11: 1.3, 12: 1.5}[date.month]\n    # 随机波动\n    random_factor = np.random.normal(1, 0.1)\n    # 计算最终销售额\n    sale = base_sale * month_factor * random_factor\n    sales.append(round(sale))\n\ndf = pd.DataFrame({'日期': dates, '销售额': sales})\n\n# 按月聚合\nmonthly_sales = df.resample('M', on='日期')['销售额'].sum()\nprint('月度销售额:')\nprint(monthly_sales)\n\n# 计算同比增长率\nprint('\n月度销售额同比增长率:')\nprint(monthly_sales.pct_change(12) * 100)\n\n# 识别销售高峰\nprint('\n销售高峰月份:')\nprint(monthly_sales.idxmax())\nprint('最高销售额:', monthly_sales.max())",
+            answer: "# 时间序列分析\nimport pandas as pd\nimport numpy as np\n\n# 模拟销售数据\ndates = pd.date_range('2022-01-01', '2023-12-31', freq='D')\nsales = []\n\n# 创建有季节性模式的数据\nfor date in dates:\n    # 基础销售额\n    base_sale = 1000\n    # 月度季节性\n    month_factor = {1: 0.8, 2: 0.9, 3: 1.0, 4: 1.1, 5: 1.2, 6: 1.1, \n                   7: 1.0, 8: 0.9, 9: 1.0, 10: 1.1, 11: 1.3, 12: 1.5}[date.month]\n    # 随机波动\n    random_factor = np.random.normal(1, 0.1)\n    # 计算最终销售额\n    sale = base_sale * month_factor * random_factor\n    sales.append(round(sale))\n\ndf = pd.DataFrame({'日期': dates, '销售额': sales})\n\n# 按月聚合\nmonthly_sales = df.resample('M', on='日期')['销售额'].sum()\nprint('月度销售额:')\nprint(monthly_sales)\n\n# 计算同比增长率\nprint('\n月度销售额同比增长率:')\ngrowth_rate = monthly_sales.pct_change(12) * 100\nprint(growth_rate)\n\n# 识别销售高峰和低谷\nprint('\n销售高峰月份:', monthly_sales.idxmax())\nprint('最高销售额:', monthly_sales.max())\nprint('销售低谷月份:', monthly_sales.idxmin())\nprint('最低销售额:', monthly_sales.min())\n\n# 计算季度销售额\nquarterly_sales = df.resample('Q', on='日期')['销售额'].sum()\nprint('\n季度销售额:')\nprint(quarterly_sales)\n\n# 计算年度销售额\nyearly_sales = df.resample('Y', on='日期')['销售额'].sum()\nprint('\n年度销售额:')\nprint(yearly_sales)\nprint('年度增长率:', yearly_sales.pct_change() * 100)",
+            difficulty: "高级"
+          }
+        ];
+      }
+    }
+    
+    // 课程9: 商业数据可视化与预测
+    if (id === '9') {
+      if (lessonId === '1') {
+        // 数据可视化基础练习
+        return [
+          {
+            id: 1,
+            title: "练习1：创建销售趋势图",
+            description: "使用Matplotlib创建销售趋势折线图",
+            template: "# 创建销售趋势图\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [12000, 13500, 11800, 14200, 15600, 14800, \n         16200, 17500, 16800, 18200, 19500, 21000]\n\n# 创建DataFrame\ndf = pd.DataFrame({'月份': dates, '销售额': sales})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 折线图\nplt.figure(figsize=(10, 6))\nplt.plot(df['月份'], df['销售额'], marker='o', linestyle='-', color='b')\nplt.title('2023年销售趋势')\nplt.xlabel('月份')\nplt.ylabel('销售额')\nplt.grid(True)\nplt.tight_layout()\n\nprint('销售趋势图已创建')\nprint('月度销售额数据:')\nprint(df)\n\n# 计算销售额增长率\ngrowth_rate = df['销售额'].pct_change() * 100\ndf['增长率'] = growth_rate\nprint('\n销售额增长率:')\nprint(df[['月份', '增长率']])",
+            answer: "# 创建销售趋势图\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [12000, 13500, 11800, 14200, 15600, 14800, \n         16200, 17500, 16800, 18200, 19500, 21000]\n\n# 创建DataFrame\ndf = pd.DataFrame({'月份': dates, '销售额': sales})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 折线图\nplt.figure(figsize=(10, 6))\nplt.plot(df['月份'], df['销售额'], marker='o', linestyle='-', color='b')\nplt.title('2023年销售趋势')\nplt.xlabel('月份')\nplt.ylabel('销售额')\nplt.grid(True)\nplt.tight_layout()\n\n# 柱状图\nplt.figure(figsize=(10, 6))\nplt.bar(df['月份'], df['销售额'], color='g')\nplt.title('2023年月度销售额')\nplt.xlabel('月份')\nplt.ylabel('销售额')\nplt.xticks(rotation=45)\nplt.tight_layout()\n\nprint('销售趋势图和柱状图已创建')\nprint('月度销售额数据:')\nprint(df)\n\n# 计算销售额增长率\ngrowth_rate = df['销售额'].pct_change() * 100\ndf['增长率'] = growth_rate\nprint('\n销售额增长率:')\nprint(df[['月份', '增长率']])\n\n# 计算年度总销售额和平均月销售额\ntotal_sales = df['销售额'].sum()\naverage_sales = df['销售额'].mean()\nprint('\n年度总销售额:', total_sales)\nprint('平均月销售额:', average_sales)\nprint('最高月销售额:', df['销售额'].max())\nprint('最低月销售额:', df['销售额'].min())",
+            difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '2') {
+        // Matplotlib高级应用练习
+        return [
+          {
+            id: 1,
+            title: "练习1：创建多维度销售分析图表",
+            description: "使用Matplotlib创建堆叠柱状图和饼图",
+            template: "# 创建多维度销售分析图表\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟多产品销售数据\nproducts = ['产品A', '产品B', '产品C', '产品D']\nquarters = ['Q1', 'Q2', 'Q3', 'Q4']\n\n# 创建销售数据\nsales_data = {\n    '产品A': [12000, 13500, 14200, 15800],\n    '产品B': [9500, 10200, 11800, 12500],\n    '产品C': [8800, 9400, 10100, 11200],\n    '产品D': [7200, 8500, 9300, 10500]\n}\n\ndf = pd.DataFrame(sales_data, index=quarters)\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 堆叠柱状图\nplt.figure(figsize=(10, 6))\ndf.plot(kind='bar', stacked=True, figsize=(10, 6))\nplt.title('2023年各季度产品销售额')\nplt.xlabel('季度')\nplt.ylabel('销售额')\nplt.legend(title='产品')\nplt.tight_layout()\n\n# 饼图 - Q4销售额分布\nplt.figure(figsize=(8, 8))\nplt.pie(df.loc['Q4'], labels=products, autopct='%1.1f%%', startangle=90)\nplt.title('Q4产品销售分布')\nplt.axis('equal')\nplt.tight_layout()\n\nprint('多维度销售分析图表已创建')\nprint('季度销售数据:')\nprint(df)\n\n# 计算各产品年度总销售额\nyearly_sales = df.sum()\nprint('\n各产品年度总销售额:')\nprint(yearly_sales)\n\n# 计算各季度总销售额\nquarterly_total = df.sum(axis=1)\nprint('\n各季度总销售额:')\nprint(quarterly_total)",
+            answer: "# 创建多维度销售分析图表\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟多产品销售数据\nproducts = ['产品A', '产品B', '产品C', '产品D']\nquarters = ['Q1', 'Q2', 'Q3', 'Q4']\n\n# 创建销售数据\nsales_data = {\n    '产品A': [12000, 13500, 14200, 15800],\n    '产品B': [9500, 10200, 11800, 12500],\n    '产品C': [8800, 9400, 10100, 11200],\n    '产品D': [7200, 8500, 9300, 10500]\n}\n\ndf = pd.DataFrame(sales_data, index=quarters)\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 堆叠柱状图\nplt.figure(figsize=(10, 6))\ndf.plot(kind='bar', stacked=True, figsize=(10, 6))\nplt.title('2023年各季度产品销售额')\nplt.xlabel('季度')\nplt.ylabel('销售额')\nplt.legend(title='产品')\nplt.tight_layout()\n\n# 饼图 - Q4销售额分布\nplt.figure(figsize=(8, 8))\nplt.pie(df.loc['Q4'], labels=products, autopct='%1.1f%%', startangle=90)\nplt.title('Q4产品销售分布')\nplt.axis('equal')\nplt.tight_layout()\n\n# 多子图 - 每个产品的销售趋势\nfig, axes = plt.subplots(2, 2, figsize=(12, 10))\nfig.suptitle('2023年产品销售分析', fontsize=16)\n\nfor i, product in enumerate(products):\n    row = i // 2\n    col = i % 2\n    axes[row, col].plot(quarters, df[product], marker='o')\n    axes[row, col].set_title(f'{product}销售趋势')\n    axes[row, col].set_xlabel('季度')\n    axes[row, col].set_ylabel('销售额')\n    axes[row, col].grid(True)\n\nplt.tight_layout(rect=[0, 0, 1, 0.95])\n\nprint('多维度销售分析图表已创建')\nprint('季度销售数据:')\nprint(df)\n\n# 计算各产品年度总销售额\nyearly_sales = df.sum()\nprint('\n各产品年度总销售额:')\nprint(yearly_sales)\nprint('销售占比:')\nprint((yearly_sales / yearly_sales.sum() * 100).round(2))\n\n# 计算各季度总销售额\nquarterly_total = df.sum(axis=1)\nprint('\n各季度总销售额:')\nprint(quarterly_total)\nprint('季度占比:')\nprint((quarterly_total / quarterly_total.sum() * 100).round(2))\n\n# 计算各产品季度增长率\nprint('\n各产品季度增长率:')\nfor product in products:\n    growth = df[product].pct_change() * 100\n    print(f'{product}:')\n    print(growth.round(2))",
+            difficulty: "高级"
+          }
+        ];
+      }
+    }
+    
+    // 默认练习题目
+    return [
+      {
+        id: 1,
+        title: "练习1：打印问候语",
+        description: "编写一个程序，打印 'Hello, 数据分析世界！'",
+        template: "# 在这里编写代码\nprint('Hello, World!')",
+        answer: "print('Hello, 数据分析世界！')",
+        difficulty: "简单"
+      },
+      {
+        id: 2,
+        title: "练习2：计算销售总额",
+        description: "给定销售数据，计算总销售额",
+        template: "# 销售数据\nsales = [1000, 1200, 900, 1500, 1300]\n\n# 在这里计算总销售额\ntotal = \nprint('总销售额:', total)",
+        answer: "# 销售数据\nsales = [1000, 1200, 900, 1500, 1300]\n\n# 在这里计算总销售额\ntotal = sum(sales)\nprint('总销售额:', total)",
+        difficulty: "中等"
+      }
+    ];
+  };
 
+  const [practiceQuestions, setPracticeQuestions] = useState(getPracticeQuestions());
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
   useEffect(() => {
@@ -60,6 +159,12 @@ const LessonDetail: React.FC = () => {
       loadLesson(Number(lessonId));
     }
   }, [lessonId]);
+
+  useEffect(() => {
+    // 当课程或课时变化时，重新生成练习题目
+    setPracticeQuestions(getPracticeQuestions());
+    setCurrentQuestion(0);
+  }, [id, lessonId]);
 
   // Mock lesson data for different courses
   const mockLessons = {
@@ -431,8 +536,10 @@ print("在实际环境中，这将生成堆叠柱状图、饼图和多子图销�
     // 设置初始代码为第一个练习
     if (practiceQuestions.length > 0) {
       setCode(practiceQuestions[0].template);
+      setOutput('');
+      setShowAnswer(false);
     }
-  }, []);
+  }, [practiceQuestions]);
 
   const handleQuestionChange = (index: number) => {
     setCurrentQuestion(index);
