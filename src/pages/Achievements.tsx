@@ -1,9 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { ChevronLeft } from 'lucide-react';
 
 const Achievements: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-3xl mx-auto">
+        {/* 返回按钮 */}
+        <div className="mb-6">
+          <Link to="/" className="flex items-center text-blue-600 hover:text-blue-800">
+            <ChevronLeft className="h-5 w-5 mr-1" />
+            返回首页
+          </Link>
+        </div>
         <h1 className="text-3xl font-bold text-gray-800 mb-6">成就中心</h1>
         <p className="text-gray-600 mb-8">
           在这里，你可以查看你的学习成就和获得的徽章。
