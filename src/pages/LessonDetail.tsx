@@ -95,6 +95,122 @@ const LessonDetail: React.FC = () => {
       }
     }
     
+    // 课程2: Python数据分析实战
+    if (id === '2') {
+      if (lessonId === '1') {
+        return [
+          {
+            id: 1,
+            title: "练习1：数据分析概述",
+            description: "了解数据分析的基本概念和流程",
+            template: "# 数据分析概述\n\n# 打印数据分析的基本步骤\nprint('数据分析的基本步骤:')\n# TODO: 列出数据分析的基本步骤\n",
+            answer: "# 数据分析概述\n\n# 打印数据分析的基本步骤\nprint('数据分析的基本步骤:')\nprint('1. 问题定义')\nprint('2. 数据收集')\nprint('3. 数据清洗')\nprint('4. 数据探索')\nprint('5. 数据建模')\nprint('6. 结果分析')\nprint('7. 报告生成')\n",
+            difficulty: "简单"
+          }
+        ];
+      } else if (lessonId === '2') {
+        return [
+          {
+            id: 1,
+            title: "练习1：数据导入与导出",
+            description: "学习如何导入和导出各种格式的数据",
+            template: "# 数据导入与导出\nimport pandas as pd\n\n# 创建示例数据\ndata = {'名称': ['产品A', '产品B', '产品C'], '价格': [100, 200, 300], '销量': [10, 20, 30]}\ndf = pd.DataFrame(data)\n\n# 打印数据\nprint('原始数据:')\nprint(df)\n\n# TODO: 将数据导出为CSV文件\nprint('\n数据已导出为CSV文件')\n",
+            answer: "# 数据导入与导出\nimport pandas as pd\n\n# 创建示例数据\ndata = {'名称': ['产品A', '产品B', '产品C'], '价格': [100, 200, 300], '销量': [10, 20, 30]}\ndf = pd.DataFrame(data)\n\n# 打印数据\nprint('原始数据:')\nprint(df)\n\n# 将数据导出为CSV文件\ndf.to_csv('products.csv', index=False)\nprint('\n数据已导出为CSV文件')\n\n# 从CSV文件导入数据\ndf_imported = pd.read_csv('products.csv')\nprint('\n从CSV导入的数据:')\nprint(df_imported)\n",
+            difficulty: "简单"
+          }
+        ];
+      } else if (lessonId === '3') {
+        return [
+          {
+            id: 1,
+            title: "练习1：数据清洗基础",
+            description: "学习数据清洗的基本方法和技巧",
+            template: "# 数据清洗基础\nimport pandas as pd\nimport numpy as np\n\n# 创建含有缺失值的示例数据\ndata = {'名称': ['产品A', '产品B', None, '产品D'], '价格': [100, np.nan, 300, 400], '销量': [10, 20, None, 40]}\ndf = pd.DataFrame(data)\n\nprint('原始数据:')\nprint(df)\n\n# TODO: 处理缺失值\nprint('\n处理后的数据:')\n",
+            answer: "# 数据清洗基础\nimport pandas as pd\nimport numpy as np\n\n# 创建含有缺失值的示例数据\ndata = {'名称': ['产品A', '产品B', None, '产品D'], '价格': [100, np.nan, 300, 400], '销量': [10, 20, None, 40]}\ndf = pd.DataFrame(data)\n\nprint('原始数据:')\nprint(df)\n\n# 处理缺失值\ndf_cleaned = df.dropna()\nprint('\n处理后的数据:')\nprint(df_cleaned)\n\n# 或者使用填充方法\ndf_filled = df.fillna({'名称': '未知', '价格': df['价格'].mean(), '销量': 0})\nprint('\n填充后的数据:')\nprint(df_filled)\n",
+            difficulty: "简单"
+          }
+        ];
+      } else if (lessonId === '4') {
+        return [
+          {
+            id: 1,
+            title: "练习1：数据探索分析",
+            description: "学习如何探索和分析数据",
+            template: "# 数据探索分析\nimport pandas as pd\nimport numpy as np\n\n# 创建示例数据\ndata = {'产品类别': ['电子产品', '服装', '家居用品', '食品', '电子产品', '服装'], '销售额': [1000, 500, 800, 300, 1200, 600], '利润': [200, 100, 160, 60, 240, 120]}\ndf = pd.DataFrame(data)\n\nprint('原始数据:')\nprint(df)\n\n# TODO: 按产品类别分组分析\nprint('\n按产品类别分析:')\n",
+            answer: "# 数据探索分析\nimport pandas as pd\nimport numpy as np\n\n# 创建示例数据\ndata = {'产品类别': ['电子产品', '服装', '家居用品', '食品', '电子产品', '服装'], '销售额': [1000, 500, 800, 300, 1200, 600], '利润': [200, 100, 160, 60, 240, 120]}\ndf = pd.DataFrame(data)\n\nprint('原始数据:')\nprint(df)\n\n# 按产品类别分组分析\ngrouped = df.groupby('产品类别').agg({'销售额': 'sum', '利润': 'sum'})\nprint('\n按产品类别分析:')\nprint(grouped)\n\n# 计算利润率\ngrouped['利润率'] = (grouped['利润'] / grouped['销售额'] * 100).round(2)\nprint('\n带利润率的分析:')\nprint(grouped)\n",
+            difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '5') {
+        return [
+          {
+            id: 1,
+            title: "练习1：数据可视化实践",
+            description: "通过实际案例学习数据可视化",
+            template: "# 数据可视化实践\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 创建示例数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [1000, 1200, 900, 1100, 1300, 1250, 1400, 1500, 1350, 1450, 1600, 1700]\ndf = pd.DataFrame({'月份': dates, '销售额': sales})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# TODO: 创建销售额折线图\nprint('销售额数据:')\nprint(df)\n",
+            answer: "# 数据可视化实践\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 创建示例数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [1000, 1200, 900, 1100, 1300, 1250, 1400, 1500, 1350, 1450, 1600, 1700]\ndf = pd.DataFrame({'月份': dates, '销售额': sales})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 创建销售额折线图\nplt.figure(figsize=(10, 6))\nplt.plot(df['月份'], df['销售额'], marker='o', linestyle='-', color='b')\nplt.title('2023年销售额趋势')\nplt.xlabel('月份')\nplt.ylabel('销售额')\nplt.grid(True)\nplt.tight_layout()\n\nprint('销售额数据:')\nprint(df)\nprint('\n销售额趋势图已创建')\n",
+            difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '6') {
+        return [
+          {
+            id: 1,
+            title: "练习1：统计分析基础",
+            description: "学习基本的统计分析方法",
+            template: "# 统计分析基础\nimport pandas as pd\nimport numpy as np\n\n# 创建示例数据\ndata = {'销售额': np.random.normal(1000, 200, 100), '利润': np.random.normal(200, 50, 100)}\ndf = pd.DataFrame(data)\n\nprint('数据基本统计:')\nprint(df.describe())\n\n# TODO: 计算相关系数\nprint('\n相关系数:')\n",
+            answer: "# 统计分析基础\nimport pandas as pd\nimport numpy as np\n\n# 创建示例数据\ndata = {'销售额': np.random.normal(1000, 200, 100), '利润': np.random.normal(200, 50, 100)}\ndf = pd.DataFrame(data)\n\nprint('数据基本统计:')\nprint(df.describe())\n\n# 计算相关系数\ncorrelation = df.corr()\nprint('\n相关系数:')\nprint(correlation)\n\n# 计算协方差\ncovariance = df.cov()\nprint('\n协方差:')\nprint(covariance)\n",
+            difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '7') {
+        return [
+          {
+            id: 1,
+            title: "练习1：商业案例分析",
+            description: "通过商业案例学习数据分析的应用",
+            template: "# 商业案例分析\nimport pandas as pd\nimport numpy as np\n\n# 模拟电商销售数据\ndata = {\n    '日期': pd.date_range('2023-01-01', periods=30),\n    '产品类别': np.random.choice(['电子产品', '服装', '家居用品'], 30),\n    '销售额': np.random.randint(500, 2000, 30),\n    '促销活动': np.random.choice(['无', '有'], 30, p=[0.7, 0.3])\n}\n\ndf = pd.DataFrame(data)\n\n# TODO: 分析促销活动对销售额的影响\nprint('促销活动效果分析:')\n",
+            answer: "# 商业案例分析\nimport pandas as pd\nimport numpy as np\n\n# 模拟电商销售数据\ndata = {\n    '日期': pd.date_range('2023-01-01', periods=30),\n    '产品类别': np.random.choice(['电子产品', '服装', '家居用品'], 30),\n    '销售额': np.random.randint(500, 2000, 30),\n    '促销活动': np.random.choice(['无', '有'], 30, p=[0.7, 0.3])\n}\n\ndf = pd.DataFrame(data)\n\n# 分析促销活动对销售额的影响\npromotion_effect = df.groupby('促销活动')['销售额'].agg(['mean', 'count', 'sum']).round(2)\nprint('促销活动效果分析:')\nprint(promotion_effect)\n\n# 按产品类别和促销活动分析\ncategory_promotion = df.groupby(['产品类别', '促销活动'])['销售额'].mean().round(2)\nprint('\n按产品类别和促销活动分析:')\nprint(category_promotion)\n",
+            difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '8') {
+        return [
+          {
+            id: 1,
+            title: "练习1：项目实践准备",
+            description: "准备进行数据分析项目实践",
+            template: "# 项目实践准备\n\n# 项目主题：电商销售数据分析\nprint('项目实践准备:')\nprint('1. 确定项目目标')\nprint('2. 收集数据')\nprint('3. 制定分析计划')\nprint('4. 准备分析工具')\n\n# TODO: 列出项目实施的具体步骤\nprint('\n项目实施步骤:')\n",
+            answer: "# 项目实践准备\n\n# 项目主题：电商销售数据分析\nprint('项目实践准备:')\nprint('1. 确定项目目标')\nprint('2. 收集数据')\nprint('3. 制定分析计划')\nprint('4. 准备分析工具')\n\n# 项目实施的具体步骤\nprint('\n项目实施步骤:')\nprint('1. 数据收集与导入')\nprint('2. 数据清洗与预处理')\nprint('3. 数据探索与分析')\nprint('4. 数据可视化')\nprint('5. 结果分析与报告')\nprint('6. 项目总结与改进')\n",
+            difficulty: "简单"
+          }
+        ];
+      } else if (lessonId === '9') {
+        return [
+          {
+            id: 1,
+            title: "练习1：项目实施",
+            description: "实施数据分析项目",
+            template: "# 项目实施\nimport pandas as pd\nimport numpy as np\n\n# 模拟电商销售数据\ndata = {\n    '订单ID': range(1, 101),\n    '日期': pd.date_range('2023-01-01', periods=100),\n    '产品类别': np.random.choice(['电子产品', '服装', '家居用品', '食品'], 100),\n    '销售额': np.random.randint(100, 2000, 100),\n    '客户年龄': np.random.randint(18, 65, 100),\n    '地区': np.random.choice(['北京', '上海', '广州', '深圳'], 100)\n}\n\ndf = pd.DataFrame(data)\n\n# TODO: 进行数据分析\nprint('项目实施分析:')\n",
+            answer: "# 项目实施\nimport pandas as pd\nimport numpy as np\n\n# 模拟电商销售数据\ndata = {\n    '订单ID': range(1, 101),\n    '日期': pd.date_range('2023-01-01', periods=100),\n    '产品类别': np.random.choice(['电子产品', '服装', '家居用品', '食品'], 100),\n    '销售额': np.random.randint(100, 2000, 100),\n    '客户年龄': np.random.randint(18, 65, 100),\n    '地区': np.random.choice(['北京', '上海', '广州', '深圳'], 100)\n}\n\ndf = pd.DataFrame(data)\n\n# 进行数据分析\nprint('项目实施分析:')\n\n# 1. 总体销售情况\nprint('\n1. 总体销售情况:')\nprint('总销售额:', df['销售额'].sum())\nprint('平均订单金额:', df['销售额'].mean().round(2))\nprint('订单数量:', len(df))\n\n# 2. 按产品类别分析\nprint('\n2. 按产品类别分析:')\nproduct_analysis = df.groupby('产品类别')['销售额'].agg(['sum', 'mean', 'count']).round(2)\nprint(product_analysis)\n\n# 3. 按地区分析\nprint('\n3. 按地区分析:')\nregion_analysis = df.groupby('地区')['销售额'].agg(['sum', 'mean', 'count']).round(2)\nprint(region_analysis)\n\n# 4. 按客户年龄分析\nprint('\n4. 按客户年龄分析:')\ndf['年龄组'] = pd.cut(df['客户年龄'], bins=[18, 30, 40, 50, 65], labels=['18-30', '31-40', '41-50', '51-65'])
+age_analysis = df.groupby('年龄组')['销售额'].agg(['sum', 'mean', 'count']).round(2)\nprint(age_analysis)\n",
+            difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '10') {
+        return [
+          {
+            id: 1,
+            title: "练习1：项目展示与总结",
+            description: "展示项目成果并总结学习内容",
+            template: "# 项目展示与总结\n\n# 项目主题：电商销售数据分析\nprint('项目展示与总结:')\nprint('1. 项目背景')\nprint('2. 数据来源')\nprint('3. 分析方法')\n\n# TODO: 总结项目成果和学习收获\nprint('\n项目成果:')\nprint('\n学习收获:')\n",
+            answer: "# 项目展示与总结\n\n# 项目主题：电商销售数据分析\nprint('项目展示与总结:')\nprint('1. 项目背景: 通过对电商销售数据的分析，了解销售趋势和客户行为，为业务决策提供数据支持')\nprint('2. 数据来源: 模拟的电商销售数据，包含订单ID、日期、产品类别、销售额、客户年龄和地区等信息')\nprint('3. 分析方法: 使用Pandas进行数据处理和分析，使用Matplotlib进行数据可视化')\n\n# 总结项目成果和学习收获\nprint('\n项目成果:')\nprint('- 分析了不同产品类别的销售情况，发现电子产品销售额最高')\nprint('- 分析了不同地区的销售表现，发现北京地区销售额领先')\nprint('- 分析了不同年龄组的消费行为，发现31-40岁年龄组消费能力最强')\nprint('- 识别了销售趋势和季节性模式')\n\nprint('\n学习收获:')\nprint('- 掌握了Python数据分析的基本流程和方法')\nprint('- 学习了使用Pandas进行数据处理和分析')\nprint('- 学习了使用Matplotlib进行数据可视化')\nprint('- 培养了数据分析思维和问题解决能力')\nprint('- 学会了如何将分析结果转化为业务 insights')\n",
+            difficulty: "简单"
+          }
+        ];
+      }
+    }
+    
     // 课程8: 商业数据分析
     if (id === '8') {
       if (lessonId === '1') {
