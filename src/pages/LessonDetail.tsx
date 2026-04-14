@@ -18,7 +18,7 @@ const LessonDetail: React.FC = () => {
   const [useJudge0, setUseJudge0] = useState(false);
 
   // 根据课程和课时生成练习题目
-  const getPracticeQuestions = () => {
+  const getPracticeQuestions = React.useCallback(() => {
     // 课程1: Python基础与数据科学入门
     if (id === '1') {
       if (lessonId === '1') {
@@ -149,7 +149,7 @@ const LessonDetail: React.FC = () => {
         difficulty: "中等"
       }
     ];
-  };
+  }, [id, lessonId]);
 
   const [practiceQuestions, setPracticeQuestions] = useState(getPracticeQuestions());
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -162,9 +162,15 @@ const LessonDetail: React.FC = () => {
 
   useEffect(() => {
     // 当课程或课时变化时，重新生成练习题目
-    setPracticeQuestions(getPracticeQuestions());
+    const questions = getPracticeQuestions();
+    setPracticeQuestions(questions);
     setCurrentQuestion(0);
-  }, [id, lessonId]);
+    if (questions.length > 0) {
+      setCode(questions[0].template);
+      setOutput('');
+      setShowAnswer(false);
+    }
+  }, [getPracticeQuestions]);
 
   // Mock lesson data for different courses
   const mockLessons = {
@@ -532,14 +538,7 @@ print("在实际环境中，这将生成堆叠柱状图、饼图和多子图销�
     loadPyodide();
   }, []);
 
-  useEffect(() => {
-    // 设置初始代码为第一个练习
-    if (practiceQuestions.length > 0) {
-      setCode(practiceQuestions[0].template);
-      setOutput('');
-      setShowAnswer(false);
-    }
-  }, [practiceQuestions]);
+
 
   const handleQuestionChange = (index: number) => {
     setCurrentQuestion(index);
