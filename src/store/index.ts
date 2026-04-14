@@ -27,7 +27,7 @@ interface AppState {
   loadUser: () => Promise<void>;
   loadCourses: () => Promise<void>;
   loadCourse: (courseId: number) => Promise<void>;
-  loadLesson: (lessonId: number) => Promise<void>;
+  loadLesson: (courseId: number, lessonId: number) => Promise<void>;
   loadProgress: () => Promise<void>;
   updateProgress: (courseId: number, lessonId: number, completed: boolean) => Promise<void>;
   loadAchievements: () => Promise<void>;
@@ -168,20 +168,40 @@ export const useStore = create<AppState>((set, get) => ({
     set({ currentCourse: data, isLoading: false });
   },
   
-  loadLesson: async (lessonId) => {
+  loadLesson: async (courseId, lessonId) => {
     set({ isLoading: true });
-    const { data, error } = await supabase
-      .from('lessons')
-      .select('*')
-      .eq('id', lessonId)
-      .single();
     
-    if (error) {
-      set({ error: error.message, isLoading: false });
+    // 模拟数据 - 实际项目中应该从数据库获取
+    const mockLessons = {
+      1: [
+        { id: 1, course_id: 1, title: 'Python环境搭建', content: 'Python环境搭建是学习Python的第一步。在本课时中，我们将学习如何安装Python、配置开发环境，以及如何使用Jupyter Notebook进行交互式编程。', order: 1, duration: '45分钟' },
+        { id: 2, course_id: 1, title: 'Python基础语法', content: 'Python基础语法是Python编程的基础。在本课时中，我们将学习Python的基本数据类型、变量、运算符、控制流等基础知识。', order: 2, duration: '60分钟' },
+        { id: 7, course_id: 1, title: '商业数据分析案例', content: '商业数据分析案例是将Python应用于实际商业场景的重要实践。在本课时中，我们将通过一个完整的商业数据分析案例，学习如何使用Python进行数据清洗、分析和可视化。', order: 7, duration: '90分钟' }
+      ],
+      8: [
+        { id: 1, course_id: 8, title: '商业数据分析概述', content: '商业数据分析概述介绍了商业数据分析的基本概念、方法和应用场景。在本课时中，我们将学习商业数据分析的重要性、流程和常用工具。', order: 1, duration: '45分钟' },
+        { id: 7, course_id: 8, title: '商业数据分析案例', content: '商业数据分析案例是将数据分析方法应用于实际商业场景的重要实践。在本课时中，我们将通过一个完整的商业数据分析案例，学习如何分析销售数据、客户行为数据等。', order: 7, duration: '90分钟' }
+      ],
+      9: [
+        { id: 1, course_id: 9, title: '数据可视化基础', content: '数据可视化基础介绍了数据可视化的基本概念、原则和方法。在本课时中，我们将学习如何使用Matplotlib和Seaborn库创建各种类型的图表。', order: 1, duration: '60分钟' },
+        { id: 7, course_id: 9, title: '商业数据可视化与预测案例', content: '商业数据可视化与预测案例是将数据可视化和预测方法应用于实际商业场景的重要实践。在本课时中，我们将通过一个完整的案例，学习如何创建交互式可视化和进行销售预测。', order: 7, duration: '90分钟' }
+      ]
+    };
+    
+    // 从模拟数据中获取课时
+    const courseLessons = mockLessons[courseId as keyof typeof mockLessons];
+    if (!courseLessons) {
+      set({ error: '课程不存在', isLoading: false });
       return;
     }
     
-    set({ currentLesson: data, isLoading: false });
+    const lesson = courseLessons.find(l => l.id === lessonId);
+    if (!lesson) {
+      set({ error: '课时不存在', isLoading: false });
+      return;
+    }
+    
+    set({ currentLesson: lesson, isLoading: false });
   },
   
   loadProgress: async () => {
