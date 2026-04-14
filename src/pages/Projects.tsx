@@ -54,7 +54,7 @@ const Projects: React.FC = () => {
                 <span className="text-sm text-gray-500">难度：中级</span>
                 <button 
                   className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
-                  onClick={() => handleViewProject('2')}
+                  onClick={() => handleViewProject('8')}
                 >
                   查看项目
                 </button>
@@ -70,7 +70,7 @@ const Projects: React.FC = () => {
                 <span className="text-sm text-gray-500">难度：高级</span>
                 <button 
                   className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
-                  onClick={() => handleViewProject('2')}
+                  onClick={() => handleViewProject('9')}
                 >
                   查看项目
                 </button>
@@ -86,7 +86,7 @@ const Projects: React.FC = () => {
                 <span className="text-sm text-gray-500">难度：中级</span>
                 <button 
                   className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
-                  onClick={() => handleViewProject('2')}
+                  onClick={() => handleViewProject('9')}
                 >
                   查看项目
                 </button>
