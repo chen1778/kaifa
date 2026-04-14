@@ -384,7 +384,7 @@ const LessonDetail: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 面包屑导航 */}
         <div className="flex items-center mb-6">
-          <Link to={`/courses/${id}`} className="flex items-center text-blue-600 hover:text-blue-800">
+          <Link to={`/courses/${id}`} className="flex items-center bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-md transition-colors">
             <ChevronLeft className="h-5 w-5 mr-1" />
             返回课程大纲
           </Link>
