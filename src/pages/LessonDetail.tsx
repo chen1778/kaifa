@@ -245,6 +245,15 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习3：使用Requests发送GET请求",
+            description: "学习使用Requests库发送GET请求并处理响应",
+            template: "# 使用Requests发送GET请求\nimport requests\n\n# 发送GET请求到百度首页\nurl = 'https://www.baidu.com'\n\n# TODO: 发送请求并获取响应\n# response = requests.get(url)\n\n# TODO: 打印响应状态码\nprint('状态码:')\n\n# TODO: 打印响应头\nprint('\n响应头:')\n\n# TODO: 打印响应内容的前500个字符\nprint('\n响应内容:')\n",
+            answer: "# 使用Requests发送GET请求\nimport requests\n\n# 发送GET请求到百度首页\nurl = 'https://www.baidu.com'\n\n# 发送请求并获取响应\nresponse = requests.get(url)\n\n# 打印响应状态码\nprint('状态码:', response.status_code)\n\n# 打印响应头\nprint('\n响应头:')\nfor key, value in response.headers.items():\n    print(f'{key}: {value}')\n\n# 打印响应内容的前500个字符\nprint('\n响应内容:')\nprint(response.text[:500])\n\n# 设置请求头\nheaders = {\n    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'\n}\n\n# 使用自定义请求头发送请求\nresponse_with_headers = requests.get(url, headers=headers)\nprint('\n使用自定义请求头的状态码:', response_with_headers.status_code)",
+            difficulty: "简单"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习3：Requests库使用",
             description: "回答关于Requests库的问题",
@@ -257,6 +266,15 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习4：使用BeautifulSoup解析HTML",
+            description: "学习使用BeautifulSoup库解析HTML并提取数据",
+            template: "# 使用BeautifulSoup解析HTML\nfrom bs4 import BeautifulSoup\n\n# 示例HTML内容\nhtml_content = '''\n<!DOCTYPE html>\n<html>\n<head>\n    <title>测试页面</title>\n</head>\n<body>\n    <h1>欢迎来到测试页面</h1>\n    <div class=\"content\">\n        <p>这是一个测试段落</p>\n        <ul>\n            <li>项目1</li>\n            <li>项目2</li>\n            <li>项目3</li>\n        </ul>\n    </div>\n</body>\n</html>\n'''\n\n# TODO: 创建BeautifulSoup对象\n# soup = BeautifulSoup(html_content, 'html.parser')\n\n# TODO: 提取标题\nprint('标题:')\n\n# TODO: 提取h1标签内容\nprint('\nh1标签内容:')\n\n# TODO: 提取所有li标签内容\nprint('\n所有li标签内容:')\n",
+            answer: '# 使用BeautifulSoup解析HTML\nfrom bs4 import BeautifulSoup\n\n# 示例HTML内容\nhtml_content = """\n<!DOCTYPE html>\n<html>\n<head>\n    <title>测试页面</title>\n</head>\n<body>\n    <h1>欢迎来到测试页面</h1>\n    <div class="content">\n        <p>这是一个测试段落</p>\n        <ul>\n            <li>项目1</li>\n            <li>项目2</li>\n            <li>项目3</li>\n        </ul>\n    </div>\n</body>\n</html>\n"""\n\n# 创建BeautifulSoup对象\nsoup = BeautifulSoup(html_content, "html.parser")\n\n# 提取标题\ntitle = soup.title.text\nprint("标题:", title)\n\n# 提取h1标签内容\nh1_content = soup.h1.text\nprint("\nh1标签内容:", h1_content)\n\n# 提取所有li标签内容\nli_tags = soup.find_all("li")\nprint("\n所有li标签内容:")\nfor i, li in enumerate(li_tags):\n    print(f"项目{i+1}: {li.text}")\n\n# 使用CSS选择器\ndiv_content = soup.select_one(".content")\nif div_content:\n    p_content = div_content.find("p").text\n    print("\n通过CSS选择器获取的段落内容:", p_content)",
+            difficulty: "简单"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习4：BeautifulSoup库使用",
             description: "回答关于BeautifulSoup库的问题",
@@ -281,6 +299,15 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习6：数据存储",
+            description: "学习将爬取的数据存储为CSV和JSON格式",
+            template: "# 数据存储练习\nimport csv\nimport json\n\n# 模拟爬取的数据\ndata = [\n    {'name': '产品1', 'price': 100, 'category': '电子产品'},\n    {'name': '产品2', 'price': 200, 'category': '服装'},\n    {'name': '产品3', 'price': 300, 'category': '家居用品'}\n]\n\n# TODO: 将数据存储为CSV文件\n# with open('products.csv', 'w', newline='', encoding='utf-8') as f:\n#     writer = csv.DictWriter(f, fieldnames=['name', 'price', 'category'])\n#     writer.writeheader()\n#     writer.writerows(data)\n\nprint('CSV文件已创建')\n\n# TODO: 将数据存储为JSON文件\n# with open('products.json', 'w', encoding='utf-8') as f:\n#     json.dump(data, f, ensure_ascii=False, indent=2)\n\nprint('JSON文件已创建')\n",
+            answer: "# 数据存储练习\nimport csv\nimport json\n\n# 模拟爬取的数据\ndata = [\n    {'name': '产品1', 'price': 100, 'category': '电子产品'},\n    {'name': '产品2', 'price': 200, 'category': '服装'},\n    {'name': '产品3', 'price': 300, 'category': '家居用品'}\n]\n\n# 将数据存储为CSV文件\nwith open('products.csv', 'w', newline='', encoding='utf-8') as f:\n    writer = csv.DictWriter(f, fieldnames=['name', 'price', 'category'])\n    writer.writeheader()\n    writer.writerows(data)\n\nprint('CSV文件已创建')\n\n# 读取CSV文件验证\nprint('\n从CSV文件读取的数据:')\nwith open('products.csv', 'r', encoding='utf-8') as f:\n    reader = csv.DictReader(f)\n    for row in reader:\n        print(row)\n\n# 将数据存储为JSON文件\nwith open('products.json', 'w', encoding='utf-8') as f:\n    json.dump(data, f, ensure_ascii=False, indent=2)\n\nprint('\nJSON文件已创建')\n\n# 读取JSON文件验证\nprint('\n从JSON文件读取的数据:')\nwith open('products.json', 'r', encoding='utf-8') as f:\n    loaded_data = json.load(f)\n    for item in loaded_data:\n        print(item)",
+            difficulty: "简单"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习6：数据存储",
             description: "回答关于数据存储的问题",
@@ -305,6 +332,15 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习8：处理缺失值",
+            description: "学习使用Pandas处理数据中的缺失值",
+            template: "# 处理缺失值练习\nimport pandas as pd\nimport numpy as np\n\n# 创建含有缺失值的示例数据\ndata = {\n    'name': ['产品1', '产品2', '产品3', '产品4'],\n    'price': [100, np.nan, 300, 400],\n    'category': ['电子产品', '服装', np.nan, '家居用品'],\n    'stock': [10, 20, np.nan, 40]\n}\n\ndf = pd.DataFrame(data)\n\nprint('原始数据:')\nprint(df)\n\n# TODO: 检查缺失值\nprint('\n缺失值情况:')\n\n# TODO: 删除含有缺失值的行\nprint('\n删除含有缺失值的行:')\n\n# TODO: 用均值填充数值型缺失值，用'未知'填充分类型缺失值\nprint('\n填充缺失值:')\n",
+            answer: "# 处理缺失值练习\nimport pandas as pd\nimport numpy as np\n\n# 创建含有缺失值的示例数据\ndata = {\n    'name': ['产品1', '产品2', '产品3', '产品4'],\n    'price': [100, np.nan, 300, 400],\n    'category': ['电子产品', '服装', np.nan, '家居用品'],\n    'stock': [10, 20, np.nan, 40]\n}\n\ndf = pd.DataFrame(data)\n\nprint('原始数据:')\nprint(df)\n\n# 检查缺失值\nprint('\n缺失值情况:')\nprint(df.isnull().sum())\n\n# 删除含有缺失值的行\ndf_dropped = df.dropna()\nprint('\n删除含有缺失值的行:')\nprint(df_dropped)\n\n# 用均值填充数值型缺失值，用'未知'填充分类型缺失值\ndf_filled = df.copy()\ndf_filled['price'] = df_filled['price'].fillna(df_filled['price'].mean())\ndf_filled['stock'] = df_filled['stock'].fillna(df_filled['stock'].mean())\ndf_filled['category'] = df_filled['category'].fillna('未知')\n\nprint('\n填充缺失值:')\nprint(df_filled)\n\n# 查看填充后的数据类型\nprint('\n填充后的数据类型:')\nprint(df_filled.dtypes)",
+            difficulty: "简单"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习8：处理缺失值",
             description: "回答关于缺失值处理的问题",
@@ -317,6 +353,15 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习9：处理异常值",
+            description: "学习使用统计方法检测和处理异常值",
+            template: "# 处理异常值练习\nimport pandas as pd\nimport numpy as np\n\n# 创建含有异常值的示例数据\nnp.random.seed(42)\ndata = {\n    'value': np.concatenate([np.random.normal(100, 10, 98), np.array([50, 150])])\n}\n\ndf = pd.DataFrame(data)\n\nprint('原始数据:')\nprint(df)\n\n# TODO: 计算Z-score\n# z_scores = np.abs((df['value'] - df['value'].mean()) / df['value'].std())\n\n# TODO: 检测异常值（Z-score > 2）\nprint('\n异常值检测:')\n\n# TODO: 处理异常值（替换为均值）\nprint('\n处理异常值:')\n",
+            answer: "# 处理异常值练习\nimport pandas as pd\nimport numpy as np\n\n# 创建含有异常值的示例数据\nnp.random.seed(42)\ndata = {\n    'value': np.concatenate([np.random.normal(100, 10, 98), np.array([50, 150])])\n}\n\ndf = pd.DataFrame(data)\n\nprint('原始数据:')\nprint(df.describe())\n\n# 计算Z-score\nz_scores = np.abs((df['value'] - df['value'].mean()) / df['value'].std())\ndf['z_score'] = z_scores\n\n# 检测异常值（Z-score > 2）\nanomaly_threshold = 2\nanomalies = df[z_scores > anomaly_threshold]\nprint('\n异常值检测:')\nprint(f'检测到 {len(anomalies)} 个异常值:')\nprint(anomalies)\n\n# 处理异常值（替换为均值）\ndf_cleaned = df.copy()\nmean_value = df['value'].mean()\ndf_cleaned.loc[z_scores > anomaly_threshold, 'value'] = mean_value\n\nprint('\n处理异常值:')\nprint(df_cleaned.describe())\n\n# 查看处理前后的差异\nprint('\n处理前后的均值差异:', abs(df['value'].mean() - df_cleaned['value'].mean()))\nprint('处理前后的标准差差异:', abs(df['value'].std() - df_cleaned['value'].std()))",
+            difficulty: "简单"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习9：处理异常值",
             description: "回答关于异常值处理的问题",
@@ -373,6 +418,15 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习1：爬虫架构设计",
+            description: "学习创建一个简单的爬虫架构",
+            template: "# 简单爬虫架构设计\nimport queue\nimport threading\nimport time\n\nclass SimpleSpider:\n    def __init__(self):\n        self.url_queue = queue.Queue()\n        self.visited_urls = set()\n        self.lock = threading.Lock()\n        \n    def add_url(self, url):\n        # TODO: 添加URL到队列\n        pass\n    \n    def crawl(self, url):\n        # 模拟爬取过程\n        print(f'爬取: {url}')\n        time.sleep(0.5)\n        # 模拟提取的新URL\n        new_urls = [f'{url}/page1', f'{url}/page2']\n        return new_urls\n    \n    def worker(self):\n        while True:\n            try:\n                url = self.url_queue.get(block=False)\n                if url in self.visited_urls:\n                    self.url_queue.task_done()\n                    continue\n                \n                with self.lock:\n                    self.visited_urls.add(url)\n                \n                new_urls = self.crawl(url)\n                for new_url in new_urls:\n                    if new_url not in self.visited_urls:\n                        self.add_url(new_url)\n                \n                self.url_queue.task_done()\n            except queue.Empty:\n                break\n\n# 测试爬虫\nspider = SimpleSpider()\nspider.add_url('https://example.com')\n\n# 创建工作线程\nthreads = []\nfor i in range(3):\n    t = threading.Thread(target=spider.worker)\n    t.start()\n    threads.append(t)\n\n# 等待所有线程完成\nfor t in threads:\n    t.join()\n\nprint(f'爬取完成，共访问 {len(spider.visited_urls)} 个URL')",
+            answer: "# 简单爬虫架构设计\nimport queue\nimport threading\nimport time\n\nclass SimpleSpider:\n    def __init__(self):\n        self.url_queue = queue.Queue()\n        self.visited_urls = set()\n        self.lock = threading.Lock()\n        \n    def add_url(self, url):\n        # 添加URL到队列\n        if url not in self.visited_urls:\n            self.url_queue.put(url)\n    \n    def crawl(self, url):\n        # 模拟爬取过程\n        print(f'爬取: {url}')\n        time.sleep(0.5)\n        # 模拟提取的新URL\n        new_urls = [f'{url}/page1', f'{url}/page2']\n        return new_urls\n    \n    def worker(self):\n        while True:\n            try:\n                url = self.url_queue.get(block=False)\n                if url in self.visited_urls:\n                    self.url_queue.task_done()\n                    continue\n                \n                with self.lock:\n                    self.visited_urls.add(url)\n                \n                new_urls = self.crawl(url)\n                for new_url in new_urls:\n                    if new_url not in self.visited_urls:\n                        self.add_url(new_url)\n                \n                self.url_queue.task_done()\n            except queue.Empty:\n                break\n\n# 测试爬虫\nspider = SimpleSpider()\nspider.add_url('https://example.com')\n\n# 创建工作线程\nthreads = []\nfor i in range(3):\n    t = threading.Thread(target=spider.worker)\n    t.start()\n    threads.append(t)\n\n# 等待所有线程完成\nfor t in threads:\n    t.join()\n\nprint(f'爬取完成，共访问 {len(spider.visited_urls)} 个URL')",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习1：爬虫架构设计",
             description: "回答关于爬虫架构设计的问题",
@@ -385,6 +439,15 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习2：反爬策略应对",
+            description: "学习如何应对常见的反爬策略",
+            template: "# 反爬策略应对\nimport requests\nimport time\nfrom fake_useragent import UserAgent\n\n# 目标网站\nurl = 'https://example.com'\n\n# 1. 使用随机User-Agent\nua = UserAgent()\nheaders = {\n    'User-Agent': ua.random\n}\n\n# 2. 设置请求间隔\ndef crawl_with_delay(url, delay=1):\n    print(f'爬取: {url}')\n    # TODO: 发送请求并处理响应\n    time.sleep(delay)\n\n# 3. 模拟浏览器行为\nsession = requests.Session()\n\n# 测试爬取\ntry:\n    response = session.get(url, headers=headers)\n    print(f'状态码: {response.status_code}')\n    print(f'响应长度: {len(response.text)}')\n    \n    # 测试带延迟的爬取\n    crawl_with_delay(url)\nexcept Exception as e:\n    print(f'错误: {e}')\n",
+            answer: "# 反爬策略应对\nimport requests\nimport time\nfrom fake_useragent import UserAgent\n\n# 目标网站\nurl = 'https://example.com'\n\n# 1. 使用随机User-Agent\nua = UserAgent()\nheaders = {\n    'User-Agent': ua.random\n}\n\n# 2. 设置请求间隔\ndef crawl_with_delay(url, delay=1):\n    print(f'爬取: {url}')\n    try:\n        response = requests.get(url, headers=headers)\n        print(f'状态码: {response.status_code}')\n    except Exception as e:\n        print(f'爬取错误: {e}')\n    time.sleep(delay)\n\n# 3. 模拟浏览器行为\nsession = requests.Session()\n\n# 测试爬取\ntry:\n    response = session.get(url, headers=headers)\n    print(f'状态码: {response.status_code}')\n    print(f'响应长度: {len(response.text)}')\n    \n    # 测试带延迟的爬取\n    crawl_with_delay(url)\nexcept Exception as e:\n    print(f'错误: {e}')\n\n# 4. 打印使用的User-Agent\nprint(f'使用的User-Agent: {headers[\"User-Agent\"]}')\n",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习2：反爬策略应对",
             description: "回答关于反爬策略应对的问题",
@@ -402,6 +465,15 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习1：数据质量评估",
+            description: "学习使用Pandas进行数据质量评估",
+            template: "# 数据质量评估练习\nimport pandas as pd\nimport numpy as np\n\n# 创建示例数据\nnp.random.seed(42)\ndata = {\n    'id': range(1, 101),\n    'name': ['产品' + str(i) for i in range(1, 101)],\n    'price': np.random.randint(50, 500, 100),\n    'category': np.random.choice(['电子产品', '服装', '家居用品'], 100),\n    'stock': np.random.randint(0, 100, 100),\n    'sales': np.random.randint(0, 50, 100)\n}\n\n# 随机添加缺失值\ndf = pd.DataFrame(data)\ndf.loc[np.random.choice(df.index, 10), 'price'] = np.nan\ndf.loc[np.random.choice(df.index, 5), 'category'] = np.nan\ndf.loc[np.random.choice(df.index, 8), 'stock'] = np.nan\n\nprint('原始数据:')\nprint(df.head())\n\n# TODO: 计算缺失值比例\nprint('\n缺失值比例:')\n\n# TODO: 计算重复值\nprint('\n重复值数量:')\n\n# TODO: 计算基本统计信息\nprint('\n基本统计信息:')\n",
+            answer: "# 数据质量评估练习\nimport pandas as pd\nimport numpy as np\n\n# 创建示例数据\nnp.random.seed(42)\ndata = {\n    'id': range(1, 101),\n    'name': ['产品' + str(i) for i in range(1, 101)],\n    'price': np.random.randint(50, 500, 100),\n    'category': np.random.choice(['电子产品', '服装', '家居用品'], 100),\n    'stock': np.random.randint(0, 100, 100),\n    'sales': np.random.randint(0, 50, 100)\n}\n\n# 随机添加缺失值\ndf = pd.DataFrame(data)\ndf.loc[np.random.choice(df.index, 10), 'price'] = np.nan\ndf.loc[np.random.choice(df.index, 5), 'category'] = np.nan\ndf.loc[np.random.choice(df.index, 8), 'stock'] = np.nan\n\nprint('原始数据:')\nprint(df.head())\n\n# 计算缺失值比例\nprint('\n缺失值比例:')\nmissing_ratio = df.isnull().sum() / len(df) * 100\nfor col, ratio in missing_ratio.items():\n    print(f'{col}: {ratio:.2f}%')\n\n# 计算重复值\nduplicate_rows = df.duplicated().sum()\nprint('\n重复值数量:', duplicate_rows)\n\n# 计算基本统计信息\nprint('\n基本统计信息:')\nprint(df.describe())\n\n# 分析分类变量\nprint('\n分类变量分析:')\nprint(df['category'].value_counts())\n\n# 数据质量报告\nprint('\n数据质量报告:')\nprint(f'数据总行数: {len(df)}')\nprint(f'数据总列数: {len(df.columns)}')\nprint(f'有缺失值的列数: {sum(missing_ratio > 0)}')\nprint(f'缺失值比例最高的列: {missing_ratio.idxmax()} ({missing_ratio.max():.2f}%)')\nprint(f'是否存在重复行: {duplicate_rows > 0}')",
+            difficulty: "简单"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习1：数据质量评估",
             description: "回答关于数据质量评估的问题",
@@ -414,6 +486,15 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习2：缺失值处理",
+            description: "学习使用多种方法处理缺失值",
+            template: "# 缺失值处理练习\nimport pandas as pd\nimport numpy as np\nfrom sklearn.impute import KNNImputer\n\n# 创建示例数据\nnp.random.seed(42)\ndata = {\n    'age': np.random.randint(18, 70, 100),\n    'income': np.random.randint(3000, 20000, 100),\n    'score': np.random.randint(0, 100, 100),\n    'gender': np.random.choice(['男', '女'], 100)\n}\n\n# 随机添加缺失值\ndf = pd.DataFrame(data)\ndf.loc[np.random.choice(df.index, 15), 'age'] = np.nan\ndf.loc[np.random.choice(df.index, 10), 'income'] = np.nan\ndf.loc[np.random.choice(df.index, 5), 'score'] = np.nan\ndf.loc[np.random.choice(df.index, 8), 'gender'] = np.nan\n\nprint('原始数据:')\nprint(df.head())\nprint('\n缺失值情况:')\nprint(df.isnull().sum())\n\n# TODO: 方法1：删除含有缺失值的行\nprint('\n方法1：删除含有缺失值的行:')\n\n# TODO: 方法2：均值填充\nprint('\n方法2：均值填充:')\n\n# TODO: 方法3：KNN插值\nprint('\n方法3：KNN插值:')\n",
+            answer: "# 缺失值处理练习\nimport pandas as pd\nimport numpy as np\nfrom sklearn.impute import KNNImputer\n\n# 创建示例数据\nnp.random.seed(42)\ndata = {\n    'age': np.random.randint(18, 70, 100),\n    'income': np.random.randint(3000, 20000, 100),\n    'score': np.random.randint(0, 100, 100),\n    'gender': np.random.choice(['男', '女'], 100)\n}\n\n# 随机添加缺失值\ndf = pd.DataFrame(data)\ndf.loc[np.random.choice(df.index, 15), 'age'] = np.nan\ndf.loc[np.random.choice(df.index, 10), 'income'] = np.nan\ndf.loc[np.random.choice(df.index, 5), 'score'] = np.nan\ndf.loc[np.random.choice(df.index, 8), 'gender'] = np.nan\n\nprint('原始数据:')\nprint(df.head())\nprint('\n缺失值情况:')\nprint(df.isnull().sum())\n\n# 方法1：删除含有缺失值的行\ndf_dropped = df.dropna()\nprint('\n方法1：删除含有缺失值的行:')\nprint(f'原始行数: {len(df)}, 删除后行数: {len(df_dropped)}')\n\n# 方法2：均值填充\ndf_mean = df.copy()\n# 数值型列用均值填充\nnumeric_cols = ['age', 'income', 'score']\nfor col in numeric_cols:\n    df_mean[col] = df_mean[col].fillna(df_mean[col].mean())\n# 分类型列用众数填充\ndf_mean['gender'] = df_mean['gender'].fillna(df_mean['gender'].mode()[0])\nprint('\n方法2：均值填充:')\nprint(df_mean.head())\nprint('填充后缺失值情况:', df_mean.isnull().sum().sum())\n\n# 方法3：KNN插值\ndf_knn = df.copy()\n# 先处理分类型变量\nfrom sklearn.preprocessing import LabelEncoder\nle = LabelEncoder()\ndf_knn['gender_encoded'] = le.fit_transform(df_knn['gender'].fillna('未知'))\n\n# 选择数值列进行KNN插值\nknn_cols = ['age', 'income', 'score', 'gender_encoded']\nimputer = KNNImputer(n_neighbors=5)\ndf_knn[knn_cols] = imputer.fit_transform(df_knn[knn_cols])\n\n# 将编码后的性别转换回原始标签\ndf_knn['gender'] = le.inverse_transform(df_knn['gender_encoded'].astype(int))\ndf_knn.drop('gender_encoded', axis=1, inplace=True)\nprint('\n方法3：KNN插值:')\nprint(df_knn.head())\nprint('填充后缺失值情况:', df_knn.isnull().sum().sum())\n\n# 比较三种方法的结果\nprint('\n方法比较:')\nprint(f'删除法：{len(df_dropped)}行')\nprint(f'均值填充法：{len(df_mean)}行，无缺失值')\nprint(f'KNN插值法：{len(df_knn)}行，无缺失值')\n",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习2：缺失值处理",
             description: "回答关于缺失值处理的问题",
@@ -431,6 +512,15 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习1：商业数据分析概述",
+            description: "学习商业数据分析的基本方法",
+            template: "# 商业数据分析练习\nimport pandas as pd\nimport numpy as np\n\n# 模拟销售数据\ndata = {\n    '产品类别': ['电子产品', '服装', '家居用品', '食品', '电子产品', '服装', '家居用品', '食品'],\n    '季度': ['Q1', 'Q1', 'Q1', 'Q1', 'Q2', 'Q2', 'Q2', 'Q2'],\n    '销售额': [100000, 80000, 60000, 40000, 120000, 90000, 70000, 45000],\n    '利润': [20000, 16000, 12000, 8000, 24000, 18000, 14000, 9000]\n}\n\ndf = pd.DataFrame(data)\n\nprint('销售数据:')\nprint(df)\n\n# 1. 按产品类别分析\n# TODO: 计算每个产品类别的总销售额和总利润\n# product_analysis = df.groupby('产品类别').agg({'销售额': 'sum', '利润': 'sum'})\n# print('\n按产品类别分析:')\n# print(product_analysis)\n\n# 2. 按季度分析\n# TODO: 计算每个季度的总销售额和总利润\n# quarter_analysis = df.groupby('季度').agg({'销售额': 'sum', '利润': 'sum'})\n# print('\n按季度分析:')\n# print(quarter_analysis)\n\n# 3. 计算利润率\n# TODO: 计算每个产品类别的利润率\n# product_analysis['利润率'] = (product_analysis['利润'] / product_analysis['销售额'] * 100).round(2)\n# print('\n产品类别利润率:')\n# print(product_analysis)\n",
+            answer: "# 商业数据分析练习\nimport pandas as pd\nimport numpy as np\n\n# 模拟销售数据\ndata = {\n    '产品类别': ['电子产品', '服装', '家居用品', '食品', '电子产品', '服装', '家居用品', '食品'],\n    '季度': ['Q1', 'Q1', 'Q1', 'Q1', 'Q2', 'Q2', 'Q2', 'Q2'],\n    '销售额': [100000, 80000, 60000, 40000, 120000, 90000, 70000, 45000],\n    '利润': [20000, 16000, 12000, 8000, 24000, 18000, 14000, 9000]\n}\n\ndf = pd.DataFrame(data)\n\nprint('销售数据:')\nprint(df)\n\n# 1. 按产品类别分析\nproduct_analysis = df.groupby('产品类别').agg({'销售额': 'sum', '利润': 'sum'})\nprint('\n按产品类别分析:')\nprint(product_analysis)\n\n# 2. 按季度分析\nquarter_analysis = df.groupby('季度').agg({'销售额': 'sum', '利润': 'sum'})\nprint('\n按季度分析:')\nprint(quarter_analysis)\n\n# 3. 计算利润率\nproduct_analysis['利润率'] = (product_analysis['利润'] / product_analysis['销售额'] * 100).round(2)\nprint('\n产品类别利润率:')\nprint(product_analysis)\n\n# 4. 季度对比分析\nquarter_analysis['利润率'] = (quarter_analysis['利润'] / quarter_analysis['销售额'] * 100).round(2)\nprint('\n季度利润率:')\nprint(quarter_analysis)\n\n# 5. 整体分析\ntotal_sales = df['销售额'].sum()\ntotal_profit = df['利润'].sum()\noverall_profit_margin = (total_profit / total_sales * 100).round(2)\nprint('\n整体分析:')\nprint(f'总销售额: {total_sales}')\nprint(f'总利润: {total_profit}')\nprint(f'整体利润率: {overall_profit_margin}%')\n",
+            difficulty: "简单"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习1：商业数据分析概述",
             description: "回答关于商业数据分析的问题",
@@ -443,6 +533,15 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习2：商业报告撰写",
+            description: "学习如何生成商业分析报告",
+            template: "# 商业报告撰写练习\nimport pandas as pd\nimport numpy as np\n\n# 模拟销售数据\ndata = {\n    '月份': ['1月', '2月', '3月', '4月', '5月', '6月'],\n    '销售额': [120000, 130000, 110000, 140000, 150000, 160000],\n    '客户数': [500, 520, 480, 550, 580, 600],\n    '客单价': [240, 250, 229, 255, 259, 267]\n}\n\ndf = pd.DataFrame(data)\n\nprint('销售数据:')\nprint(df)\n\n# 1. 计算关键指标\n# TODO: 计算总销售额、平均销售额、增长率\n# total_sales = df['销售额'].sum()\n# avg_sales = df['销售额'].mean()\n# growth_rate = ((df['销售额'].iloc[-1] - df['销售额'].iloc[0]) / df['销售额'].iloc[0] * 100).round(2)\n\n# 2. 生成报告\n# TODO: 生成简单的商业报告\nprint('\n商业分析报告')\nprint('=' * 50)\nprint('1. 执行摘要')\nprint('2. 数据概览')\nprint('3. 分析发现')\nprint('4. 结论与建议')\n",
+            answer: "# 商业报告撰写练习\nimport pandas as pd\nimport numpy as np\n\n# 模拟销售数据\ndata = {\n    '月份': ['1月', '2月', '3月', '4月', '5月', '6月'],\n    '销售额': [120000, 130000, 110000, 140000, 150000, 160000],\n    '客户数': [500, 520, 480, 550, 580, 600],\n    '客单价': [240, 250, 229, 255, 259, 267]\n}\n\ndf = pd.DataFrame(data)\n\nprint('销售数据:')\nprint(df)\n\n# 1. 计算关键指标\ntotal_sales = df['销售额'].sum()\navg_sales = df['销售额'].mean()\ngrowth_rate = ((df['销售额'].iloc[-1] - df['销售额'].iloc[0]) / df['销售额'].iloc[0] * 100).round(2)\navg_customers = df['客户数'].mean()\navg_order_value = df['客单价'].mean()\n\n# 2. 生成报告\nprint('\n商业分析报告')\nprint('=' * 50)\nprint('1. 执行摘要')\nprint(f'- 半年总销售额: {total_sales}')\nprint(f'- 月平均销售额: {avg_sales:.2f}')\nprint(f'- 销售额增长率: {growth_rate}%')\nprint(f'- 月平均客户数: {avg_customers:.0f}')\nprint(f'- 平均客单价: {avg_order_value:.2f}')\n\nprint('\n2. 数据概览')\nprint(df)\n\nprint('\n3. 分析发现')\nprint('- 销售额呈上升趋势，从1月的12万增长到6月的16万')\nprint('- 客户数稳步增长，从500增长到600')\nprint('- 客单价持续提高，从240提高到267')\nprint('- 3月销售额有所下降，需要进一步分析原因')\n\nprint('\n4. 结论与建议')\nprint('结论:')\nprint('- 业务整体呈现良好增长态势')\nprint('- 客户获取和客单价提升策略有效')\n\nprint('建议:')\nprint('- 分析3月销售额下降的原因，避免类似情况再次发生')\nprint('- 继续优化客户获取策略，提高客户转化率')\nprint('- 探索提高客单价的方法，如交叉销售、 upselling等')\nprint('- 建立月度销售预测模型，提前规划库存和营销活动')\n",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习2：商业报告撰写",
             description: "回答关于商业报告撰写的问题",
@@ -460,18 +559,37 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习1：数据可视化基础",
+            description: "学习使用Matplotlib进行数据可视化",
+            template: "# 数据可视化基础练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [100000, 120000, 110000, 130000, 140000, 160000, 150000, 170000, 180000, 200000, 190000, 210000]\nprofits = [20000, 24000, 22000, 26000, 28000, 32000, 30000, 34000, 36000, 40000, 38000, 42000]\n\ndf = pd.DataFrame({'日期': dates, '销售额': sales, '利润': profits})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\nprint('销售数据:')\nprint(df)\n\n# 1. 创建销售额折线图\n# TODO: 创建折线图\n# plt.figure(figsize=(10, 6))\n# plt.plot(df['日期'], df['销售额'], marker='o', linestyle='-', color='b')\n# plt.title('2023年销售额趋势')\n# plt.xlabel('月份')\n# plt.ylabel('销售额')\n# plt.grid(True)\n# plt.tight_layout()\n# plt.show()\n\n# 2. 创建销售额和利润的双轴图\n# TODO: 创建双轴图\n",
+            answer: "# 数据可视化基础练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [100000, 120000, 110000, 130000, 140000, 160000, 150000, 170000, 180000, 200000, 190000, 210000]\nprofits = [20000, 24000, 22000, 26000, 28000, 32000, 30000, 34000, 36000, 40000, 38000, 42000]\n\ndf = pd.DataFrame({'日期': dates, '销售额': sales, '利润': profits})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\nprint('销售数据:')\nprint(df)\n\n# 1. 创建销售额折线图\nplt.figure(figsize=(10, 6))\nplt.plot(df['日期'], df['销售额'], marker='o', linestyle='-', color='b')\nplt.title('2023年销售额趋势')\nplt.xlabel('月份')\nplt.ylabel('销售额')\nplt.grid(True)\nplt.tight_layout()\nprint('销售额趋势图已创建')\n\n# 2. 创建销售额和利润的双轴图\nfig, ax1 = plt.subplots(figsize=(10, 6))\n\n# 销售额轴\nax1.set_xlabel('月份')\nax1.set_ylabel('销售额', color='b')\nax1.plot(df['日期'], df['销售额'], marker='o', linestyle='-', color='b')\nax1.tick_params(axis='y', labelcolor='b')\n\n# 利润轴\nax2 = ax1.twinx()\nax2.set_ylabel('利润', color='r')\nax2.plot(df['日期'], df['利润'], marker='s', linestyle='--', color='r')\nax2.tick_params(axis='y', labelcolor='r')\n\nplt.title('2023年销售额和利润趋势')\nplt.grid(True)\nplt.tight_layout()\nprint('销售额和利润双轴图已创建')\n\n# 3. 计算利润率\ndf['利润率'] = (df['利润'] / df['销售额'] * 100).round(2)\nprint('\n利润率数据:')\nprint(df[['日期', '利润率']])\n\n# 4. 创建利润率柱状图\nplt.figure(figsize=(10, 6))\nplt.bar(df['日期'], df['利润率'], color='green')\nplt.title('2023年利润率')\nplt.xlabel('月份')\nplt.ylabel('利润率 (%)')\nplt.grid(axis='y')\nplt.tight_layout()\nprint('利润率柱状图已创建')\n",
+            difficulty: "简单"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习1：数据可视化基础",
             description: "回答关于数据可视化的问题",
             difficulty: "简单",
             question: "1. 数据可视化的基本原则有哪些？\n\n2. 常见的图表类型有哪些？请至少列举5种。\n\n3. 如何选择合适的图表类型？",
             answer: "1. 数据可视化的基本原则包括：\n   - 准确性：正确反映数据\n   - 清晰性：易于理解\n   - 简洁性：避免不必要的元素\n   - 美观性：视觉吸引力\n   - 有效性：有效传达信息\n\n2. 常见的图表类型包括：\n   - 折线图：展示趋势变化\n   - 柱状图：比较不同类别的数据\n   - 饼图：展示构成比例\n   - 散点图：展示两个变量的关系\n   - 热力图：展示数据密度\n   - 箱线图：展示数据分布\n   - 雷达图：展示多维度数据\n\n3. 选择合适图表类型的考虑因素：\n   - 数据类型：数值型、分类型、时间序列等\n   - 分析目的：比较、趋势、分布、关系等\n   - 数据量：数据点的多少\n   - 受众：技术背景和需求\n   - 展示媒介：屏幕、纸张等"
+
           }
         ];
       } else if (lessonId === '6') {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习2：简单预测模型",
+            description: "学习使用移动平均法进行简单预测",
+            template: "# 简单预测模型练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [100000, 120000, 110000, 130000, 140000, 160000, 150000, 170000, 180000, 200000, 190000, 210000]\n\ndf = pd.DataFrame({'日期': dates, '销售额': sales})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\nprint('销售数据:')\nprint(df)\n\n# 1. 移动平均法预测\n# TODO: 计算3期和5期移动平均\n# df['3期移动平均'] = df['销售额'].rolling(window=3).mean()\n# df['5期移动平均'] = df['销售额'].rolling(window=5).mean()\n\n# 2. 预测下一期销售额\n# TODO: 计算预测值\n\n# 3. 评估预测效果\n# TODO: 计算预测误差\n",
+            answer: "# 简单预测模型练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [100000, 120000, 110000, 130000, 140000, 160000, 150000, 170000, 180000, 200000, 190000, 210000]\n\ndf = pd.DataFrame({'日期': dates, '销售额': sales})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\nprint('销售数据:')\nprint(df)\n\n# 1. 移动平均法预测\ndf['3期移动平均'] = df['销售额'].rolling(window=3).mean()\ndf['5期移动平均'] = df['销售额'].rolling(window=5).mean()\n\nprint('\n移动平均预测:')\nprint(df)\n\n# 2. 预测下一期销售额\nlast_3_sales = df['销售额'].tail(3)\nnext_month_prediction_3 = last_3_sales.mean()\n\nlast_5_sales = df['销售额'].tail(5)\nnext_month_prediction_5 = last_5_sales.mean()\n\nprint('\n预测结果:')\nprint(f'基于3期移动平均的2024年1月销售额预测: {next_month_prediction_3:.2f}')\nprint(f'基于5期移动平均的2024年1月销售额预测: {next_month_prediction_5:.2f}')\n\n# 3. 评估预测效果（使用历史数据进行回测）\ndf['3期移动平均预测'] = df['3期移动平均'].shift(1)\ndf['5期移动平均预测'] = df['5期移动平均'].shift(1)\n\n# 计算预测误差\ndf['3期误差'] = df['销售额'] - df['3期移动平均预测']\ndf['5期误差'] = df['销售额'] - df['5期移动平均预测']\ndf['3期绝对误差'] = abs(df['3期误差'])\ndf['5期绝对误差'] = abs(df['5期误差'])\n\n# 计算平均绝对误差 (MAE)\nmae_3 = df['3期绝对误差'].mean()\nmae_5 = df['5期绝对误差'].mean()\n\nprint('\n预测效果评估:')\nprint(f'3期移动平均的MAE: {mae_3:.2f}')\nprint(f'5期移动平均的MAE: {mae_5:.2f}')\n\n# 4. 可视化预测结果\nplt.figure(figsize=(12, 6))\nplt.plot(df['日期'], df['销售额'], marker='o', linestyle='-', label='实际销售额')\nplt.plot(df['日期'], df['3期移动平均'], marker='s', linestyle='--', label='3期移动平均')\nplt.plot(df['日期'], df['5期移动平均'], marker='^', linestyle='--', label='5期移动平均')\nplt.title('销售额与移动平均预测')\nplt.xlabel('月份')\nplt.ylabel('销售额')\nplt.legend()\nplt.grid(True)\nplt.tight_layout()\nprint('预测结果可视化已创建')\n",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习2：简单预测模型",
             description: "回答关于简单预测模型的问题",
@@ -489,6 +607,15 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习1：Pandas高级索引",
+            description: "学习Pandas的高级索引技术",
+            template: "# Pandas高级索引练习\nimport pandas as pd\nimport numpy as np\n\n# 创建示例数据\ndata = {\n    'year': [2020, 2020, 2021, 2021, 2022, 2022],\n    'quarter': [1, 2, 1, 2, 1, 2],\n    'sales': [100, 150, 200, 250, 300, 350],\n    'profit': [20, 30, 40, 50, 60, 70]\n}\n\ndf = pd.DataFrame(data)\n\n# 1. 创建多级索引\n# TODO: 使用set_index创建多级索引\n# df_multi = df.set_index(['year', 'quarter'])\n\nprint('原始数据:')\nprint(df)\n\n# 2. 多级索引的访问\n# TODO: 访问2021年的数据\n# print('\n2021年数据:')\n# print(df_multi.loc[2021])\n\n# 3. 布尔索引\n# TODO: 选择销售额大于200的数据\n# print('\n销售额大于200的数据:')\n# print(df[df['sales'] > 200])\n\n# 4. 索引排序\n# TODO: 按销售额降序排序\n# df_sorted = df.sort_values('sales', ascending=False)\n# print('\n按销售额降序排序:')\n# print(df_sorted)\n",
+            answer: "# Pandas高级索引练习\nimport pandas as pd\nimport numpy as np\n\n# 创建示例数据\ndata = {\n    'year': [2020, 2020, 2021, 2021, 2022, 2022],\n    'quarter': [1, 2, 1, 2, 1, 2],\n    'sales': [100, 150, 200, 250, 300, 350],\n    'profit': [20, 30, 40, 50, 60, 70]\n}\n\ndf = pd.DataFrame(data)\n\n# 1. 创建多级索引\ndf_multi = df.set_index(['year', 'quarter'])\n\nprint('原始数据:')\nprint(df)\n\n# 2. 多级索引的访问\nprint('\n2021年数据:')\nprint(df_multi.loc[2021])\n\n# 3. 布尔索引\nprint('\n销售额大于200的数据:')\nprint(df[df['sales'] > 200])\n\n# 4. 索引排序\ndf_sorted = df.sort_values('sales', ascending=False)\nprint('\n按销售额降序排序:')\nprint(df_sorted)\n\n# 5. 重置索引\nprint('\n重置索引:')\nprint(df_multi.reset_index())\n",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习1：Pandas高级索引",
             description: "回答关于Pandas高级索引的问题",
@@ -501,6 +628,15 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习2：大数据处理",
+            description: "学习使用Pandas处理大数据",
+            template: "# 大数据处理练习\nimport pandas as pd\nimport numpy as np\n\n# 模拟大型数据集（100万行）\nnp.random.seed(42)\ndata = {\n    'id': range(1, 1000001),\n    'value1': np.random.randn(1000000),\n    'value2': np.random.randn(1000000),\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 1000000)\n}\n\n# 1. 内存使用优化\n# TODO: 查看数据类型\n# print('数据类型:')\n# print(df.dtypes)\n\n# 2. 分块处理\n# TODO: 使用分块读取数据\n# chunk_size = 100000\n# for chunk in pd.read_csv('large_data.csv', chunksize=chunk_size):\n#     print(f'处理块大小: {len(chunk)}')\n#     # 处理逻辑\n\n# 3. 数据压缩\n# TODO: 保存为压缩格式\n# df.to_parquet('large_data.parquet')\n# print('数据已保存为Parquet格式')\n\nprint('大数据处理示例')\nprint('数据创建完成')\n",
+            answer: "# 大数据处理练习\nimport pandas as pd\nimport numpy as np\nimport sys\n\n# 模拟大型数据集（100万行）\nnp.random.seed(42)\ndata = {\n    'id': range(1, 1000001),\n    'value1': np.random.randn(1000000),\n    'value2': np.random.randn(1000000),\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 1000000)\n}\n\ndf = pd.DataFrame(data)\n\n# 1. 内存使用优化\nprint('数据类型:')\nprint(df.dtypes)\n\n# 查看内存使用\nprint('\n内存使用:')\nprint(f'总内存: {df.memory_usage(deep=True).sum() / 1024**2:.2f} MB')\n\n# 优化数据类型\ndf_optimized = df.copy()\ndf_optimized['category'] = df_optimized['category'].astype('category')\n\nprint('\n优化后内存使用:')\nprint(f'总内存: {df_optimized.memory_usage(deep=True).sum() / 1024**2:.2f} MB')\n\n# 2. 分块处理示例\nprint('\n分块处理示例:')\nchunk_size = 250000\nfor i, chunk in enumerate(np.array_split(df, 4)):\n    print(f'处理块 {i+1}，大小: {len(chunk)}')\n    # 简单统计\n    print(f'  value1均值: {chunk["value1"].mean():.2f}')\n\n# 3. 数据压缩\nprint('\n数据压缩示例:')\n# 保存为Parquet格式（需要pyarrow或fastparquet）\ntry:\n    df_optimized.to_parquet('large_data.parquet', index=False)\n    print('数据已保存为Parquet格式')\nexcept ImportError:\n    print('Parquet格式需要pyarrow或fastparquet库')\n    # 保存为CSV压缩格式\n    df_optimized.to_csv('large_data.csv.gz', index=False, compression='gzip')\n    print('数据已保存为CSV压缩格式')\n\nprint('\n大数据处理完成')\n",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习2：大数据处理",
             description: "回答关于Pandas大数据处理的问题",
@@ -518,6 +654,19 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习1：预测模型概述",
+            description: "学习预测模型的基本概念和应用",
+            template: "# 预测模型概述练习\nimport pandas as pd\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import mean_squared_error, r2_score\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\n# 生成带有趋势的销售数据\ntrend = np.arange(1, 13) * 10000\nnoise = np.random.normal(0, 5000, 12)\nsales = 100000 + trend + noise\n\ndf = pd.DataFrame({'日期': dates, '月份': range(1, 13), '销售额': sales})\nprint('销售数据:')\nprint(df)\n\n# 准备特征和目标变量\nX = df[['月份']]\ny = df['销售额']\n\n# 1. 划分训练集和测试集\n# TODO: 使用train_test_split划分数据\n# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# 2. 训练线性回归模型\n# TODO: 创建并训练模型\n# model = LinearRegression()\n# model.fit(X_train, y_train)\n\n# 3. 预测\n# TODO: 进行预测\n# y_pred = model.predict(X_test)\n\n# 4. 评估模型\n# TODO: 计算评估指标\n",
+            answer: "# 预测模型概述练习\nimport pandas as pd\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import mean_squared_error, r2_score\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\n# 生成带有趋势的销售数据\ntrend = np.arange(1, 13) * 10000\nnoise = np.random.normal(0, 5000, 12)\nsales = 100000 + trend + noise\n\ndf = pd.DataFrame({'日期': dates, '月份': range(1, 13), '销售额': sales})\nprint('销售数据:')\nprint(df)\n\n# 准备特征和目标变量\nX = df[['月份']]\ny = df['销售额']\n\n# 1. 划分训练集和测试集\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\nprint('\n训练集大小:', len(X_train))\nprint('测试集大小:', len(X_test))\n\n# 2. 训练线性回归模型\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\nprint('\n模型系数:', model.coef_)\nprint('模型截距:', model.intercept_)\n\n# 3. 预测\ny_pred = model.predict(X_test)\nprint('\n预测结果:')\nprint(pd.DataFrame({'实际值': y_test, '预测值': y_pred}))\n\n# 4. 评估模型\nmse = mean_squared_error(y_test, y_pred)\nrmse = np.sqrt(mse)\nr2 = r2_score(y_test, y_pred)\n\nprint('\n模型评估:')\nprint(f'MSE: {mse:.2f}')\nprint(f'RMSE: {rmse:.2f}')\nprint(f'R²: {r2:.2f}')\n\n# 5. 预测未来销售额\nfuture_months = pd.DataFrame({'月份': [13, 14, 15]})\nfuture_pred = model.predict(future_months)\nprint('\n未来3个月销售额预测:')\nfor i, pred in enumerate(future_pred):\n    print(f'2024年{i+1}月: {pred:.2f}')\n"
+\nprint('销售数据:')\nprint(df)\n\n# 准备特征和目标变量\nX = df[['月份']]
+y = df['销售额']\n\n# 1. 划分训练集和测试集\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\nprint('\n训练集大小:', len(X_train))\nprint('测试集大小:', len(X_test))\n\n# 2. 训练线性回归模型\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\nprint('\n模型系数:', model.coef_)
+print('模型截距:', model.intercept_)
+\n# 3. 预测\ny_pred = model.predict(X_test)\nprint('\n预测结果:')\nprint(pd.DataFrame({'实际值': y_test, '预测值': y_pred}))\n\n# 4. 评估模型\nmse = mean_squared_error(y_test, y_pred)\nrmse = np.sqrt(mse)\nr2 = r2_score(y_test, y_pred)\n\nprint('\n模型评估:')\nprint(f'MSE: {mse:.2f}')\nprint(f'RMSE: {rmse:.2f}')\nprint(f'R²: {r2:.2f}')\n\n# 5. 预测未来销售额\nfuture_months = pd.DataFrame({'月份': [13, 14, 15]})\nfuture_pred = model.predict(future_months)\nprint('\n未来3个月销售额预测:')\nfor i, pred in enumerate(future_pred):\n    print(f'2024年{i+1}月: {pred:.2f}')\n",
+            difficulty: "简单"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习1：预测模型概述",
             description: "回答关于预测模型的问题",
@@ -530,6 +679,32 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
+            title: "练习2：模型评估与选择",
+            description: "学习模型评估与选择的方法",
+            template: "# 模型评估与选择练习\nimport pandas as pd\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.tree import DecisionTreeRegressor\nfrom sklearn.model_selection import cross_val_score, KFold\nfrom sklearn.metrics import mean_squared_error\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\ntrend = np.arange(1, 13) * 10000\nseasonality = 5000 * np.sin(np.arange(1, 13) * np.pi/6)\nnoise = np.random.normal(0, 3000, 12)\nsales = 100000 + trend + seasonality + noise\n\ndf = pd.DataFrame({'日期': dates, '月份': range(1, 13), '销售额': sales})\n
+\nprint('销售数据:')\nprint(df)\n\n# 准备特征和目标变量\nX = df[['月份']]
+y = df['销售额']\n\n# 1. 定义模型
+models = {
+    '线性回归': LinearRegression(),
+    '决策树': DecisionTreeRegressor(random_state=42)
+}
+\n# 2. 交叉验证评估\nkf = KFold(n_splits=3, shuffle=True, random_state=42)\n\n# TODO: 对每个模型进行交叉验证\n# for name, model in models.items():\n#     scores = cross_val_score(model, X, y, cv=kf, scoring='neg_mean_squared_error')\n#     rmse_scores = np.sqrt(-scores)\n#     print(f'{name}模型:')\n#     print(f'  平均RMSE: {rmse_scores.mean():.2f}')\n#     print(f'  RMSE标准差: {rmse_scores.std():.2f}')\n#     print()\n",
+            answer: "# 模型评估与选择练习\nimport pandas as pd\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.tree import DecisionTreeRegressor\nfrom sklearn.model_selection import cross_val_score, KFold\nfrom sklearn.metrics import mean_squared_error\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\ntrend = np.arange(1, 13) * 10000\nseasonality = 5000 * np.sin(np.arange(1, 13) * np.pi/6)\nnoise = np.random.normal(0, 3000, 12)\nsales = 100000 + trend + seasonality + noise\n\ndf = pd.DataFrame({'日期': dates, '月份': range(1, 13), '销售额': sales})\n
+\nprint('销售数据:')\nprint(df)\n\n# 准备特征和目标变量\nX = df[['月份']]
+y = df['销售额']\n\n# 1. 定义模型
+models = {
+    '线性回归': LinearRegression(),
+    '决策树': DecisionTreeRegressor(random_state=42)
+}
+\n# 2. 交叉验证评估\nkf = KFold(n_splits=3, shuffle=True, random_state=42)\n\nfor name, model in models.items():\n    scores = cross_val_score(model, X, y, cv=kf, scoring='neg_mean_squared_error')\n    rmse_scores = np.sqrt(-scores)\n    print(f'{name}模型:')\n    print(f'  平均RMSE: {rmse_scores.mean():.2f}')\n    print(f'  RMSE标准差: {rmse_scores.std():.2f}')\n    print()\n\n# 3. 选择最佳模型并训练\nbest_model = LinearRegression()\nbest_model.fit(X, y)\n\n# 4. 预测未来销售额\nfuture_months = pd.DataFrame({'月份': [13, 14, 15, 16, 17, 18]})\nfuture_pred = best_model.predict(future_months)\n\nprint('未来6个月销售额预测:')\nfor i, pred in enumerate(future_pred):\n    print(f'2024年{i+1}月: {pred:.2f}')\n\n# 5. 模型可解释性
+print('\n模型系数:', best_model.coef_)
+print('模型截距:', best_model.intercept_)
+print('模型方程: 销售额 = {:.2f} * 月份 + {:.2f}'.format(best_model.coef_[0], best_model.intercept_))\n",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
             type: "text",
             title: "练习2：模型评估与选择",
             description: "回答关于模型评估与选择的问题",
