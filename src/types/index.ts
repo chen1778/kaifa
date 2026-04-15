@@ -32,6 +32,7 @@ export interface Lesson {
   code_example?: string;
   learning_points?: string[];
   business_scenario?: string;
+  pitfalls?: string;
 }
 
 export interface CodeExample {
