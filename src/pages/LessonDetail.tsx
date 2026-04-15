@@ -367,28 +367,175 @@ const LessonDetail: React.FC = () => {
       }
     }
     
+    // 课程4: 网络爬虫进阶
+    if (id === '4') {
+      if (lessonId === '1') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习1：爬虫架构设计",
+            description: "回答关于爬虫架构设计的问题",
+            difficulty: "中等",
+            question: "1. 请简述网络爬虫的基本架构组成。\n\n2. 什么是任务队列？它在爬虫中的作用是什么？\n\n3. 请列举至少3种爬虫性能优化的方法。",
+            answer: "1. 网络爬虫的基本架构通常包括：\n   - 调度器：负责管理URL队列，决定爬取顺序\n   - 下载器：负责发送HTTP请求，获取网页内容\n   - 解析器：负责解析HTML，提取数据和新的URL\n   - 数据存储：负责保存爬取的数据\n   - 反爬处理：处理网站的反爬措施\n\n2. 任务队列是存储待爬取URL的容器，它的作用是：\n   - 管理爬取顺序和优先级\n   - 防止重复爬取\n   - 支持断点续爬\n   - 实现分布式爬取\n\n3. 爬虫性能优化的方法包括：\n   - 并发处理：使用多线程或异步IO\n   - 缓存机制：缓存已爬取的内容\n   - 批量请求：减少HTTP请求次数\n   - 数据压缩：减少数据传输量\n   - 内存管理：优化内存使用\n   - 合理的爬取策略：避免过度请求"
+          }
+        ];
+      } else if (lessonId === '2') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习2：反爬策略应对",
+            description: "回答关于反爬策略应对的问题",
+            difficulty: "中等",
+            question: "1. 请列举至少5种常见的反爬措施。\n\n2. 如何应对IP限制？\n\n3. 验证码处理的常用方法有哪些？",
+            answer: "1. 常见的反爬措施包括：\n   - User-Agent检测\n   - IP限制\n   - 验证码\n   - 动态加载\n   - 登录验证\n   - 蜜罐陷阱\n   - 行为分析\n\n2. 应对IP限制的方法：\n   - 使用代理IP池\n   - 代理轮换策略\n   - IP质量评估\n   - 分布式爬虫\n   - 控制爬取频率\n\n3. 验证码处理的常用方法：\n   - 手动识别\n   - OCR技术\n   - 第三方验证码服务\n   - 验证码绕过技巧\n   - 模拟登录获取Cookie"
+          }
+        ];
+      }
+    }
+    
+    // 课程5: 数据质量评估与预处理
+    if (id === '5') {
+      if (lessonId === '1') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习1：数据质量评估",
+            description: "回答关于数据质量评估的问题",
+            difficulty: "简单",
+            question: "1. 数据质量的主要维度有哪些？\n\n2. 请简述数据质量评估的基本方法。\n\n3. 数据质量报告应该包含哪些内容？",
+            answer: "1. 数据质量的主要维度包括：\n   - 完整性：数据是否完整，无缺失\n   - 一致性：数据是否符合业务规则和逻辑\n   - 准确性：数据是否准确反映现实\n   - 时效性：数据是否及时更新\n   - 唯一性：数据是否存在重复\n   - 有效性：数据是否符合预定义的格式和范围\n\n2. 数据质量评估的基本方法：\n   - 统计分析：计算缺失率、重复率等指标\n   - 可视化分析：通过图表展示数据分布和异常\n   - 规则检查：根据业务规则验证数据\n   - 数据profiling：自动分析数据结构和质量\n\n3. 数据质量报告应该包含：\n   - 数据概况：数据量、字段数等基本信息\n   - 质量指标：各维度的质量得分\n   - 问题识别：发现的质量问题\n   - 优先级排序：问题的严重程度\n   - 改进建议：针对问题的解决方案\n   - 可视化展示：通过图表直观展示质量状况"
+          }
+        ];
+      } else if (lessonId === '2') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习2：缺失值处理",
+            description: "回答关于缺失值处理的问题",
+            difficulty: "简单",
+            question: "1. 缺失值的类型有哪些？\n\n2. 请列举至少4种缺失值处理方法。\n\n3. 如何选择合适的缺失值处理方法？",
+            answer: "1. 缺失值的类型包括：\n   - 完全随机缺失 (MCAR)：缺失与数据本身无关\n   - 随机缺失 (MAR)：缺失与已观测数据相关\n   - 非随机缺失 (MNAR)：缺失与未观测数据相关\n\n2. 缺失值处理方法包括：\n   - 删除法：删除包含缺失值的记录或变量\n   - 替换法：使用均值、中位数、众数等替换缺失值\n   - 插值法：线性插值、多项式插值、KNN插值等\n   - 模型法：使用回归、决策树等模型预测缺失值\n   - 多重插补：生成多个可能的缺失值估计\n\n3. 选择缺失值处理方法的考虑因素：\n   - 数据特性：数据类型、分布等\n   - 缺失率：缺失数据的比例\n   - 业务需求：分析目的和要求\n   - 后续分析方法：不同模型对缺失值的敏感性\n   - 计算资源：复杂方法的计算成本"
+          }
+        ];
+      }
+    }
+    
+    // 课程8: 商业数据分析
+    if (id === '8') {
+      if (lessonId === '1') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习1：商业数据分析概述",
+            description: "回答关于商业数据分析的问题",
+            difficulty: "简单",
+            question: "1. 什么是商业数据分析？它的重要性是什么？\n\n2. 商业数据分析的基本流程是什么？\n\n3. 商业数据分析的主要工具和技术有哪些？",
+            answer: "1. 商业数据分析是指使用数据分析技术和方法，从商业数据中提取有价值的信息，为业务决策提供支持的过程。它的重要性在于：\n   - 帮助企业了解业务现状\n   - 识别业务机会和风险\n   - 优化业务流程\n   - 提高决策质量\n   - 增强竞争力\n\n2. 商业数据分析的基本流程：\n   - 问题定义：明确分析目标和问题\n   - 数据收集：获取相关数据\n   - 数据清洗：处理数据质量问题\n   - 数据探索：了解数据特征\n   - 数据分析：应用分析方法\n   - 结果呈现：展示分析结果\n   - 决策支持：基于分析结果制定决策\n\n3. 商业数据分析的主要工具和技术：\n   - Excel：基础数据分析和可视化\n   - Python：强大的数据分析库（Pandas、NumPy等）\n   - SQL：数据库查询和分析\n   - 商业智能工具：Tableau、Power BI等\n   - 统计分析：描述性统计、推断统计等\n   - 数据挖掘：聚类、分类、关联分析等"
+          }
+        ];
+      } else if (lessonId === '6') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习2：商业报告撰写",
+            description: "回答关于商业报告撰写的问题",
+            difficulty: "中等",
+            question: "1. 商业报告的主要类型有哪些？\n\n2. 商业报告的基本结构是什么？\n\n3. 商业报告撰写的技巧有哪些？",
+            answer: "1. 商业报告的主要类型包括：\n   - 日常报告：定期汇报业务进展\n   - 定期报告：月度、季度、年度报告\n   - 专题报告：针对特定问题的分析报告\n   - 战略报告：长期规划和战略分析\n\n2. 商业报告的基本结构：\n   - 标题和摘要：报告的核心内容和结论\n   - 背景和目标：分析的背景和目的\n   - 数据和方法：使用的数据和分析方法\n   - 分析结果：详细的分析发现\n   - 结论和建议：基于分析的结论和行动建议\n   - 附录：支持性材料和详细数据\n\n3. 商业报告撰写的技巧：\n   - 清晰的结构：逻辑清晰，层次分明\n   - 简洁的语言：使用专业但易懂的语言\n   - 有效的可视化：使用图表直观展示数据\n   - 有说服力的论证：基于数据和逻辑\n   - 专业的格式：统一的格式和风格\n   - 针对性：根据读者需求定制内容"
+          }
+        ];
+      }
+    }
+    
     // 课程9: 商业数据可视化与预测
     if (id === '9') {
       if (lessonId === '1') {
         return [
           {
             id: 1,
-            title: "练习1：创建销售趋势图",
-            description: "使用Matplotlib创建销售趋势折线图",
-            template: "# 创建销售趋势图\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [12000, 13500, 11800, 14200, 15600, 14800, \n         16200, 17500, 16800, 18200, 19500, 21000]\n\n# 创建DataFrame\ndf = pd.DataFrame({'月份': dates, '销售额': sales})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# TODO: 创建折线图\nprint('销售趋势图已创建')\nprint('月度销售额数据:')\nprint(df)\n",
-            answer: "# 创建销售趋势图\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [12000, 13500, 11800, 14200, 15600, 14800, 16200, 17500, 16800, 18200, 19500, 21000]\n\n# 创建DataFrame\ndf = pd.DataFrame({'月份': dates, '销售额': sales})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 折线图\nplt.figure(figsize=(10, 6))\nplt.plot(df['月份'], df['销售额'], marker='o', linestyle='-', color='b')\nplt.title('2023年销售趋势')\nplt.xlabel('月份')\nplt.ylabel('销售额')\nplt.grid(True)\nplt.tight_layout()\n\nprint('销售趋势图已创建')\nprint('月度销售额数据:')\nprint(df)",
-            difficulty: "中等"
+            type: "text",
+            title: "练习1：数据可视化基础",
+            description: "回答关于数据可视化的问题",
+            difficulty: "简单",
+            question: "1. 数据可视化的基本原则有哪些？\n\n2. 常见的图表类型有哪些？请至少列举5种。\n\n3. 如何选择合适的图表类型？",
+            answer: "1. 数据可视化的基本原则包括：\n   - 准确性：正确反映数据\n   - 清晰性：易于理解\n   - 简洁性：避免不必要的元素\n   - 美观性：视觉吸引力\n   - 有效性：有效传达信息\n\n2. 常见的图表类型包括：\n   - 折线图：展示趋势变化\n   - 柱状图：比较不同类别的数据\n   - 饼图：展示构成比例\n   - 散点图：展示两个变量的关系\n   - 热力图：展示数据密度\n   - 箱线图：展示数据分布\n   - 雷达图：展示多维度数据\n\n3. 选择合适图表类型的考虑因素：\n   - 数据类型：数值型、分类型、时间序列等\n   - 分析目的：比较、趋势、分布、关系等\n   - 数据量：数据点的多少\n   - 受众：技术背景和需求\n   - 展示媒介：屏幕、纸张等"
+          }
+        ];
+      } else if (lessonId === '6') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习2：简单预测模型",
+            description: "回答关于简单预测模型的问题",
+            difficulty: "中等",
+            question: "1. 常见的简单预测方法有哪些？\n\n2. 移动平均法的基本原理是什么？\n\n3. 如何评估预测模型的性能？",
+            answer: "1. 常见的简单预测方法包括：\n   - 移动平均法：使用历史数据的平均值\n   - 指数平滑法：对历史数据赋予不同权重\n   - 线性趋势法：基于线性回归\n   - 季节性预测法：考虑季节性因素\n   - 因果预测法：基于因果关系\n\n2. 移动平均法的基本原理：\n   - 计算最近n个时期数据的平均值作为下一期的预测值\n   - 随着时间推移，不断更新平均值，去掉最早的数据点，加入最新的数据点\n   - 适用于稳定的时间序列数据，无明显趋势和季节性\n\n3. 评估预测模型性能的指标：\n   - 均方误差 (MSE)：预测值与实际值差的平方的平均值\n   - 均方根误差 (RMSE)：MSE的平方根\n   - 平均绝对误差 (MAE)：预测值与实际值差的绝对值的平均值\n   - 平均绝对百分比误差 (MAPE)：MAE与实际值的比值\n   - R²值：模型解释数据变异的比例"
+          }
+        ];
+      }
+    }
+    
+    // 课程7: Pandas高级应用
+    if (id === '7') {
+      if (lessonId === '1') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习1：Pandas高级索引",
+            description: "回答关于Pandas高级索引的问题",
+            difficulty: "中等",
+            question: "1. Pandas中的索引类型有哪些？\n\n2. 什么是多级索引？它的作用是什么？\n\n3. 如何优化Pandas索引的性能？",
+            answer: "1. Pandas中的索引类型包括：\n   - 整数索引：使用整数作为索引\n   - 标签索引：使用标签作为索引\n   - 布尔索引：使用布尔值作为索引\n   - 多级索引：使用多个级别作为索引\n\n2. 多级索引是指在Pandas中使用多个级别来组织数据的索引结构。它的作用是：\n   - 处理层次化数据\n   - 支持更复杂的数据查询\n   - 方便数据的分组和聚合\n   - 提高数据的可读性\n\n3. 优化Pandas索引性能的方法：\n   - 选择合适的索引类型\n   - 对索引进行排序\n   - 合理使用多级索引\n   - 避免链式索引操作\n   - 利用索引进行快速查询"
           }
         ];
       } else if (lessonId === '7') {
         return [
           {
             id: 1,
-            title: "练习1：销售趋势可视化",
-            description: "创建销售趋势图并分析季节性模式",
-            template: "# 商业数据可视化与预测案例：销售趋势可视化\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟历史销售数据\nhistorical_dates = pd.date_range('2022-01-01', '2023-12-31', freq='M')\n\n# 创建有季节性模式的销售数据\nhistorical_sales = []\nfor date in historical_dates:\n    # 基础销售额\n    base_sale = 10000\n    # 月度季节性\n    month_factor = {1: 0.8, 2: 0.9, 3: 1.0, 4: 1.1, 5: 1.2, 6: 1.1, \n                   7: 1.0, 8: 0.9, 9: 1.0, 10: 1.1, 11: 1.3, 12: 1.5}[date.month]\n    # 增长趋势\n    trend_factor = 1 + (date.year - 2022) * 0.1 + (date.month - 1) / 12 * 0.1\n    # 随机波动\n    random_factor = np.random.normal(1, 0.05)\n    # 计算最终销售额\n    sale = base_sale * month_factor * trend_factor * random_factor\n    historical_sales.append(round(sale))\n\n# 创建历史数据DataFrame\ndf = pd.DataFrame({'日期': historical_dates, '销售额': historical_sales})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# TODO: 1. 创建销售趋势折线图\nprint('销售趋势分析:')\n",
-            answer: "# 商业数据可视化与预测案例：销售趋势可视化\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟历史销售数据\nhistorical_dates = pd.date_range('2022-01-01', '2023-12-31', freq='M')\n\n# 创建有季节性模式的销售数据\nhistorical_sales = []\nfor date in historical_dates:\n    # 基础销售额\n    base_sale = 10000\n    # 月度季节性\n    month_factor = {1: 0.8, 2: 0.9, 3: 1.0, 4: 1.1, 5: 1.2, 6: 1.1, 7: 1.0, 8: 0.9, 9: 1.0, 10: 1.1, 11: 1.3, 12: 1.5}[date.month]\n    # 增长趋势\n    trend_factor = 1 + (date.year - 2022) * 0.1 + (date.month - 1) / 12 * 0.1\n    # 随机波动\n    random_factor = np.random.normal(1, 0.05)\n    # 计算最终销售额\n    sale = base_sale * month_factor * trend_factor * random_factor\n    historical_sales.append(round(sale))\n\n# 创建历史数据DataFrame\ndf = pd.DataFrame({'日期': historical_dates, '销售额': historical_sales})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 1. 创建销售趋势折线图\nprint('销售趋势分析:')\nplt.figure(figsize=(12, 6))\nplt.plot(df['日期'], df['销售额'], marker='o', linestyle='-', color='b')\nplt.title('2022-2023年销售趋势')\nplt.xlabel('日期')\nplt.ylabel('销售额')\nplt.grid(True)\nplt.tight_layout()\nprint('销售趋势图已创建')",
+            type: "text",
+            title: "练习2：大数据处理",
+            description: "回答关于Pandas大数据处理的问题",
             difficulty: "中等",
+            question: "1. 处理大数据时，Pandas面临的主要挑战是什么？\n\n2. 内存优化的方法有哪些？\n\n3. 如何使用分块处理大型数据集？",
+            answer: "1. Pandas处理大数据时面临的主要挑战：\n   - 内存限制：大型数据集可能超出内存容量\n   - 计算速度：处理大型数据时计算速度较慢\n   - I/O瓶颈：读写大型文件时I/O操作成为瓶颈\n   - 可扩展性：单机处理能力有限\n\n2. 内存优化的方法：\n   - 数据类型优化：选择合适的数据类型\n   - 内存使用监控：使用工具监控内存使用\n   - 数据压缩：使用压缩格式存储数据\n   - 惰性计算：延迟计算直到必要时\n\n3. 分块处理大型数据集的方法：\n   - 使用chunksize参数分块读取\n   - 分块计算并合并结果\n   - 分块聚合操作\n   - 利用外部存储格式如HDF5、Parquet等"
+          }
+        ];
+      }
+    }
+    
+    // 课程10: 商业预测模型
+    if (id === '10') {
+      if (lessonId === '1') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习1：预测模型概述",
+            description: "回答关于预测模型的问题",
+            difficulty: "简单",
+            question: "1. 什么是预测模型？它的应用场景有哪些？\n\n2. 预测模型的基本流程是什么？\n\n3. 预测模型的主要评估指标有哪些？",
+            answer: "1. 预测模型是使用历史数据和统计方法，对未来事件或数值进行预测的数学模型。应用场景包括：\n   - 销售预测：预测未来销售额\n   - 库存预测：预测库存需求\n   - 客户流失预测：预测客户流失风险\n   - 市场需求预测：预测市场需求变化\n   - 财务预测：预测财务指标\n\n2. 预测模型的基本流程：\n   - 问题定义：明确预测目标和范围\n   - 数据收集：获取相关历史数据\n   - 数据预处理：清洗、转换和准备数据\n   - 模型选择：选择合适的预测方法\n   - 模型训练：使用历史数据训练模型\n   - 模型评估：评估模型性能\n   - 模型应用：使用模型进行预测\n   - 模型监控：监控模型性能并更新\n\n3. 预测模型的主要评估指标：\n   - 回归模型：MSE、RMSE、MAE、MAPE、R²等\n   - 分类模型：准确率、召回率、F1分数、AUC等\n   - 时间序列模型：MAPE、SMAPE、MASE等"
+          }
+        ];
+      } else if (lessonId === '7') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习2：模型评估与选择",
+            description: "回答关于模型评估与选择的问题",
+            difficulty: "中等",
+            question: "1. 模型评估的主要方法有哪些？\n\n2. 什么是交叉验证？它的作用是什么？\n\n3. 如何选择合适的预测模型？",
+            answer: "1. 模型评估的主要方法包括：\n   - 训练集和测试集分离：将数据分为训练和测试两部分\n   - 交叉验证：k折交叉验证、留一交叉验证等\n   - 自助法：使用自助采样评估模型\n   - 时间序列交叉验证：考虑时间顺序的交叉验证\n\n2. 交叉验证是一种模型评估方法，它的作用是：\n   - 减少过拟合风险\n   - 更准确地评估模型在新数据上的性能\n   - 充分利用有限的数据\n   - 提供模型稳定性的评估\n\n3. 选择合适预测模型的考虑因素：\n   - 数据特性：数据类型、规模、质量等\n   - 预测目标：短期还是长期预测\n   - 模型复杂度：简单模型vs复杂模型\n   - 计算资源：模型训练和预测的时间和空间需求\n   - 可解释性：模型结果的可理解程度\n   - 业务需求：预测精度和速度的要求"
           }
         ];
       }
