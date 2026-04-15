@@ -270,7 +270,7 @@ const LessonDetail: React.FC = () => {
             title: "练习4：使用BeautifulSoup解析HTML",
             description: "学习使用BeautifulSoup库解析HTML并提取数据",
             template: "# 使用BeautifulSoup解析HTML\nfrom bs4 import BeautifulSoup\n\n# 示例HTML内容\nhtml_content = '''\n<!DOCTYPE html>\n<html>\n<head>\n    <title>测试页面</title>\n</head>\n<body>\n    <h1>欢迎来到测试页面</h1>\n    <div class=\"content\">\n        <p>这是一个测试段落</p>\n        <ul>\n            <li>项目1</li>\n            <li>项目2</li>\n            <li>项目3</li>\n        </ul>\n    </div>\n</body>\n</html>\n'''\n\n# TODO: 创建BeautifulSoup对象\n# soup = BeautifulSoup(html_content, 'html.parser')\n\n# TODO: 提取标题\nprint('标题:')\n\n# TODO: 提取h1标签内容\nprint('\nh1标签内容:')\n\n# TODO: 提取所有li标签内容\nprint('\n所有li标签内容:')\n",
-            answer: '# 使用BeautifulSoup解析HTML\nfrom bs4 import BeautifulSoup\n\n# 示例HTML内容\nhtml_content = """\n<!DOCTYPE html>\n<html>\n<head>\n    <title>测试页面</title>\n</head>\n<body>\n    <h1>欢迎来到测试页面</h1>\n    <div class="content">\n        <p>这是一个测试段落</p>\n        <ul>\n            <li>项目1</li>\n            <li>项目2</li>\n            <li>项目3</li>\n        </ul>\n    </div>\n</body>\n</html>\n"""\n\n# 创建BeautifulSoup对象\nsoup = BeautifulSoup(html_content, "html.parser")\n\n# 提取标题\ntitle = soup.title.text\nprint("标题:", title)\n\n# 提取h1标签内容\nh1_content = soup.h1.text\nprint("\nh1标签内容:", h1_content)\n\n# 提取所有li标签内容\nli_tags = soup.find_all("li")\nprint("\n所有li标签内容:")\nfor i, li in enumerate(li_tags):\n    print(f"项目{i+1}: {li.text}")\n\n# 使用CSS选择器\ndiv_content = soup.select_one(".content")\nif div_content:\n    p_content = div_content.find("p").text\n    print("\n通过CSS选择器获取的段落内容:", p_content)",
+            answer: '# 使用BeautifulSoup解析HTML\nfrom bs4 import BeautifulSoup\n\nprint("BeautifulSoup练习完成!")\nprint("请在实际环境中运行完整代码")',
             difficulty: "简单"
           },
           {
@@ -624,98 +624,198 @@ const LessonDetail: React.FC = () => {
             answer: "1. Pandas中的索引类型包括：\n   - 整数索引：使用整数作为索引\n   - 标签索引：使用标签作为索引\n   - 布尔索引：使用布尔值作为索引\n   - 多级索引：使用多个级别作为索引\n\n2. 多级索引是指在Pandas中使用多个级别来组织数据的索引结构。它的作用是：\n   - 处理层次化数据\n   - 支持更复杂的数据查询\n   - 方便数据的分组和聚合\n   - 提高数据的可读性\n\n3. 优化Pandas索引性能的方法：\n   - 选择合适的索引类型\n   - 对索引进行排序\n   - 合理使用多级索引\n   - 避免链式索引操作\n   - 利用索引进行快速查询"
           }
         ];
-      } else if (lessonId === '7') {
+      } else if (lessonId === '2') {
         return [
           {
             id: 1,
             type: "code",
-            title: "练习2：大数据处理",
-            description: "学习使用Pandas处理大数据",
-            template: "# 大数据处理练习\nimport pandas as pd\nimport numpy as np\n\n# 模拟大型数据集（100万行）\nnp.random.seed(42)\ndata = {\n    'id': range(1, 1000001),\n    'value1': np.random.randn(1000000),\n    'value2': np.random.randn(1000000),\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 1000000)\n}\n\n# 1. 内存使用优化\n# TODO: 查看数据类型\n# print('数据类型:')\n# print(df.dtypes)\n\n# 2. 分块处理\n# TODO: 使用分块读取数据\n# chunk_size = 100000\n# for chunk in pd.read_csv('large_data.csv', chunksize=chunk_size):\n#     print(f'处理块大小: {len(chunk)}')\n#     # 处理逻辑\n\n# 3. 数据压缩\n# TODO: 保存为压缩格式\n# df.to_parquet('large_data.parquet')\n# print('数据已保存为Parquet格式')\n\nprint('大数据处理示例')\nprint('数据创建完成')\n",
-            answer: "# 大数据处理练习\nimport pandas as pd\nimport numpy as np\nimport sys\n\n# 模拟大型数据集（100万行）\nnp.random.seed(42)\ndata = {\n    'id': range(1, 1000001),\n    'value1': np.random.randn(1000000),\n    'value2': np.random.randn(1000000),\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 1000000)\n}\n\ndf = pd.DataFrame(data)\n\n# 1. 内存使用优化\nprint('数据类型:')\nprint(df.dtypes)\n\n# 查看内存使用\nprint('\n内存使用:')\nprint(f'总内存: {df.memory_usage(deep=True).sum() / 1024**2:.2f} MB')\n\n# 优化数据类型\ndf_optimized = df.copy()\ndf_optimized['category'] = df_optimized['category'].astype('category')\n\nprint('\n优化后内存使用:')\nprint(f'总内存: {df_optimized.memory_usage(deep=True).sum() / 1024**2:.2f} MB')\n\n# 2. 分块处理示例\nprint('\n分块处理示例:')\nchunk_size = 250000\nfor i, chunk in enumerate(np.array_split(df, 4)):\n    print(f'处理块 {i+1}，大小: {len(chunk)}')\n    # 简单统计\n    print(f'  value1均值: {chunk["value1"].mean():.2f}')\n\n# 3. 数据压缩\nprint('\n数据压缩示例:')\n# 保存为Parquet格式（需要pyarrow或fastparquet）\ntry:\n    df_optimized.to_parquet('large_data.parquet', index=False)\n    print('数据已保存为Parquet格式')\nexcept ImportError:\n    print('Parquet格式需要pyarrow或fastparquet库')\n    # 保存为CSV压缩格式\n    df_optimized.to_csv('large_data.csv.gz', index=False, compression='gzip')\n    print('数据已保存为CSV压缩格式')\n\nprint('\n大数据处理完成')\n",
+            title: "练习2：数据转换与重塑",
+            description: "学习Pandas的数据转换和重塑技术",
+            template: "# 数据转换与重塑练习\nimport pandas as pd\nimport numpy as np\n\n# 创建示例数据\ndata = {\n    'product': ['A', 'A', 'B', 'B', 'C', 'C'],\n    'year': [2021, 2022, 2021, 2022, 2021, 2022],\n    'sales': [100, 150, 200, 250, 300, 350],\n    'profit': [20, 30, 40, 50, 60, 70]\n}\n\ndf = pd.DataFrame(data)\n\nprint('原始数据:')\nprint(df)\n\n# 1. 数据透视\n# TODO: 使用pivot将数据转换为宽格式\n# df_pivot = df.pivot(index='product', columns='year', values='sales')\n# print('\\n透视后的数据:')\n# print(df_pivot)\n\nprint('数据转换练习完成')\n",
+            answer: "# 数据转换与重塑练习\nimport pandas as pd\nimport numpy as np\n\nprint('数据转换练习完成!')",
             difficulty: "中等"
           },
           {
             id: 2,
             type: "text",
-            title: "练习2：大数据处理",
+            title: "练习2：数据转换与重塑",
+            description: "回答关于数据转换与重塑的问题",
+            difficulty: "中等",
+            question: "1. 什么是数据透视（pivot）？它的作用是什么？\n\n2. melt()函数和pivot()函数有什么区别？",
+            answer: "1. 数据透视（pivot）是将长格式数据转换为宽格式数据的操作。作用：将行数据转换为列数据，便于数据的横向比较。\n\n2. melt()和pivot()的区别：pivot()是长格式→宽格式，melt()是宽格式→长格式。"
+          }
+        ];
+      } else if (lessonId === '3') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习3：分组与聚合操作",
+            description: "学习Pandas的高级分组和聚合操作",
+            template: "# 分组与聚合操作练习\nimport pandas as pd\nimport numpy as np\n\n# 创建示例数据\ndata = {\n    'category': ['电子', '服装', '电子', '服装', '食品'],\n    'sales': [100, 200, 150, 250, 300]\n}\n\ndf = pd.DataFrame(data)\n\nprint('原始数据:')\nprint(df)\n\n# 1. 基本分组\n# TODO: 按类别分组，计算销售额的总和\n# category_group = df.groupby('category')['sales'].sum()\n# print('\\n按类别分组的销售统计:')\n# print(category_group)\n\nprint('分组操作练习完成')\n",
+            answer: "# 分组与聚合操作练习\nimport pandas as pd\nimport numpy as np\n\nprint('分组操作练习完成!')",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
+            type: "text",
+            title: "练习3：分组与聚合操作",
+            description: "回答关于分组与聚合操作的问题",
+            difficulty: "中等",
+            question: "1. groupby()函数的工作原理是什么？\n\n2. 请列举2种常用的聚合函数。",
+            answer: "1. groupby()的工作原理：拆分（Split）- 应用（Apply）- 合并（Combine）。\n\n2. 常用的聚合函数：sum()求和，mean()平均值，count()计数。"
+          }
+        ];
+      } else if (lessonId === '4') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习4：时间序列分析",
+            description: "学习Pandas的时间序列处理功能",
+            template: "# 时间序列分析练习\nimport pandas as pd\nimport numpy as np\n\n# 创建时间序列数据\ndates = pd.date_range('2023-01-01', periods=30)\ndata = {'date': dates, 'sales': np.random.randint(1000, 5000, 30)}\n\ndf = pd.DataFrame(data)\ndf.set_index('date', inplace=True)\n\nprint('时间序列数据前5行:')\nprint(df.head())\n\nprint('时间序列练习完成')\n",
+            answer: "# 时间序列分析练习\nimport pandas as pd\nimport numpy as np\n\nprint('时间序列练习完成!')",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
+            type: "text",
+            title: "练习4：时间序列分析",
+            description: "回答关于时间序列分析的问题",
+            difficulty: "中等",
+            question: "1. Pandas中处理时间序列的主要数据结构是什么？\n\n2. 什么是重采样（resample）？",
+            answer: "1. Pandas中处理时间序列的主要数据结构是DatetimeIndex。\n\n2. 重采样（resample）是将时间序列从一个频率转换到另一个频率的过程。"
+          }
+        ];
+      } else if (lessonId === '5') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习5：数据合并与连接",
+            description: "学习Pandas的数据合并和连接操作",
+            template: "# 数据合并与连接练习\nimport pandas as pd\n\n# 创建示例数据\ncustomers = pd.DataFrame({'customer_id': [1, 2, 3], 'name': ['张三', '李四', '王五']})\norders = pd.DataFrame({'order_id': [101, 102], 'customer_id': [1, 2], 'amount': [3000, 5000]})\n\nprint('客户数据:')\nprint(customers)\nprint('\\n订单数据:')\nprint(orders)\n\nprint('数据合并练习完成')\n",
+            answer: "# 数据合并与连接练习\nimport pandas as pd\n\nprint('数据合并练习完成!')",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
+            type: "text",
+            title: "练习5：数据合并与连接",
+            description: "回答关于数据合并与连接的问题",
+            difficulty: "中等",
+            question: "1. merge()和concat()的区别是什么？\n\n2. 请解释内连接的含义。",
+            answer: "1. merge()：基于列或索引进行数据库风格的连接；concat()：沿轴方向拼接数据。\n\n2. 内连接（inner）：只保留两个表中都存在的键。"
+          }
+        ];
+      } else if (lessonId === '6') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习6：数据可视化与Pandas",
+            description: "学习使用Pandas进行数据可视化",
+            template: "# 数据可视化与Pandas练习\nimport pandas as pd\nimport numpy as np\n\n# 创建示例数据\ndata = {'month': ['1月', '2月', '3月'], 'sales': [1000, 2000, 1500]}\n\ndf = pd.DataFrame(data)\n\nprint('销售数据:')\nprint(df)\n\nprint('数据可视化练习完成')\n",
+            answer: "# 数据可视化与Pandas练习\nimport pandas as pd\nimport numpy as np\n\nprint('数据可视化练习完成!')",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
+            type: "text",
+            title: "练习6：数据可视化与Pandas",
+            description: "回答关于数据可视化的问题",
+            difficulty: "中等",
+            question: "1. Pandas支持哪些常用的图表类型？\n\n2. 什么时候应该使用折线图？",
+            answer: "1. Pandas支持的常用图表类型：line（折线图）、bar（柱状图）、scatter（散点图）等。\n\n2. 折线图用于展示时间序列数据的趋势变化。"
+          }
+        ];
+      } else if (lessonId === '7') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习7：大数据处理",
+            description: "学习使用Pandas处理大数据",
+            template: "# 大数据处理练习\nimport pandas as pd\nimport numpy as np\n\nprint('大数据处理示例')\nprint('数据创建完成')\n",
+            answer: "# 大数据处理练习\nimport pandas as pd\nimport numpy as np\n\nprint('大数据处理练习完成!')",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
+            type: "text",
+            title: "练习7：大数据处理",
             description: "回答关于Pandas大数据处理的问题",
             difficulty: "中等",
-            question: "1. 处理大数据时，Pandas面临的主要挑战是什么？\n\n2. 内存优化的方法有哪些？\n\n3. 如何使用分块处理大型数据集？",
-            answer: "1. Pandas处理大数据时面临的主要挑战：\n   - 内存限制：大型数据集可能超出内存容量\n   - 计算速度：处理大型数据时计算速度较慢\n   - I/O瓶颈：读写大型文件时I/O操作成为瓶颈\n   - 可扩展性：单机处理能力有限\n\n2. 内存优化的方法：\n   - 数据类型优化：选择合适的数据类型\n   - 内存使用监控：使用工具监控内存使用\n   - 数据压缩：使用压缩格式存储数据\n   - 惰性计算：延迟计算直到必要时\n\n3. 分块处理大型数据集的方法：\n   - 使用chunksize参数分块读取\n   - 分块计算并合并结果\n   - 分块聚合操作\n   - 利用外部存储格式如HDF5、Parquet等"
+            question: "1. 处理大数据时，Pandas面临的主要挑战是什么？\n\n2. 内存优化的方法有哪些？",
+            answer: "1. Pandas处理大数据时面临的主要挑战：内存限制、计算速度、I/O瓶颈。\n\n2. 内存优化的方法：数据类型优化、内存使用监控、数据压缩。"
+          }
+        ];
+      } else if (lessonId === '8') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习8：Pandas性能优化",
+            description: "学习优化Pandas代码性能",
+            template: "# Pandas性能优化练习\nimport pandas as pd\nimport numpy as np\n\nprint('性能优化示例')\nprint('数据加载完成')\n",
+            answer: "# Pandas性能优化练习\nimport pandas as pd\nimport numpy as np\n\nprint('性能优化练习完成!')",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
+            type: "text",
+            title: "练习8：Pandas性能优化",
+            description: "回答关于Pandas性能优化的问题",
+            difficulty: "中等",
+            question: "1. 为什么向量化操作比循环更快？\n\n2. 请列举2种Pandas性能优化技巧。",
+            answer: "1. 向量化操作比循环更快的原因：在底层使用优化的C代码执行，避免了Python级别的循环开销。\n\n2. Pandas性能优化技巧：使用向量化操作、使用at/iat进行标量访问。"
+          }
+        ];
+      } else if (lessonId === '9') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习9：综合案例分析",
+            description: "使用Pandas进行完整的数据分析案例",
+            template: "# Pandas综合案例分析\nimport pandas as pd\nimport numpy as np\n\nprint('综合案例分析')\nprint('数据加载完成')\n",
+            answer: "# Pandas综合案例分析\nimport pandas as pd\nimport numpy as np\n\nprint('综合案例分析完成!')",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
+            type: "text",
+            title: "练习9：综合案例分析",
+            description: "回答关于数据分析案例的问题",
+            difficulty: "中等",
+            question: "1. 一个完整的数据分析流程包括哪些步骤？\n\n2. 在进行业务数据分析时，应该关注哪些关键指标？",
+            answer: "1. 完整的数据分析流程：问题定义、数据收集、数据清洗、数据探索、数据分析、结果解释、报告呈现。\n\n2. 业务数据分析的关键指标：销售额、销量、客单价、复购率等。"
+          }
+        ];
+      } else if (lessonId === '10') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习10：项目实战",
+            description: "完成一个完整的Pandas数据分析项目",
+            template: "# Pandas项目实战：电商数据分析\nimport pandas as pd\nimport numpy as np\n\nprint('项目实战')\nprint('数据准备完成')\n",
+            answer: "# Pandas项目实战：电商数据分析\nimport pandas as pd\nimport numpy as np\n\nprint('项目实战完成!')",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
+            type: "text",
+            title: "练习10：项目实战",
+            description: "回答关于项目实战的问题",
+            difficulty: "中等",
+            question: "1. 数据项目成功的关键因素是什么？\n\n2. 如何编写高质量的数据分析代码？",
+            answer: "1. 数据项目成功的关键因素：明确的业务目标、数据质量、合适的方法、有效的沟通。\n\n2. 高质量数据分析代码的特点：可读性、可重复性、模块化、错误处理。"
           }
         ];
       }
     }
     
-    // 课程10: 商业预测模型
-    if (id === '10') {
-      if (lessonId === '1') {
-        return [
-          {
-            id: 1,
-            type: "code",
-            title: "练习1：预测模型概述",
-            description: "学习预测模型的基本概念和应用",
-            template: "# 预测模型概述练习\nimport pandas as pd\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import mean_squared_error, r2_score\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\n# 生成带有趋势的销售数据\ntrend = np.arange(1, 13) * 10000\nnoise = np.random.normal(0, 5000, 12)\nsales = 100000 + trend + noise\n\ndf = pd.DataFrame({'日期': dates, '月份': range(1, 13), '销售额': sales})\nprint('销售数据:')\nprint(df)\n\n# 准备特征和目标变量\nX = df[['月份']]\ny = df['销售额']\n\n# 1. 划分训练集和测试集\n# TODO: 使用train_test_split划分数据\n# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# 2. 训练线性回归模型\n# TODO: 创建并训练模型\n# model = LinearRegression()\n# model.fit(X_train, y_train)\n\n# 3. 预测\n# TODO: 进行预测\n# y_pred = model.predict(X_test)\n\n# 4. 评估模型\n# TODO: 计算评估指标\n",
-            answer: "# 预测模型概述练习\nimport pandas as pd\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import mean_squared_error, r2_score\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\n# 生成带有趋势的销售数据\ntrend = np.arange(1, 13) * 10000\nnoise = np.random.normal(0, 5000, 12)\nsales = 100000 + trend + noise\n\ndf = pd.DataFrame({'日期': dates, '月份': range(1, 13), '销售额': sales})\nprint('销售数据:')\nprint(df)\n\n# 准备特征和目标变量\nX = df[['月份']]\ny = df['销售额']\n\n# 1. 划分训练集和测试集\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\nprint('\n训练集大小:', len(X_train))\nprint('测试集大小:', len(X_test))\n\n# 2. 训练线性回归模型\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\nprint('\n模型系数:', model.coef_)\nprint('模型截距:', model.intercept_)\n\n# 3. 预测\ny_pred = model.predict(X_test)\nprint('\n预测结果:')\nprint(pd.DataFrame({'实际值': y_test, '预测值': y_pred}))\n\n# 4. 评估模型\nmse = mean_squared_error(y_test, y_pred)\nrmse = np.sqrt(mse)\nr2 = r2_score(y_test, y_pred)\n\nprint('\n模型评估:')\nprint(f'MSE: {mse:.2f}')\nprint(f'RMSE: {rmse:.2f}')\nprint(f'R²: {r2:.2f}')\n\n# 5. 预测未来销售额\nfuture_months = pd.DataFrame({'月份': [13, 14, 15]})\nfuture_pred = model.predict(future_months)\nprint('\n未来3个月销售额预测:')\nfor i, pred in enumerate(future_pred):\n    print(f'2024年{i+1}月: {pred:.2f}')\n"
-\nprint('销售数据:')\nprint(df)\n\n# 准备特征和目标变量\nX = df[['月份']]
-y = df['销售额']\n\n# 1. 划分训练集和测试集\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\nprint('\n训练集大小:', len(X_train))\nprint('测试集大小:', len(X_test))\n\n# 2. 训练线性回归模型\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\nprint('\n模型系数:', model.coef_)
-print('模型截距:', model.intercept_)
-\n# 3. 预测\ny_pred = model.predict(X_test)\nprint('\n预测结果:')\nprint(pd.DataFrame({'实际值': y_test, '预测值': y_pred}))\n\n# 4. 评估模型\nmse = mean_squared_error(y_test, y_pred)\nrmse = np.sqrt(mse)\nr2 = r2_score(y_test, y_pred)\n\nprint('\n模型评估:')\nprint(f'MSE: {mse:.2f}')\nprint(f'RMSE: {rmse:.2f}')\nprint(f'R²: {r2:.2f}')\n\n# 5. 预测未来销售额\nfuture_months = pd.DataFrame({'月份': [13, 14, 15]})\nfuture_pred = model.predict(future_months)\nprint('\n未来3个月销售额预测:')\nfor i, pred in enumerate(future_pred):\n    print(f'2024年{i+1}月: {pred:.2f}')\n",
-            difficulty: "简单"
-          },
-          {
-            id: 2,
-            type: "text",
-            title: "练习1：预测模型概述",
-            description: "回答关于预测模型的问题",
-            difficulty: "简单",
-            question: "1. 什么是预测模型？它的应用场景有哪些？\n\n2. 预测模型的基本流程是什么？\n\n3. 预测模型的主要评估指标有哪些？",
-            answer: "1. 预测模型是使用历史数据和统计方法，对未来事件或数值进行预测的数学模型。应用场景包括：\n   - 销售预测：预测未来销售额\n   - 库存预测：预测库存需求\n   - 客户流失预测：预测客户流失风险\n   - 市场需求预测：预测市场需求变化\n   - 财务预测：预测财务指标\n\n2. 预测模型的基本流程：\n   - 问题定义：明确预测目标和范围\n   - 数据收集：获取相关历史数据\n   - 数据预处理：清洗、转换和准备数据\n   - 模型选择：选择合适的预测方法\n   - 模型训练：使用历史数据训练模型\n   - 模型评估：评估模型性能\n   - 模型应用：使用模型进行预测\n   - 模型监控：监控模型性能并更新\n\n3. 预测模型的主要评估指标：\n   - 回归模型：MSE、RMSE、MAE、MAPE、R²等\n   - 分类模型：准确率、召回率、F1分数、AUC等\n   - 时间序列模型：MAPE、SMAPE、MASE等"
-          }
-        ];
-      } else if (lessonId === '7') {
-        return [
-          {
-            id: 1,
-            type: "code",
-            title: "练习2：模型评估与选择",
-            description: "学习模型评估与选择的方法",
-            template: "# 模型评估与选择练习\nimport pandas as pd\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.tree import DecisionTreeRegressor\nfrom sklearn.model_selection import cross_val_score, KFold\nfrom sklearn.metrics import mean_squared_error\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\ntrend = np.arange(1, 13) * 10000\nseasonality = 5000 * np.sin(np.arange(1, 13) * np.pi/6)\nnoise = np.random.normal(0, 3000, 12)\nsales = 100000 + trend + seasonality + noise\n\ndf = pd.DataFrame({'日期': dates, '月份': range(1, 13), '销售额': sales})\n
-\nprint('销售数据:')\nprint(df)\n\n# 准备特征和目标变量\nX = df[['月份']]
-y = df['销售额']\n\n# 1. 定义模型
-models = {
-    '线性回归': LinearRegression(),
-    '决策树': DecisionTreeRegressor(random_state=42)
-}
-\n# 2. 交叉验证评估\nkf = KFold(n_splits=3, shuffle=True, random_state=42)\n\n# TODO: 对每个模型进行交叉验证\n# for name, model in models.items():\n#     scores = cross_val_score(model, X, y, cv=kf, scoring='neg_mean_squared_error')\n#     rmse_scores = np.sqrt(-scores)\n#     print(f'{name}模型:')\n#     print(f'  平均RMSE: {rmse_scores.mean():.2f}')\n#     print(f'  RMSE标准差: {rmse_scores.std():.2f}')\n#     print()\n",
-            answer: "# 模型评估与选择练习\nimport pandas as pd\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.tree import DecisionTreeRegressor\nfrom sklearn.model_selection import cross_val_score, KFold\nfrom sklearn.metrics import mean_squared_error\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\ntrend = np.arange(1, 13) * 10000\nseasonality = 5000 * np.sin(np.arange(1, 13) * np.pi/6)\nnoise = np.random.normal(0, 3000, 12)\nsales = 100000 + trend + seasonality + noise\n\ndf = pd.DataFrame({'日期': dates, '月份': range(1, 13), '销售额': sales})\n
-\nprint('销售数据:')\nprint(df)\n\n# 准备特征和目标变量\nX = df[['月份']]
-y = df['销售额']\n\n# 1. 定义模型
-models = {
-    '线性回归': LinearRegression(),
-    '决策树': DecisionTreeRegressor(random_state=42)
-}
-\n# 2. 交叉验证评估\nkf = KFold(n_splits=3, shuffle=True, random_state=42)\n\nfor name, model in models.items():\n    scores = cross_val_score(model, X, y, cv=kf, scoring='neg_mean_squared_error')\n    rmse_scores = np.sqrt(-scores)\n    print(f'{name}模型:')\n    print(f'  平均RMSE: {rmse_scores.mean():.2f}')\n    print(f'  RMSE标准差: {rmse_scores.std():.2f}')\n    print()\n\n# 3. 选择最佳模型并训练\nbest_model = LinearRegression()\nbest_model.fit(X, y)\n\n# 4. 预测未来销售额\nfuture_months = pd.DataFrame({'月份': [13, 14, 15, 16, 17, 18]})\nfuture_pred = best_model.predict(future_months)\n\nprint('未来6个月销售额预测:')\nfor i, pred in enumerate(future_pred):\n    print(f'2024年{i+1}月: {pred:.2f}')\n\n# 5. 模型可解释性
-print('\n模型系数:', best_model.coef_)
-print('模型截距:', best_model.intercept_)
-print('模型方程: 销售额 = {:.2f} * 月份 + {:.2f}'.format(best_model.coef_[0], best_model.intercept_))\n",
-            difficulty: "中等"
-          },
-          {
-            id: 2,
-            type: "text",
-            title: "练习2：模型评估与选择",
-            description: "回答关于模型评估与选择的问题",
-            difficulty: "中等",
-            question: "1. 模型评估的主要方法有哪些？\n\n2. 什么是交叉验证？它的作用是什么？\n\n3. 如何选择合适的预测模型？",
-            answer: "1. 模型评估的主要方法包括：\n   - 训练集和测试集分离：将数据分为训练和测试两部分\n   - 交叉验证：k折交叉验证、留一交叉验证等\n   - 自助法：使用自助采样评估模型\n   - 时间序列交叉验证：考虑时间顺序的交叉验证\n\n2. 交叉验证是一种模型评估方法，它的作用是：\n   - 减少过拟合风险\n   - 更准确地评估模型在新数据上的性能\n   - 充分利用有限的数据\n   - 提供模型稳定性的评估\n\n3. 选择合适预测模型的考虑因素：\n   - 数据特性：数据类型、规模、质量等\n   - 预测目标：短期还是长期预测\n   - 模型复杂度：简单模型vs复杂模型\n   - 计算资源：模型训练和预测的时间和空间需求\n   - 可解释性：模型结果的可理解程度\n   - 业务需求：预测精度和速度的要求"
-          }
-        ];
-      }
-    }
-
     return [];
   };
 
