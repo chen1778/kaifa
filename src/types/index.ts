@@ -121,3 +121,14 @@ export interface CourseWithLessons extends Course {
 export interface LessonWithCodeExamples extends Lesson {
   code_examples: CodeExample[];
 }
+
+export interface PracticeQuestion {
+  id: number;
+  type: 'code' | 'text';
+  title: string;
+  description: string;
+  difficulty: string;
+  template?: string;
+  answer?: string;
+  question?: string;
+}

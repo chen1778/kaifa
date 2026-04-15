@@ -12,6 +12,7 @@ const LessonDetail: React.FC = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [showTextAnswer, setShowTextAnswer] = useState(false);
   const pyodideRef = useRef<any>(null);
   const codeEditorRef = useRef<HTMLTextAreaElement>(null);
   const [pyodideLoaded, setPyodideLoaded] = useState(false);
@@ -56,6 +57,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：检查Python版本",
             description: "编写一个程序，检查当前Python版本并打印出来",
             template: "# 检查Python版本\nimport sys\n\n# 在这里编写代码打印Python版本\nprint('Python版本:')",
@@ -64,6 +66,7 @@ const LessonDetail: React.FC = () => {
           },
           {
             id: 2,
+            type: "code",
             title: "练习2：测试NumPy和Pandas",
             description: "导入NumPy和Pandas库，并打印它们的版本",
             template: "# 测试NumPy和Pandas\n\n# 在这里导入NumPy和Pandas库\n\n# 打印版本信息\nprint('NumPy版本:')\nprint('Pandas版本:')",
@@ -75,6 +78,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：变量和数据类型",
             description: "创建不同类型的变量并打印它们",
             template: "# 变量和数据类型\n\n# 创建变量\nname = '数据分析'\nage = 3\nis_active = True\n\n# 打印变量\nprint('名称:', name)\nprint('年龄:', age)\nprint('是否活跃:', is_active)\n\n# TODO: 计算并打印类型\n# 提示：使用type()函数获取变量类型",
@@ -211,6 +215,131 @@ const LessonDetail: React.FC = () => {
       }
     }
     
+    // 课程3: 数据采集与预处理
+    if (id === '3') {
+      if (lessonId === '1') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习1：数据采集概述",
+            description: "回答关于数据采集基本概念的问题",
+            difficulty: "简单",
+            question: "1. 什么是数据采集？请列举至少3种常见的数据采集方法。\n\n2. 数据采集的主要挑战有哪些？请至少列举3个。\n\n3. 在进行数据采集时，为什么需要遵守robots.txt协议？",
+            answer: "1. 数据采集是指从各种来源获取数据的过程。常见的数据采集方法包括：网络爬虫、API接口、问卷调查、实验数据采集、公开数据集等。\n\n2. 数据采集的主要挑战包括：数据质量问题、数据量过大、数据格式多样、法律和道德问题、技术挑战、反爬机制等。\n\n3. 遵守robots.txt协议是为了：尊重网站所有者的意愿、避免法律风险、维护良好的网络爬虫伦理、防止被网站封禁等。"
+          }
+        ];
+      } else if (lessonId === '2') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习2：网络爬虫基础",
+            description: "回答关于网络爬虫的问题",
+            difficulty: "简单",
+            question: "1. 什么是网络爬虫？它的工作原理是什么？\n\n2. 请列举3种常见的反爬机制。\n\n3. 在开发网络爬虫时，应该注意哪些法律和道德问题？",
+            answer: "1. 网络爬虫是一种自动获取网页内容的程序。它的工作原理是：发送HTTP请求获取网页内容、解析HTML结构、提取所需数据、存储数据。\n\n2. 常见的反爬机制包括：User-Agent检测、IP限制、验证码、动态加载、登录验证、蜜罐陷阱、行为分析等。\n\n3. 在开发网络爬虫时，应该注意：遵守robots.txt协议、控制爬取频率、尊重网站Terms of Service、不爬取敏感数据、遵守数据使用限制等。"
+          }
+        ];
+      } else if (lessonId === '3') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习3：Requests库使用",
+            description: "回答关于Requests库的问题",
+            difficulty: "简单",
+            question: "1. Requests库的主要功能是什么？\n\n2. 请列举3种常见的HTTP请求方法。\n\n3. 为什么在使用Requests库时需要设置合适的请求头？",
+            answer: "1. Requests库是Python中用于发送HTTP请求的库，主要功能包括：发送GET/POST/PUT/DELETE等请求、处理请求参数、处理响应、会话管理、Cookie处理等。\n\n2. 常见的HTTP请求方法包括：GET（获取资源）、POST（提交数据）、PUT（更新资源）、DELETE（删除资源）等。\n\n3. 设置合适的请求头是为了：模拟真实浏览器访问、避免被识别为爬虫、提高请求成功率、传递必要的信息（如User-Agent、Cookie等）。"
+          }
+        ];
+      } else if (lessonId === '4') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习4：BeautifulSoup库使用",
+            description: "回答关于BeautifulSoup库的问题",
+            difficulty: "简单",
+            question: "1. BeautifulSoup库的主要功能是什么？\n\n2. 请列举2种常用的HTML元素选择方法。\n\n3. 在使用BeautifulSoup时，如何处理HTML结构变化的情况？",
+            answer: "1. BeautifulSoup库是Python中用于解析HTML和XML的库，主要功能包括：解析HTML结构、提取文本内容、查找元素、修改HTML等。\n\n2. 常用的HTML元素选择方法包括：CSS选择器（如标签选择器、类选择器、ID选择器）、XPath表达式、标签名查找等。\n\n3. 处理HTML结构变化的方法包括：使用更灵活的选择器、添加异常处理、使用多个备选选择器、定期检查和更新爬虫等。"
+          }
+        ];
+      } else if (lessonId === '5') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习5：Selenium使用",
+            description: "回答关于Selenium的问题",
+            difficulty: "简单",
+            question: "1. 什么时候应该使用Selenium而不是Requests+BeautifulSoup？\n\n2. Selenium的主要优点和缺点是什么？\n\n3. 请列举2种Selenium中常用的元素定位方法。",
+            answer: "1. 应该使用Selenium的情况包括：处理动态加载的内容、需要模拟用户交互（如点击、滚动）、处理JavaScript渲染的页面、需要登录认证等。\n\n2. Selenium的主要优点：可以处理复杂的动态页面、模拟真实用户操作。主要缺点：运行速度慢、内存消耗大、需要浏览器驱动、性能较差。\n\n3. Selenium中常用的元素定位方法包括：ID定位、类名定位、XPath定位、CSS选择器定位、链接文本定位等。"
+          }
+        ];
+      } else if (lessonId === '6') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习6：数据存储",
+            description: "回答关于数据存储的问题",
+            difficulty: "简单",
+            question: "1. 请列举3种常见的数据存储格式，并说明它们的特点。\n\n2. 关系型数据库和NoSQL数据库的主要区别是什么？\n\n3. 在选择数据存储方案时，应该考虑哪些因素？",
+            answer: "1. 常见的数据存储格式包括：\n- CSV：简单、易读、通用，但不适合复杂数据结构\n- JSON：灵活、支持嵌套结构、易于Web应用使用\n- Excel：便于人工查看和编辑，但不适合大数据量\n- 数据库：适合结构化数据、支持查询和索引\n\n2. 关系型数据库（如MySQL）使用表结构、支持SQL查询、强调一致性；NoSQL数据库（如MongoDB）使用文档/键值对结构、更灵活、强调可扩展性。\n\n3. 选择数据存储方案时应考虑：数据结构、数据量、查询需求、性能要求、成本、可扩展性等。"
+          }
+        ];
+      } else if (lessonId === '7') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习7：数据清洗概述",
+            description: "回答关于数据清洗的问题",
+            difficulty: "简单",
+            question: "1. 什么是数据清洗？它为什么重要？\n\n2. 请列举3种常见的数据质量问题。\n\n3. 数据清洗的基本流程是什么？",
+            answer: "1. 数据清洗是识别和修正数据中的错误、不一致和缺失值的过程。它重要是因为：垃圾进垃圾出、提高分析结果可靠性、确保数据质量、为后续分析做好准备。\n\n2. 常见的数据质量问题包括：缺失值、重复值、异常值、不一致性、数据类型错误等。\n\n3. 数据清洗的基本流程：数据质量评估、缺失值处理、重复值处理、异常值处理、数据类型转换、数据验证等。"
+          }
+        ];
+      } else if (lessonId === '8') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习8：处理缺失值",
+            description: "回答关于缺失值处理的问题",
+            difficulty: "简单",
+            question: "1. 请列举3种常见的缺失值类型，并说明它们的特点。\n\n2. 请列举3种处理缺失值的方法，并说明它们的适用场景。\n\n3. 在选择缺失值处理方法时，应该考虑哪些因素？",
+            answer: "1. 常见的缺失值类型：\n- 完全随机缺失（MCAR）：缺失与数据本身无关\n- 随机缺失（MAR）：缺失与已观测数据相关\n- 非随机缺失（MNAR）：缺失与未观测数据相关\n\n2. 处理缺失值的方法：\n- 删除法：适用于缺失率低、数据量大的情况\n- 填充法：适用于缺失率适中的情况\n- 插值法：适用于时间序列等有规律的数据\n- 模型法：适用于复杂情况，利用其他变量预测\n\n3. 选择缺失值处理方法时应考虑：缺失率、缺失类型、数据类型、后续分析方法、业务知识等。"
+          }
+        ];
+      } else if (lessonId === '9') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习9：处理异常值",
+            description: "回答关于异常值处理的问题",
+            difficulty: "简单",
+            question: "1. 什么是异常值？它可能带来什么影响？\n\n2. 请列举2种常用的异常值检测方法。\n\n3. 处理异常值时应该注意什么？",
+            answer: "1. 异常值是指与其他数据显著不同的数据点。它可能带来的影响：影响统计分析结果、扭曲模型预测、降低数据质量等。\n\n2. 常用的异常值检测方法：\n- 统计方法：Z-score、IQR方法\n- 可视化方法：箱线图、散点图\n- 机器学习方法：孤立森林、One-class SVM\n\n3. 处理异常值时应该注意：不要盲目删除、考虑异常值的业务意义、记录处理方法、验证处理效果、考虑业务知识等。"
+          }
+        ];
+      } else if (lessonId === '10') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习10：数据预处理实战",
+            description: "回答关于数据预处理实战的问题",
+            difficulty: "中等",
+            question: "1. 一个完整的数据预处理项目包括哪些主要步骤？\n\n2. 在数据预处理过程中，为什么需要记录每一步的操作？\n\n3. 请列举3个数据预处理中常见的挑战，并说明如何应对。",
+            answer: "1. 一个完整的数据预处理项目主要步骤：\n- 项目规划和需求分析\n- 数据收集和导入\n- 数据探索和质量评估\n- 数据清洗（缺失值、异常值、重复值处理）\n- 数据转换和整合\n- 特征工程\n- 数据标准化\n- 预处理结果评估\n- 文档记录\n\n2. 记录每一步操作的原因：\n- 保证可重现性\n- 便于后续检查和调试\n- 便于团队协作\n- 便于知识传承\n- 便于审计和合规\n\n3. 数据预处理中常见的挑战及应对：\n- 数据质量差：充分的数据探索、多种方法尝试、业务知识结合\n- 数据量过大：分块处理、采样、并行计算、优化算法\n- 业务知识缺乏：与业务专家合作、充分理解业务背景、迭代优化\n- 时间紧迫：优先级排序、自动化流程、分步实施"
+          }
+        ];
+      }
+    }
+    
     // 课程8: 商业数据分析
     if (id === '8') {
       if (lessonId === '1') {
@@ -276,8 +405,8 @@ const LessonDetail: React.FC = () => {
   useEffect(() => {
     if (currentQuestion) {
       // 只在第一次加载时设置代码，避免后续重置
-      if (code === '') {
-        setCode(currentQuestion.template);
+      if (code === '' && (currentQuestion as any).template) {
+        setCode((currentQuestion as any).template);
       }
       // 延迟聚焦，确保DOM已更新
       setTimeout(() => {
@@ -372,6 +501,7 @@ const LessonDetail: React.FC = () => {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setOutput('');
       setShowAnswer(false);
+      setShowTextAnswer(false);
     }
   };
 
@@ -381,6 +511,7 @@ const LessonDetail: React.FC = () => {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
       setOutput('');
       setShowAnswer(false);
+      setShowTextAnswer(false);
     }
   };
 
@@ -451,93 +582,122 @@ const LessonDetail: React.FC = () => {
                   </div>
                 </div>
 
-                {/* 代码编辑器和运行结果并排布局 */}
-                <div className="flex flex-col md:flex-row gap-4 mb-4">
-                  {/* 代码编辑器 */}
-                  <div className="flex-1">
-                    <div className="flex justify-between items-center mb-2">
-                      <div className="flex items-center">
-                        <Code className="h-5 w-5 text-gray-500 mr-2" />
-                        <span className="text-sm font-medium text-gray-700">Python 编辑器</span>
-                      </div>
-                      <div className="flex space-x-2">
-                        <button 
-                          onClick={copyCode}
-                          className="flex items-center px-2 py-1 text-xs text-gray-600 hover:text-gray-900"
-                        >
-                          {copied ? <Check className="h-4 w-4 mr-1" /> : <Copy className="h-4 w-4 mr-1" />}
-                          {copied ? '已复制' : '复制'}
-                        </button>
-                        <button 
-                          onClick={resetCode}
-                          className="flex items-center px-2 py-1 text-xs text-gray-600 hover:text-gray-900"
-                        >
-                          <RotateCcw className="h-4 w-4 mr-1" />
-                          重置
-                        </button>
-                        <button 
-                          onClick={toggleAnswer}
-                          className="flex items-center px-2 py-1 text-xs text-gray-600 hover:text-gray-900"
-                        >
-                          <Code className="h-4 w-4 mr-1" />
-                          {showAnswer ? '隐藏答案' : '答案'}
-                        </button>
+                {/* 根据练习类型显示不同的界面 */}
+                {currentQuestion.type === 'text' ? (
+                  /* 文字习题 */
+                  <div className="mb-4">
+                    <div className="bg-gray-50 border border-gray-200 rounded-md p-6 mb-4">
+                      <div className="prose max-w-none">
+                        {currentQuestion.question.split('\n').map((line: string, index: number) => (
+                          <p key={index} className="mb-2">{line}</p>
+                        ))}
                       </div>
                     </div>
-                    <div className="border border-gray-300 rounded-md">
-                      <div className="bg-gray-100 px-4 py-2 border-b border-gray-300 flex items-center justify-between">
-                        <div className="flex space-x-2">
-                          <div className="h-3 w-3 rounded-full bg-red-500"></div>
-                          <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
-                          <div className="h-3 w-3 rounded-full bg-green-500"></div>
+                    <button
+                      onClick={() => setShowTextAnswer(!showTextAnswer)}
+                      className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm font-medium transition-colors"
+                    >
+                      {showTextAnswer ? '隐藏答案' : '显示答案'}
+                    </button>
+                    {showTextAnswer && (
+                      <div className="mt-4 bg-green-50 border-l-4 border-green-500 p-4 rounded-md">
+                        <div className="prose max-w-none text-green-800">
+                          {currentQuestion.answer.split('\n').map((line: string, index: number) => (
+                            <p key={index} className="mb-2">{line}</p>
+                          ))}
                         </div>
-                        <div className="flex items-center space-x-2">
-                          <span className="text-xs text-gray-600">Python 3</span>
-                          <button
-                            onClick={runCode}
-                            disabled={isRunning}
-                            className="flex items-center px-3 py-1 bg-green-600 hover:bg-green-700 text-white rounded-md text-xs font-medium transition-colors"
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  /* 代码练习 */
+                  <div className="flex flex-col md:flex-row gap-4 mb-4">
+                    {/* 代码编辑器 */}
+                    <div className="flex-1">
+                      <div className="flex justify-between items-center mb-2">
+                        <div className="flex items-center">
+                          <Code className="h-5 w-5 text-gray-500 mr-2" />
+                          <span className="text-sm font-medium text-gray-700">Python 编辑器</span>
+                        </div>
+                        <div className="flex space-x-2">
+                          <button 
+                            onClick={copyCode}
+                            className="flex items-center px-2 py-1 text-xs text-gray-600 hover:text-gray-900"
                           >
-                            {isRunning ? (
-                              <>
-                                <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-1"></div>
-                                运行中...
-                              </>
-                            ) : (
-                              <>
-                                <Play className="h-3 w-3 mr-1" />
-                                运行
-                              </>
-                            )}
+                            {copied ? <Check className="h-4 w-4 mr-1" /> : <Copy className="h-4 w-4 mr-1" />}
+                            {copied ? '已复制' : '复制'}
+                          </button>
+                          <button 
+                            onClick={resetCode}
+                            className="flex items-center px-2 py-1 text-xs text-gray-600 hover:text-gray-900"
+                          >
+                            <RotateCcw className="h-4 w-4 mr-1" />
+                            重置
+                          </button>
+                          <button 
+                            onClick={toggleAnswer}
+                            className="flex items-center px-2 py-1 text-xs text-gray-600 hover:text-gray-900"
+                          >
+                            <Code className="h-4 w-4 mr-1" />
+                            {showAnswer ? '隐藏答案' : '答案'}
                           </button>
                         </div>
                       </div>
-                      <textarea
-                        ref={codeEditorRef}
-                        value={code}
-                        onChange={(e) => {
-                          const newValue = e.target.value;
-                          console.log('Input changed to:', newValue);
-                          setCode(newValue);
-                        }}
-                        className="w-full p-4 text-gray-800 font-mono text-sm min-h-[300px] resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        spellCheck={false}
-                        autoFocus
-                      />
+                      <div className="border border-gray-300 rounded-md">
+                        <div className="bg-gray-100 px-4 py-2 border-b border-gray-300 flex items-center justify-between">
+                          <div className="flex space-x-2">
+                            <div className="h-3 w-3 rounded-full bg-red-500"></div>
+                            <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
+                            <div className="h-3 w-3 rounded-full bg-green-500"></div>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="text-xs text-gray-600">Python 3</span>
+                            <button
+                              onClick={runCode}
+                              disabled={isRunning}
+                              className="flex items-center px-3 py-1 bg-green-600 hover:bg-green-700 text-white rounded-md text-xs font-medium transition-colors"
+                            >
+                              {isRunning ? (
+                                <>
+                                  <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-1"></div>
+                                  运行中...
+                                </>
+                              ) : (
+                                <>
+                                  <Play className="h-3 w-3 mr-1" />
+                                  运行
+                                </>
+                              )}
+                            </button>
+                          </div>
+                        </div>
+                        <textarea
+                          ref={codeEditorRef}
+                          value={code}
+                          onChange={(e) => {
+                            const newValue = e.target.value;
+                            console.log('Input changed to:', newValue);
+                            setCode(newValue);
+                          }}
+                          className="w-full p-4 text-gray-800 font-mono text-sm min-h-[300px] resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          spellCheck={false}
+                          autoFocus
+                        />
+                      </div>
+                    </div>
+                    
+                    {/* 运行结果 */}
+                    <div className="flex-1">
+                      <div className="flex items-center mb-2">
+                        <Terminal className="h-5 w-5 text-gray-500 mr-2" />
+                        <span className="text-sm font-medium text-gray-700">运行结果</span>
+                      </div>
+                      <div className="bg-gray-50 border border-gray-200 rounded-md p-4 min-h-[300px] font-mono text-sm overflow-auto">
+                        {output || 'Python环境已就绪！开始编写代码吧。'}
+                      </div>
                     </div>
                   </div>
-                  
-                  {/* 运行结果 */}
-                  <div className="flex-1">
-                    <div className="flex items-center mb-2">
-                      <Terminal className="h-5 w-5 text-gray-500 mr-2" />
-                      <span className="text-sm font-medium text-gray-700">运行结果</span>
-                    </div>
-                    <div className="bg-gray-50 border border-gray-200 rounded-md p-4 min-h-[300px] font-mono text-sm overflow-auto">
-                      {output || 'Python环境已就绪！开始编写代码吧。'}
-                    </div>
-                  </div>
-                </div>
+                )}
 
                 {/* 导航按钮 */}
                 <div className="flex justify-between">
