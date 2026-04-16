@@ -86,6 +86,63 @@ const LessonDetail: React.FC = () => {
             difficulty: "简单"
           }
         ];
+      } else if (lessonId === '3') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习1：函数定义和调用",
+            description: "定义一个函数并调用它",
+            template: "# 函数定义和调用\n\n# TODO: 定义一个计算阶乘的函数\n# def factorial(n):\n#     pass\n\n# 调用函数并打印结果\nprint('5的阶乘:', )\n",
+            answer: "# 函数定义和调用\n\n# 定义一个计算阶乘的函数\ndef factorial(n):\n    if n == 0 or n == 1:\n        return 1\n    else:\n        return n * factorial(n-1)\n\n# 调用函数并打印结果\nprint('5的阶乘:', factorial(5))\nprint('10的阶乘:', factorial(10))\n",
+            difficulty: "简单"
+          },
+          {
+            id: 2,
+            type: "text",
+            title: "练习2：函数和模块",
+            description: "回答关于函数和模块的问题",
+            difficulty: "简单",
+            question: "1. 什么是函数？函数的优点是什么？\n\n2. 什么是模块？如何导入和使用模块？\n\n3. 什么是作用域？Python中的作用域规则是什么？",
+            answer: "1. 函数是一段可重用的代码块，用于执行特定的任务。函数的优点：代码重用、模块化、可维护性、可读性。\n\n2. 模块是一个包含Python定义和语句的文件。导入模块的方法：import module_name 或 from module_name import function_name。\n\n3. 作用域是变量可访问的范围。Python中的作用域规则：LEGB规则（Local, Enclosing, Global, Built-in）。"
+          }
+        ];
+      } else if (lessonId === '4') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习1：NumPy数组操作",
+            description: "学习NumPy数组的基本操作",
+            template: "# NumPy数组操作\nimport numpy as np\n\n# 创建一个一维数组\narr = np.array([1, 2, 3, 4, 5])\nprint('原始数组:', arr)\n\n# TODO: 计算数组的和\nprint('数组和:', )\n\n# TODO: 计算数组的平均值\nprint('数组平均值:', )\n\n# TODO: 创建一个2x3的二维数组\n# 2d_arr = \nprint('二维数组:')\n",
+            answer: "# NumPy数组操作\nimport numpy as np\n\n# 创建一个一维数组\narr = np.array([1, 2, 3, 4, 5])\nprint('原始数组:', arr)\n\n# 计算数组的和\nprint('数组和:', np.sum(arr))\n\n# 计算数组的平均值\nprint('数组平均值:', np.mean(arr))\n\n# 创建一个2x3的二维数组\n2d_arr = np.array([[1, 2, 3], [4, 5, 6]])\nprint('二维数组:')\nprint(2d_arr)\n\n# 访问二维数组元素\nprint('第二行第二列元素:', 2d_arr[1, 1])\n",
+            difficulty: "简单"
+          }
+        ];
+      } else if (lessonId === '5') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习1：Pandas DataFrame操作",
+            description: "学习Pandas DataFrame的基本操作",
+            template: "# Pandas DataFrame操作\nimport pandas as pd\n\n# 创建一个DataFrame\ndata = {'name': ['张三', '李四', '王五'], 'age': [20, 25, 30], 'score': [85, 90, 95]}\ndf = pd.DataFrame(data)\nprint('原始DataFrame:')\nprint(df)\n\n# TODO: 查看DataFrame的前2行\nprint('\n前2行:')\n\n# TODO: 计算score列的平均值\nprint('\n平均分数:', )\n",
+            answer: "# Pandas DataFrame操作\nimport pandas as pd\n\n# 创建一个DataFrame\ndata = {'name': ['张三', '李四', '王五'], 'age': [20, 25, 30], 'score': [85, 90, 95]}\ndf = pd.DataFrame(data)\nprint('原始DataFrame:')\nprint(df)\n\n# 查看DataFrame的前2行\nprint('\n前2行:')\nprint(df.head(2))\n\n# 计算score列的平均值\nprint('\n平均分数:', df['score'].mean())\n\n# 按分数排序\nprint('\n按分数排序:')\nprint(df.sort_values('score', ascending=False))\n",
+            difficulty: "简单"
+          }
+        ];
+      } else if (lessonId === '6') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习1：数据可视化",
+            description: "学习使用Matplotlib创建简单的图表",
+            template: "# 数据可视化\nimport matplotlib.pyplot as plt\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 数据\nx = [1, 2, 3, 4, 5]\ny = [10, 20, 15, 25, 30]\n\n# TODO: 创建折线图\n# plt.plot(x, y)\n# plt.title('折线图')\n# plt.xlabel('X轴')\n# plt.ylabel('Y轴')\n# plt.show()\n\nprint('图表已创建')\n",
+            answer: "# 数据可视化\nimport matplotlib.pyplot as plt\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 数据\nx = [1, 2, 3, 4, 5]\ny = [10, 20, 15, 25, 30]\n\n# 创建折线图\nplt.plot(x, y, marker='o', linestyle='-', color='b')\nplt.title('折线图')\nplt.xlabel('X轴')\nplt.ylabel('Y轴')\nplt.grid(True)\nplt.tight_layout()\n\nprint('图表已创建')\nprint('数据点:', list(zip(x, y)))\n",
+            difficulty: "简单"
+          }
+        ];
       } else if (lessonId === '7') {
         return [
           {
@@ -96,6 +153,27 @@ const LessonDetail: React.FC = () => {
             template: "# 商业数据分析案例：数据概览和基本统计\nimport pandas as pd\nimport numpy as np\n\n# 模拟电商销售数据\ndata = {\n    '订单ID': range(1, 51),\n    '日期': pd.date_range('2023-01-01', periods=50),\n    '产品类别': np.random.choice(['电子产品', '服装', '家居用品', '食品'], 50),\n    '销售额': np.random.randint(100, 1000, 50),\n    '客户年龄': np.random.randint(18, 65, 50)\n}\n\ndf = pd.DataFrame(data)\n\n# TODO: 1. 查看数据前5行\nprint('数据前5行:')\n\n# TODO: 2. 查看数据基本统计信息\nprint('\n数据基本统计:')\n\n# TODO: 3. 计算总销售额和平均订单金额\nprint('\n总销售额:')\nprint('平均订单金额:')\n",
             answer: "# 商业数据分析案例：数据概览和基本统计\nimport pandas as pd\nimport numpy as np\n\n# 模拟电商销售数据\ndata = {\n    '订单ID': range(1, 51),\n    '日期': pd.date_range('2023-01-01', periods=50),\n    '产品类别': np.random.choice(['电子产品', '服装', '家居用品', '食品'], 50),\n    '销售额': np.random.randint(100, 1000, 50),\n    '客户年龄': np.random.randint(18, 65, 50)\n}\n\ndf = pd.DataFrame(data)\n\n# 1. 查看数据前5行\nprint('数据前5行:')\nprint(df.head())\n\n# 2. 查看数据基本统计信息\nprint('\n数据基本统计:')\nprint(df.describe())\n\n# 3. 计算总销售额和平均订单金额\nprint('\n总销售额:', df['销售额'].sum())\nprint('平均订单金额:', df['销售额'].mean().round(2))",
             difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '8') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习1：课程总结",
+            description: "回答关于课程内容的问题",
+            difficulty: "简单",
+            question: "1. 本课程主要学习了哪些内容？\n\n2. 数据分析的基本流程是什么？\n\n3. 请列举至少3个Python数据分析的常用库。",
+            answer: "1. 本课程主要学习了：Python基础语法、NumPy和Pandas库、数据可视化、商业数据分析等内容。\n\n2. 数据分析的基本流程：问题定义、数据收集、数据清洗、数据探索、数据建模、结果分析、报告生成。\n\n3. Python数据分析的常用库：NumPy（数值计算）、Pandas（数据处理）、Matplotlib（数据可视化）。"
+          },
+          {
+            id: 2,
+            type: "code",
+            title: "练习2：项目实践",
+            description: "完成一个简单的数据分析项目",
+            template: "# 项目实践：销售数据分析\nimport pandas as pd\nimport numpy as np\n\n# 模拟销售数据\ndata = {\n    '产品类别': ['电子产品', '服装', '家居用品', '食品'],\n    '销售额': [10000, 8000, 6000, 4000],\n    '销量': [100, 200, 150, 250]\n}\n\ndf = pd.DataFrame(data)\n\nprint('销售数据:')\nprint(df)\n\n# TODO: 计算每个产品类别的客单价\nprint('\n客单价:')\n",
+            answer: "# 项目实践：销售数据分析\nimport pandas as pd\nimport numpy as np\n\n# 模拟销售数据\ndata = {\n    '产品类别': ['电子产品', '服装', '家居用品', '食品'],\n    '销售额': [10000, 8000, 6000, 4000],\n    '销量': [100, 200, 150, 250]\n}\n\ndf = pd.DataFrame(data)\n\nprint('销售数据:')\nprint(df)\n\n# 计算每个产品类别的客单价\ndf['客单价'] = df['销售额'] / df['销量']\nprint('\n客单价:')\nprint(df)\n\n# 按销售额排序\nprint('\n按销售额排序:')\nprint(df.sort_values('销售额', ascending=False))\n",
+            difficulty: "简单"
           }
         ];
       }
@@ -396,6 +474,175 @@ const LessonDetail: React.FC = () => {
       }
     }
     
+    // 课程4: 网络爬虫进阶
+    if (id === '4') {
+      if (lessonId === '1') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习1：网络爬虫进阶概述",
+            description: "回答关于网络爬虫进阶的问题",
+            difficulty: "简单",
+            question: "1. 网络爬虫进阶涉及哪些内容？\n\n2. 为什么需要使用多线程和多进程进行爬虫？\n\n3. 如何设计一个高效的网络爬虫系统？",
+            answer: "1. 网络爬虫进阶涉及：多线程/多进程爬虫、异步爬虫、分布式爬虫、反爬策略应对、爬虫框架使用、数据存储优化等。\n\n2. 使用多线程和多进程的原因：提高爬取效率、充分利用系统资源、减少等待时间、处理大规模数据等。\n\n3. 设计高效爬虫系统的要点：合理的URL管理、有效的去重机制、智能的请求调度、灵活的反爬策略、健壮的错误处理、高效的数据存储等。"
+          }
+        ];
+      } else if (lessonId === '2') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习2：多线程爬虫",
+            description: "学习使用多线程进行爬虫",
+            template: "# 多线程爬虫练习\nimport threading\nimport requests\nfrom bs4 import BeautifulSoup\nimport time\n\n# 待爬取的URL列表\nurls = [\n    'https://www.baidu.com',\n    'https://www.google.com',\n    'https://www.bing.com',\n    'https://www.360.com',\n    'https://www.sogou.com'\n]\n\n# 存储结果\nresults = []\n\n# 爬取函数\ndef crawl(url):\n    try:\n        # 发送请求\n        response = requests.get(url, timeout=5)\n        # 解析HTML\n        soup = BeautifulSoup(response.text, 'html.parser')\n        # 提取标题\n        title = soup.title.string if soup.title else '无标题'\n        results.append((url, title))\n        print(f'爬取 {url} 成功，标题: {title}')\n    except Exception as e:\n        print(f'爬取 {url} 失败: {e}')\n\n# 记录开始时间\nstart_time = time.time()\n\n# TODO: 创建并启动多线程\n\n# 等待所有线程完成\n\n# 记录结束时间\nend_time = time.time()\n\nprint(f'\n爬取完成，耗时: {end_time - start_time:.2f} 秒')\nprint('\n爬取结果:')\nfor url, title in results:\n    print(f'{url}: {title}')\n",
+            answer: "# 多线程爬虫练习\nimport threading\nimport requests\nfrom bs4 import BeautifulSoup\nimport time\n\n# 待爬取的URL列表\nurls = [\n    'https://www.baidu.com',\n    'https://www.google.com',\n    'https://www.bing.com',\n    'https://www.360.com',\n    'https://www.sogou.com'\n]\n\n# 存储结果\nresults = []\n\n# 爬取函数\ndef crawl(url):\n    try:\n        # 发送请求\n        response = requests.get(url, timeout=5)\n        # 解析HTML\n        soup = BeautifulSoup(response.text, 'html.parser')\n        # 提取标题\n        title = soup.title.string if soup.title else '无标题'\n        results.append((url, title))\n        print(f'爬取 {url} 成功，标题: {title}')\n    except Exception as e:\n        print(f'爬取 {url} 失败: {e}')\n\n# 记录开始时间\nstart_time = time.time()\n\n# 创建并启动多线程\nthreads = []\nfor url in urls:\n    thread = threading.Thread(target=crawl, args=(url,))\n    threads.append(thread)\n    thread.start()\n\n# 等待所有线程完成\nfor thread in threads:\n    thread.join()\n\n# 记录结束时间\nend_time = time.time()\n\nprint(f'\n爬取完成，耗时: {end_time - start_time:.2f} 秒')\nprint('\n爬取结果:')\nfor url, title in results:\n    print(f'{url}: {title}')\n\nprint('\n多线程爬虫练习完成!')",
+            difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '3') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习3：异步爬虫",
+            description: "学习使用asyncio和aiohttp进行异步爬虫",
+            template: "# 异步爬虫练习\nimport asyncio\nimport aiohttp\nfrom bs4 import BeautifulSoup\nimport time\n\n# 待爬取的URL列表\nurls = [\n    'https://www.baidu.com',\n    'https://www.google.com',\n    'https://www.bing.com',\n    'https://www.360.com',\n    'https://www.sogou.com'\n]\n\n# 存储结果\nresults = []\n\n# 异步爬取函数\nasync def crawl(url, session):\n    try:\n        async with session.get(url, timeout=5) as response:\n            html = await response.text()\n            soup = BeautifulSoup(html, 'html.parser')\n            title = soup.title.string if soup.title else '无标题'\n            results.append((url, title))\n            print(f'爬取 {url} 成功，标题: {title}')\n    except Exception as e:\n        print(f'爬取 {url} 失败: {e}')\n\n# 主函数\nasync def main():\n    async with aiohttp.ClientSession() as session:\n        # TODO: 创建任务并执行\n        pass\n\n# 记录开始时间\nstart_time = time.time()\n\n# 运行异步函数\nasyncio.run(main())\n\n# 记录结束时间\nend_time = time.time()\n\nprint(f'\n爬取完成，耗时: {end_time - start_time:.2f} 秒')\nprint('\n爬取结果:')\nfor url, title in results:\n    print(f'{url}: {title}')\n",
+            answer: "# 异步爬虫练习\nimport asyncio\nimport aiohttp\nfrom bs4 import BeautifulSoup\nimport time\n\n# 待爬取的URL列表\nurls = [\n    'https://www.baidu.com',\n    'https://www.google.com',\n    'https://www.bing.com',\n    'https://www.360.com',\n    'https://www.sogou.com'\n]\n\n# 存储结果\nresults = []\n\n# 异步爬取函数\nasync def crawl(url, session):\n    try:\n        async with session.get(url, timeout=5) as response:\n            html = await response.text()\n            soup = BeautifulSoup(html, 'html.parser')\n            title = soup.title.string if soup.title else '无标题'\n            results.append((url, title))\n            print(f'爬取 {url} 成功，标题: {title}')\n    except Exception as e:\n        print(f'爬取 {url} 失败: {e}')\n\n# 主函数\nasync def main():\n    async with aiohttp.ClientSession() as session:\n        # 创建任务并执行\n        tasks = [crawl(url, session) for url in urls]\n        await asyncio.gather(*tasks)\n\n# 记录开始时间\nstart_time = time.time()\n\n# 运行异步函数\nasyncio.run(main())\n\n# 记录结束时间\nend_time = time.time()\n\nprint(f'\n爬取完成，耗时: {end_time - start_time:.2f} 秒')\nprint('\n爬取结果:')\nfor url, title in results:\n    print(f'{url}: {title}')\n\nprint('\n异步爬虫练习完成!')",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
+            type: "text",
+            title: "练习3：异步爬虫优势",
+            description: "回答关于异步爬虫的问题",
+            difficulty: "简单",
+            question: "1. 异步爬虫相比多线程爬虫有什么优势？\n\n2. 在什么情况下应该使用异步爬虫？\n\n3. 异步爬虫的主要挑战是什么？",
+            answer: "1. 异步爬虫的优势：更高的并发性能、更低的资源消耗、更好的扩展性、更简洁的代码结构、避免线程切换开销等。\n\n2. 适合使用异步爬虫的情况：IO密集型任务、需要高并发、网络请求频繁、内存资源有限等。\n\n3. 异步爬虫的主要挑战：编程复杂度增加、错误处理更复杂、需要学习异步编程模式、部分库可能不支持异步等。"
+          }
+        ];
+      } else if (lessonId === '4') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习4：Scrapy框架使用",
+            description: "回答关于Scrapy框架的问题",
+            difficulty: "简单",
+            question: "1. Scrapy框架的主要组件有哪些？\n\n2. Scrapy的工作流程是什么？\n\n3. 如何使用Scrapy创建一个爬虫项目？",
+            answer: "1. Scrapy框架的主要组件：Spider（爬虫）、Item（数据模型）、Pipeline（数据处理管道）、Downloader（下载器）、Scheduler（调度器）、Engine（引擎）等。\n\n2. Scrapy的工作流程：Spider发送初始请求、Scheduler调度请求、Downloader下载页面、Spider解析响应、Pipeline处理数据、Scheduler调度新的请求。\n\n3. 创建Scrapy项目的步骤：使用scrapy startproject命令创建项目、创建Spider、定义Item、配置Pipeline、运行爬虫等。"
+          }
+        ];
+      } else if (lessonId === '5') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习5：反爬策略应对",
+            description: "回答关于反爬策略的问题",
+            difficulty: "中等",
+            question: "1. 常见的反爬机制有哪些？\n\n2. 如何应对IP限制？\n\n3. 如何应对验证码？\n\n4. 如何应对动态加载？",
+            answer: "1. 常见的反爬机制：IP限制、User-Agent检测、验证码、动态加载、登录验证、行为分析、蜜罐陷阱等。\n\n2. 应对IP限制的方法：使用代理IP、控制请求频率、分布式爬取、使用爬虫池等。\n\n3. 应对验证码的方法：手动识别、OCR技术、第三方打码服务、模拟登录保持会话等。\n\n4. 应对动态加载的方法：分析API、使用Selenium、使用Pyppeteer、分析JavaScript代码等。"
+          }
+        ];
+      } else if (lessonId === '6') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习6：分布式爬虫",
+            description: "回答关于分布式爬虫的问题",
+            difficulty: "中等",
+            question: "1. 什么是分布式爬虫？它有什么优势？\n\n2. 分布式爬虫的基本架构是什么？\n\n3. 常见的分布式爬虫框架有哪些？",
+            answer: "1. 分布式爬虫是将爬虫任务分散到多个节点上执行的系统。优势：更高的爬取速度、更大的爬取规模、更好的容错性、更高的可靠性等。\n\n2. 分布式爬虫的基本架构：任务调度中心、多个爬虫节点、数据存储中心、通信机制等。\n\n3. 常见的分布式爬虫框架：Scrapy-Redis、PySpider、Crawlab、Heritrix等。"
+          }
+        ];
+      } else if (lessonId === '7') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习7：爬虫数据存储",
+            description: "学习将爬虫数据存储到MongoDB",
+            template: `# 爬虫数据存储练习
+import pymongo
+import json
+
+# 模拟爬取的数据
+data = [
+    {'title': '产品1', 'price': 100, 'category': '电子产品'},
+    {'title': '产品2', 'price': 200, 'category': '服装'},
+    {'title': '产品3', 'price': 300, 'category': '家居用品'}
+]
+
+# TODO: 连接MongoDB
+# client = pymongo.MongoClient('mongodb://localhost:27017/')
+# db = client['spider_db']
+# collection = db['products']
+
+# TODO: 插入数据
+# collection.insert_many(data)
+
+# TODO: 查询数据
+# for item in collection.find():
+#     print(item)
+
+print('数据存储练习完成!')
+`,
+            answer: `# 爬虫数据存储练习
+import pymongo
+import json
+
+# 模拟爬取的数据
+data = [
+    {'title': '产品1', 'price': 100, 'category': '电子产品'},
+    {'title': '产品2', 'price': 200, 'category': '服装'},
+    {'title': '产品3', 'price': 300, 'category': '家居用品'}
+]
+
+print('爬虫数据存储练习完成!')
+print('在实际环境中，以下代码将连接MongoDB并存储数据:')
+print('')
+print('import pymongo')
+print('# 连接MongoDB')
+print('client = pymongo.MongoClient(\'mongodb://localhost:27017/\')')
+print('db = client[\'spider_db\']')
+print('collection = db[\'products\']')
+print('')
+print('# 插入数据')
+print('collection.insert_many(data)')
+print('')
+print('# 查询数据')
+print('for item in collection.find():')
+print('    print(item)')
+`,
+            difficulty: "中等"
+          },
+          {
+            id: 2,
+            type: "text",
+            title: "练习7：数据存储方案",
+            description: "回答关于爬虫数据存储的问题",
+            difficulty: "简单",
+            question: "1. 爬虫数据存储的常用方案有哪些？\n\n2. 如何选择合适的数据存储方案？\n\n3. 大规模爬虫数据存储的挑战是什么？",
+            answer: "1. 常用的数据存储方案：文件存储（CSV、JSON、Excel）、关系型数据库（MySQL、PostgreSQL）、NoSQL数据库（MongoDB、Redis）、搜索引擎（Elasticsearch）等。\n\n2. 选择存储方案的因素：数据量、数据结构、查询需求、性能要求、成本、可扩展性等。\n\n3. 大规模爬虫数据存储的挑战：存储容量、写入速度、查询性能、数据一致性、数据备份、成本控制等。"
+          }
+        ];
+      } else if (lessonId === '8') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习8：爬虫项目实战",
+            description: "回答关于爬虫项目实战的问题",
+            difficulty: "中等",
+            question: "1. 一个完整的爬虫项目包括哪些步骤？\n\n2. 如何评估爬虫的性能和效率？\n\n3. 爬虫项目的维护和监控要点是什么？",
+            answer: "1. 完整的爬虫项目步骤：需求分析、目标网站分析、爬虫设计、开发与测试、部署与运行、数据处理与存储、监控与维护等。\n\n2. 评估爬虫性能的指标：爬取速度、成功率、资源消耗、稳定性、反爬能力等。\n\n3. 爬虫项目的维护和监控要点：定期检查爬虫状态、监控IP使用情况、更新反爬策略、处理异常情况、数据质量监控、性能优化等。"
+          }
+        ];
+      }
+    }
+    
     // 课程8: 商业数据分析
     if (id === '8') {
       if (lessonId === '1') {
@@ -420,6 +667,39 @@ const LessonDetail: React.FC = () => {
             template: "# 商业数据分析案例：促销活动效果分析\nimport pandas as pd\nimport numpy as np\n\n# 模拟零售企业数据\ndata = {\n    '日期': pd.date_range('2023-01-01', periods=100),\n    '销售额': np.random.randint(5000, 20000, 100),\n    '客流量': np.random.randint(100, 500, 100),\n    '促销活动': np.random.choice(['无', '节日促销', '会员日', '清仓活动'], 100, p=[0.6, 0.15, 0.15, 0.1])\n}\n\ndf = pd.DataFrame(data)\n\n# TODO: 1. 查看不同促销活动的平均销售额\nprint('不同促销活动的平均销售额:')\n\n# TODO: 2. 查看不同促销活动的平均客流量\nprint('\n不同促销活动的平均客流量:')\n",
             answer: "# 商业数据分析案例：促销活动效果分析\nimport pandas as pd\nimport numpy as np\n\n# 模拟零售企业数据\ndata = {\n    '日期': pd.date_range('2023-01-01', periods=100),\n    '销售额': np.random.randint(5000, 20000, 100),\n    '客流量': np.random.randint(100, 500, 100),\n    '促销活动': np.random.choice(['无', '节日促销', '会员日', '清仓活动'], 100, p=[0.6, 0.15, 0.15, 0.1])\n}\n\ndf = pd.DataFrame(data)\n\n# 1. 查看不同促销活动的平均销售额\nprint('不同促销活动的平均销售额:')\npromotion_sales = df.groupby('促销活动')['销售额'].mean()\nprint(promotion_sales.round(2))\n\n# 2. 查看不同促销活动的平均客流量\nprint('\n不同促销活动的平均客流量:')\npromotion_customers = df.groupby('促销活动')['客流量'].mean()\nprint(promotion_customers.round(2))",
             difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '6') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习2：商业报告撰写",
+            description: "学习如何生成商业分析报告",
+            template: "# 商业报告撰写练习\nimport pandas as pd\nimport numpy as np\n\n# 模拟销售数据\ndata = {\n    '月份': ['1月', '2月', '3月', '4月', '5月', '6月'],\n    '销售额': [120000, 130000, 110000, 140000, 150000, 160000],\n    '客户数': [500, 520, 480, 550, 580, 600],\n    '客单价': [240, 250, 229, 255, 259, 267]\n}\n\ndf = pd.DataFrame(data)\n\nprint('销售数据:')\nprint(df)\n\n# 1. 计算关键指标\n# TODO: 计算总销售额、平均销售额、增长率\n# total_sales = df['销售额'].sum()\n# avg_sales = df['销售额'].mean()\n# growth_rate = ((df['销售额'].iloc[-1] - df['销售额'].iloc[0]) / df['销售额'].iloc[0] * 100).round(2)\n\n# 2. 生成报告\n# TODO: 生成简单的商业报告\nprint('\n商业分析报告')\nprint('=' * 50)\nprint('1. 执行摘要')\nprint('2. 数据概览')\nprint('3. 分析发现')\nprint('4. 结论与建议')\n",
+            answer: "# 商业报告撰写练习\nimport pandas as pd\nimport numpy as np\n\n# 模拟销售数据\ndata = {\n    '月份': ['1月', '2月', '3月', '4月', '5月', '6月'],\n    '销售额': [120000, 130000, 110000, 140000, 150000, 160000],\n    '客户数': [500, 520, 480, 550, 580, 600],\n    '客单价': [240, 250, 229, 255, 259, 267]\n}\n\ndf = pd.DataFrame(data)\n\nprint('销售数据:')\nprint(df)\n\n# 1. 计算关键指标\ntotal_sales = df['销售额'].sum()\navg_sales = df['销售额'].mean()\ngrowth_rate = ((df['销售额'].iloc[-1] - df['销售额'].iloc[0]) / df['销售额'].iloc[0] * 100).round(2)\navg_customers = df['客户数'].mean()\navg_order_value = df['客单价'].mean()\n\n# 2. 生成报告\nprint('\n商业分析报告')\nprint('=' * 50)\nprint('1. 执行摘要')\nprint(f'- 半年总销售额: {total_sales}')\nprint(f'- 月平均销售额: {avg_sales:.2f}')\nprint(f'- 销售额增长率: {growth_rate}%')\nprint(f'- 月平均客户数: {avg_customers:.0f}')\nprint(f'- 平均客单价: {avg_order_value:.2f}')\n\nprint('\n2. 数据概览')\nprint(df)\n\nprint('\n3. 分析发现')\nprint('- 销售额呈上升趋势，从1月的12万增长到6月的16万')\nprint('- 客户数稳步增长，从500增长到600')\nprint('- 客单价持续提高，从240提高到267')\nprint('- 3月销售额有所下降，需要进一步分析原因')\n\nprint('\n4. 结论与建议')\nprint('结论:')\nprint('- 业务整体呈现良好增长态势')\nprint('- 客户获取和客单价提升策略有效')\n\nprint('建议:')\nprint('- 分析3月销售额下降的原因，避免类似情况再次发生')\nprint('- 继续优化客户获取策略，提高客户转化率')\nprint('- 探索提高客单价的方法，如交叉销售、 upselling等')\nprint('- 建立月度销售预测模型，提前规划库存和营销活动')\n",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
+            type: "text",
+            title: "练习2：商业报告撰写",
+            description: "回答关于商业报告撰写的问题",
+            difficulty: "中等",
+            question: "1. 商业报告的主要类型有哪些？\n\n2. 商业报告的基本结构是什么？\n\n3. 商业报告撰写的技巧有哪些？",
+            answer: "1. 商业报告的主要类型包括：\n   - 日常报告：定期汇报业务进展\n   - 定期报告：月度、季度、年度报告\n   - 专题报告：针对特定问题的分析报告\n   - 战略报告：长期规划和战略分析\n\n2. 商业报告的基本结构：\n   - 标题和摘要：报告的核心内容和结论\n   - 背景和目标：分析的背景和目的\n   - 数据和方法：使用的数据和分析方法\n   - 分析结果：详细的分析发现\n   - 结论和建议：基于分析的结论和行动建议\n   - 附录：支持性材料和详细数据\n\n3. 商业报告撰写的技巧：\n   - 清晰的结构：逻辑清晰，层次分明\n   - 简洁的语言：使用专业但易懂的语言\n   - 有效的可视化：使用图表直观展示数据\n   - 有说服力的论证：基于数据和逻辑\n   - 专业的格式：统一的格式和风格\n   - 针对性：根据读者需求定制内容"
+          }
+        ];
+      } else {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习：商业数据分析",
+            description: "回答关于商业数据分析的问题",
+            difficulty: "中等",
+            question: "1. 什么是商业数据分析？它的重要性是什么？\n\n2. 商业数据分析的基本流程是什么？\n\n3. 商业数据分析的主要工具和技术有哪些？",
+            answer: "1. 商业数据分析是指使用数据分析技术和方法，从商业数据中提取有价值的信息，为业务决策提供支持的过程。它的重要性在于：\n   - 帮助企业了解业务现状\n   - 识别业务机会和风险\n   - 优化业务流程\n   - 提高决策质量\n   - 增强竞争力\n\n2. 商业数据分析的基本流程：\n   - 问题定义：明确分析目标和问题\n   - 数据收集：获取相关数据\n   - 数据清洗：处理数据质量问题\n   - 数据探索：了解数据特征\n   - 数据分析：应用分析方法\n   - 结果呈现：展示分析结果\n   - 决策支持：基于分析结果制定决策\n\n3. 商业数据分析的主要工具和技术：\n   - Excel：基础数据分析和可视化\n   - Python：强大的数据分析库（Pandas、NumPy等）\n   - SQL：数据库查询和分析\n   - 商业智能工具：Tableau、Power BI等\n   - 统计分析：描述性统计、推断统计等\n   - 数据挖掘：聚类、分类、关联分析等"
           }
         ];
       }
@@ -516,7 +796,34 @@ const LessonDetail: React.FC = () => {
             answer: "1. 缺失值的类型包括：\n   - 完全随机缺失 (MCAR)：缺失与数据本身无关\n   - 随机缺失 (MAR)：缺失与已观测数据相关\n   - 非随机缺失 (MNAR)：缺失与未观测数据相关\n\n2. 缺失值处理方法包括：\n   - 删除法：删除包含缺失值的记录或变量\n   - 替换法：使用均值、中位数、众数等替换缺失值\n   - 插值法：线性插值、多项式插值、KNN插值等\n   - 模型法：使用回归、决策树等模型预测缺失值\n   - 多重插补：生成多个可能的缺失值估计\n\n3. 选择缺失值处理方法的考虑因素：\n   - 数据特性：数据类型、分布等\n   - 缺失率：缺失数据的比例\n   - 业务需求：分析目的和要求\n   - 后续分析方法：不同模型对缺失值的敏感性\n   - 计算资源：复杂方法的计算成本"
           }
         ];
+      } else {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习：数据质量评估与预处理",
+            description: "回答关于数据质量评估与预处理的问题",
+            difficulty: "简单",
+            question: "1. 数据预处理的主要步骤有哪些？\n\n2. 什么是数据标准化？为什么需要数据标准化？\n\n3. 请简述数据质量评估的重要性。",
+            answer: "1. 数据预处理的主要步骤：数据收集、数据清洗、数据转换、数据集成、数据标准化、特征工程。\n\n2. 数据标准化是将数据转换为均值为0、标准差为1的分布。需要数据标准化的原因：消除量纲影响、提高模型收敛速度、改善模型性能。\n\n3. 数据质量评估的重要性：确保数据准确性、提高分析结果可靠性、减少错误决策、降低数据处理成本、提升数据价值。"
+          }
+        ];
       }
+    }
+    
+    // 课程6: 数据可视化进阶
+    if (id === '6') {
+      return [
+        {
+          id: 1,
+          type: "text",
+          title: "练习1：数据可视化进阶",
+          description: "回答关于数据可视化进阶的问题",
+          difficulty: "中等",
+          question: "1. 什么是数据可视化？它的重要性是什么？\n\n2. 请列举至少5种常见的图表类型及其适用场景。\n\n3. 数据可视化的最佳实践有哪些？",
+          answer: "1. 数据可视化是将数据以图形或图表的形式展示的过程。重要性：直观展示数据、发现数据模式、便于决策、提高沟通效率。\n\n2. 常见的图表类型：\n   - 折线图：展示时间趋势\n   - 柱状图：比较不同类别数据\n   - 饼图：展示比例关系\n   - 散点图：展示两个变量的关系\n   - 热力图：展示数据密度\n   - 箱线图：展示数据分布\n\n3. 数据可视化的最佳实践：\n   - 选择合适的图表类型\n   - 保持简洁清晰\n   - 使用适当的颜色\n   - 添加标题和标签\n   - 避免图表垃圾\n   - 考虑受众需求"
+        }
+      ];
     }
     
     // 课程8: 商业数据分析
@@ -824,6 +1131,65 @@ const LessonDetail: React.FC = () => {
             difficulty: "中等",
             question: "1. 数据项目成功的关键因素是什么？\n\n2. 如何编写高质量的数据分析代码？",
             answer: "1. 数据项目成功的关键因素：明确的业务目标、数据质量、合适的方法、有效的沟通。\n\n2. 高质量数据分析代码的特点：可读性、可重复性、模块化、错误处理。"
+          }
+        ];
+      }
+    }
+    
+    // 课程9: 商业数据可视化与预测
+    if (id === '9') {
+      if (lessonId === '1') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习1：数据可视化基础",
+            description: "学习使用Matplotlib进行数据可视化",
+            template: "# 数据可视化基础练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [100000, 120000, 110000, 130000, 140000, 160000, 150000, 170000, 180000, 200000, 190000, 210000]\nprofits = [20000, 24000, 22000, 26000, 28000, 32000, 30000, 34000, 36000, 40000, 38000, 42000]\n\ndf = pd.DataFrame({'日期': dates, '销售额': sales, '利润': profits})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\nprint('销售数据:')\nprint(df)\n\n# 1. 创建销售额折线图\n# TODO: 创建折线图\n# plt.figure(figsize=(10, 6))\n# plt.plot(df['日期'], df['销售额'], marker='o', linestyle='-', color='b')\n# plt.title('2023年销售额趋势')\n# plt.xlabel('月份')\n# plt.ylabel('销售额')\n# plt.grid(True)\n# plt.tight_layout()\n# plt.show()\n\n# 2. 创建销售额和利润的双轴图\n# TODO: 创建双轴图\n",
+            answer: "# 数据可视化基础练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [100000, 120000, 110000, 130000, 140000, 160000, 150000, 170000, 180000, 200000, 190000, 210000]\nprofits = [20000, 24000, 22000, 26000, 28000, 32000, 30000, 34000, 36000, 40000, 38000, 42000]\n\ndf = pd.DataFrame({'日期': dates, '销售额': sales, '利润': profits})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\nprint('销售数据:')\nprint(df)\n\n# 1. 创建销售额折线图\nplt.figure(figsize=(10, 6))\nplt.plot(df['日期'], df['销售额'], marker='o', linestyle='-', color='b')\nplt.title('2023年销售额趋势')\nplt.xlabel('月份')\nplt.ylabel('销售额')\nplt.grid(True)\nplt.tight_layout()\nprint('销售额趋势图已创建')\n\n# 2. 创建销售额和利润的双轴图\nfig, ax1 = plt.subplots(figsize=(10, 6))\n\n# 销售额轴\nax1.set_xlabel('月份')\nax1.set_ylabel('销售额', color='b')\nax1.plot(df['日期'], df['销售额'], marker='o', linestyle='-', color='b')\nax1.tick_params(axis='y', labelcolor='b')\n\n# 利润轴\nax2 = ax1.twinx()\nax2.set_ylabel('利润', color='r')\nax2.plot(df['日期'], df['利润'], marker='s', linestyle='--', color='r')\nax2.tick_params(axis='y', labelcolor='r')\n\nplt.title('2023年销售额和利润趋势')\nplt.grid(True)\nplt.tight_layout()\nprint('销售额和利润双轴图已创建')\n\n# 3. 计算利润率\ndf['利润率'] = (df['利润'] / df['销售额'] * 100).round(2)\nprint('\n利润率数据:')\nprint(df[['日期', '利润率']])\n",
+            difficulty: "简单"
+          },
+          {
+            id: 2,
+            type: "text",
+            title: "练习1：数据可视化基础",
+            description: "回答关于数据可视化的问题",
+            difficulty: "简单",
+            question: "1. 数据可视化的基本原则有哪些？\n\n2. 常见的图表类型有哪些？请至少列举5种。\n\n3. 如何选择合适的图表类型？",
+            answer: "1. 数据可视化的基本原则包括：\n   - 准确性：正确反映数据\n   - 清晰性：易于理解\n   - 简洁性：避免不必要的元素\n   - 美观性：视觉吸引力\n   - 有效性：有效传达信息\n\n2. 常见的图表类型包括：\n   - 折线图：展示趋势变化\n   - 柱状图：比较不同类别的数据\n   - 饼图：展示构成比例\n   - 散点图：展示两个变量的关系\n   - 热力图：展示数据密度\n   - 箱线图：展示数据分布\n   - 雷达图：展示多维度数据\n\n3. 选择合适图表类型的考虑因素：\n   - 数据类型：数值型、分类型、时间序列等\n   - 分析目的：比较、趋势、分布、关系等\n   - 数据量：数据点的多少\n   - 受众：技术背景和需求\n   - 展示媒介：屏幕、纸张等"
+          }
+        ];
+      } else if (lessonId === '6') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习2：简单预测模型",
+            description: "学习使用移动平均法进行简单预测",
+            template: "# 简单预测模型练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [100000, 120000, 110000, 130000, 140000, 160000, 150000, 170000, 180000, 200000, 190000, 210000]\n\ndf = pd.DataFrame({'日期': dates, '销售额': sales})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\nprint('销售数据:')\nprint(df)\n\n# 1. 移动平均法预测\n# TODO: 计算3期和5期移动平均\n# df['3期移动平均'] = df['销售额'].rolling(window=3).mean()\n# df['5期移动平均'] = df['销售额'].rolling(window=5).mean()\n\n# 2. 预测下一期销售额\n# TODO: 计算预测值\n\n# 3. 评估预测效果\n# TODO: 计算预测误差\n",
+            answer: "# 简单预测模型练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [100000, 120000, 110000, 130000, 140000, 160000, 150000, 170000, 180000, 200000, 190000, 210000]\n\ndf = pd.DataFrame({'日期': dates, '销售额': sales})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\nprint('销售数据:')\nprint(df)\n\n# 1. 移动平均法预测\ndf['3期移动平均'] = df['销售额'].rolling(window=3).mean()\ndf['5期移动平均'] = df['销售额'].rolling(window=5).mean()\n\nprint('\n移动平均预测:')\nprint(df)\n\n# 2. 预测下一期销售额\nlast_3_sales = df['销售额'].tail(3)\nnext_month_prediction_3 = last_3_sales.mean()\n\nlast_5_sales = df['销售额'].tail(5)\nnext_month_prediction_5 = last_5_sales.mean()\n\nprint('\n预测结果:')\nprint(f'基于3期移动平均的2024年1月销售额预测: {next_month_prediction_3:.2f}')\nprint(f'基于5期移动平均的2024年1月销售额预测: {next_month_prediction_5:.2f}')\n\n# 3. 评估预测效果（使用历史数据进行回测）\ndf['3期移动平均预测'] = df['3期移动平均'].shift(1)\ndf['5期移动平均预测'] = df['5期移动平均'].shift(1)\n\n# 计算预测误差\ndf['3期误差'] = df['销售额'] - df['3期移动平均预测']\ndf['5期误差'] = df['销售额'] - df['5期移动平均预测']\ndf['3期绝对误差'] = abs(df['3期误差'])\ndf['5期绝对误差'] = abs(df['5期误差'])\n\n# 计算平均绝对误差 (MAE)\nmae_3 = df['3期绝对误差'].mean()\nmae_5 = df['5期绝对误差'].mean()\n\nprint('\n预测效果评估:')\nprint(f'3期移动平均的MAE: {mae_3:.2f}')\nprint(f'5期移动平均的MAE: {mae_5:.2f}')\n",
+            difficulty: "中等"
+          },
+          {
+            id: 2,
+            type: "text",
+            title: "练习2：简单预测模型",
+            description: "回答关于简单预测模型的问题",
+            difficulty: "中等",
+            question: "1. 常见的简单预测方法有哪些？\n\n2. 移动平均法的基本原理是什么？\n\n3. 如何评估预测模型的性能？",
+            answer: "1. 常见的简单预测方法包括：\n   - 移动平均法：使用历史数据的平均值\n   - 指数平滑法：对历史数据赋予不同权重\n   - 线性趋势法：基于线性回归\n   - 季节性预测法：考虑季节性因素\n   - 因果预测法：基于因果关系\n\n2. 移动平均法的基本原理：\n   - 计算最近n个时期数据的平均值作为下一期的预测值\n   - 随着时间推移，不断更新平均值，去掉最早的数据点，加入最新的数据点\n   - 适用于稳定的时间序列数据，无明显趋势和季节性\n\n3. 评估预测模型性能的指标：\n   - 均方误差 (MSE)：预测值与实际值差的平方的平均值\n   - 均方根误差 (RMSE)：MSE的平方根\n   - 平均绝对误差 (MAE)：预测值与实际值差的绝对值的平均值\n   - 平均绝对百分比误差 (MAPE)：MAE与实际值的比值\n   - R²值：模型解释数据变异的比例"
+          }
+        ];
+      } else {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习：商业数据可视化与预测",
+            description: "回答关于商业数据可视化与预测的问题",
+            difficulty: "中等",
+            question: "1. 商业数据可视化的目的是什么？\n\n2. 什么是时间序列预测？它的应用场景有哪些？\n\n3. 数据可视化和预测在商业决策中的作用是什么？",
+            answer: "1. 商业数据可视化的目的：直观展示业务数据、发现数据模式、支持决策制定、提高沟通效率、识别业务机会和风险。\n\n2. 时间序列预测是基于历史时间序列数据预测未来值的方法。应用场景：销售预测、库存管理、需求预测、财务预测等。\n\n3. 数据可视化和预测在商业决策中的作用：提供数据支持、降低决策风险、发现市场趋势、优化资源配置、提高运营效率。"
           }
         ];
       }
