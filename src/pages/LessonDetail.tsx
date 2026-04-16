@@ -643,6 +643,194 @@ print('    print(item)')
       }
     }
     
+    // 课程10: 商业预测模型
+    if (id === '10') {
+      if (lessonId === '1') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习1：预测模型概述",
+            description: "回答关于预测模型基本概念的问题",
+            difficulty: "简单",
+            question: "1. 什么是预测模型？请列举至少3个预测模型的应用场景。\n\n2. 预测模型的基本流程是什么？\n\n3. 请列举至少3个预测模型的评估指标。",
+            answer: "1. 预测模型是一种用于预测未来结果的数学模型。常见的应用场景包括：销售预测、库存预测、客户流失预测、市场需求预测等。\n\n2. 预测模型的基本流程：问题定义、数据收集、数据预处理、模型选择、模型训练、模型评估、模型应用、模型监控。\n\n3. 预测模型的评估指标：MAE（平均绝对误差）、MSE（均方误差）、RMSE（均方根误差）、R²值、准确率、召回率、F1分数等。"
+          }
+        ];
+      } else if (lessonId === '2') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习2：时间序列分析",
+            description: "学习时间序列的基本分析方法",
+            template: "# 时间序列分析练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 创建模拟时间序列数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='D')\n# 生成带有趋势和季节性的时间序列\ntrend = np.linspace(100, 200, len(dates))\nseasonality = 50 * np.sin(np.arange(len(dates)) * 2 * np.pi / 365)\nnoise = np.random.normal(0, 10, len(dates))\nvalues = trend + seasonality + noise\n\ndf = pd.DataFrame({'日期': dates, '值': values})\n\nprint('时间序列数据前5行:')\nprint(df.head())\n\n# TODO: 计算移动平均\n# 计算7天移动平均\n# df['7天移动平均'] = \n\n# TODO: 计算30天移动平均\n# df['30天移动平均'] = \n\nprint('移动平均计算完成')\n",
+            answer: "# 时间序列分析练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 创建模拟时间序列数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='D')\n# 生成带有趋势和季节性的时间序列\ntrend = np.linspace(100, 200, len(dates))\nseasonality = 50 * np.sin(np.arange(len(dates)) * 2 * np.pi / 365)\nnoise = np.random.normal(0, 10, len(dates))\nvalues = trend + seasonality + noise\n\ndf = pd.DataFrame({'日期': dates, '值': values})\n\nprint('时间序列数据前5行:')\nprint(df.head())\n\n# 计算移动平均\n# 计算7天移动平均\ndf['7天移动平均'] = df['值'].rolling(window=7).mean()\n\n# 计算30天移动平均\ndf['30天移动平均'] = df['值'].rolling(window=30).mean()\n\nprint('移动平均计算完成')\nprint('计算结果前10行:')\nprint(df.head(10))\n\n# 简单的时间序列分析\nprint('\n时间序列基本统计:')\nprint(df['值'].describe())\n\n# 计算自相关\nautocorr = df['值'].autocorr()\nprint('\n自相关系数:', autocorr)\n",
+            difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '3') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习3：移动平均模型",
+            description: "学习移动平均模型的实现",
+            template: "# 移动平均模型练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 创建模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [120, 132, 145, 150, 160, 175, 180, 195, 205, 210, 220, 230]\ndf = pd.DataFrame({'日期': dates, '销售额': sales})\n\nprint('销售数据:')\nprint(df)\n\n# TODO: 计算简单移动平均（3个月）\n# df['SMA3'] = \n\n# TODO: 计算加权移动平均（3个月，权重为[0.2, 0.3, 0.5]）\n# weights = [0.2, 0.3, 0.5]\n# df['WMA3'] = \n\n# TODO: 计算指数移动平均（alpha=0.3）\n# df['EMA'] = \n\nprint('移动平均计算完成')\n",
+            answer: "# 移动平均模型练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 创建模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [120, 132, 145, 150, 160, 175, 180, 195, 205, 210, 220, 230]\ndf = pd.DataFrame({'日期': dates, '销售额': sales})\n\nprint('销售数据:')\nprint(df)\n\n# 计算简单移动平均（3个月）\ndf['SMA3'] = df['销售额'].rolling(window=3).mean()\n\n# 计算加权移动平均（3个月，权重为[0.2, 0.3, 0.5]）\nweights = [0.2, 0.3, 0.5]\ndf['WMA3'] = df['销售额'].rolling(window=3).apply(lambda x: np.dot(x, weights), raw=True)\n\n# 计算指数移动平均（alpha=0.3）\ndf['EMA'] = df['销售额'].ewm(alpha=0.3, adjust=False).mean()\n\nprint('移动平均计算完成')\nprint('计算结果:')\nprint(df)\n\n# 简单的预测\n# 使用最后一个EMA值预测下一个月\nlast_ema = df['EMA'].iloc[-1]\nprint('\n使用EMA预测下一个月销售额:', last_ema)\n",
+            difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '4') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习4：指数平滑模型",
+            description: "学习指数平滑模型的实现",
+            template: "# 指数平滑模型练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 创建模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [120, 132, 145, 150, 160, 175, 180, 195, 205, 210, 220, 230]\ndf = pd.DataFrame({'日期': dates, '销售额': sales})\n\nprint('销售数据:')\nprint(df)\n\n# TODO: 计算简单指数平滑（alpha=0.3）\n# df['SES'] = \n\n# TODO: 计算双指数平滑（alpha=0.3, beta=0.2）\n# 这里使用pandas的ewm实现简单版本\n\nprint('指数平滑计算完成')\n",
+            answer: "# 指数平滑模型练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 创建模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [120, 132, 145, 150, 160, 175, 180, 195, 205, 210, 220, 230]\ndf = pd.DataFrame({'日期': dates, '销售额': sales})\n\nprint('销售数据:')\nprint(df)\n\n# 计算简单指数平滑（alpha=0.3）\ndf['SES'] = df['销售额'].ewm(alpha=0.3, adjust=False).mean()\n\n# 计算双指数平滑（简单实现）\nalpha = 0.3\nbeta = 0.2\n\n# 初始化\nlevel = [df['销售额'].iloc[0]]\ntrend = [df['销售额'].iloc[1] - df['销售额'].iloc[0]]\nholt = [level[0] + trend[0]]\n\n# 迭代计算\nfor i in range(1, len(df)):\n    # 更新水平\n    new_level = alpha * df['销售额'].iloc[i] + (1 - alpha) * (level[i-1] + trend[i-1])\n    level.append(new_level)\n    # 更新趋势\n    new_trend = beta * (new_level - level[i-1]) + (1 - beta) * trend[i-1]\n    trend.append(new_trend)\n    # 计算预测\n    holt.append(new_level + new_trend)\n\ndf['Holt'] = holt\n\nprint('指数平滑计算完成')\nprint('计算结果:')\nprint(df)\n\n# 简单的预测\n# 使用最后一个Holt值预测下一个月\nlast_holt = df['Holt'].iloc[-1]\nprint('\n使用双指数平滑预测下一个月销售额:', last_holt)\n",
+            difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '5') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习5：线性回归分析",
+            description: "学习线性回归模型的实现",
+            template: "# 线性回归分析练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.linear_model import LinearRegression\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 创建模拟数据\nx = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).reshape(-1, 1)\ny = np.array([2, 4, 5, 7, 8, 10, 11, 13, 14, 16])\n\ndf = pd.DataFrame({'x': x.flatten(), 'y': y})\nprint('数据:')\nprint(df)\n\n# TODO: 创建并训练线性回归模型\n# model = LinearRegression()\n# model.fit(x, y)\n\n# TODO: 预测\n# y_pred = model.predict(x)\n\n# TODO: 计算R²值\n# r2 = model.score(x, y)\n\nprint('线性回归分析完成')\n",
+            answer: "# 线性回归分析练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.linear_model import LinearRegression\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 创建模拟数据\nx = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).reshape(-1, 1)\ny = np.array([2, 4, 5, 7, 8, 10, 11, 13, 14, 16])\n\ndf = pd.DataFrame({'x': x.flatten(), 'y': y})\nprint('数据:')\nprint(df)\n\n# 创建并训练线性回归模型\nmodel = LinearRegression()\nmodel.fit(x, y)\n\n# 预测\ny_pred = model.predict(x)\ndf['y_pred'] = y_pred\n\n# 计算R²值\nr2 = model.score(x, y)\n\nprint('线性回归分析完成')\nprint('模型系数:', model.coef_[0])\nprint('模型截距:', model.intercept_)\nprint('R²值:', r2)\nprint('预测结果:')\nprint(df)\n\n# 预测新值\nnew_x = np.array([11, 12, 13]).reshape(-1, 1)\nnew_y_pred = model.predict(new_x)\nprint('\n预测新值:')\nfor i, pred in enumerate(new_y_pred):\n    print(f'x={new_x[i][0]}, 预测y={pred:.2f}')\n",
+            difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '6') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习6：多元回归分析",
+            description: "学习多元回归模型的实现",
+            template: "# 多元回归分析练习\nimport pandas as pd\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import r2_score\n\n# 创建模拟数据\nnp.random.seed(42)\nX = np.random.rand(100, 2)  # 两个自变量\ny = 2 + 3 * X[:, 0] + 5 * X[:, 1] + np.random.randn(100) * 0.1  # 因变量\n\ndf = pd.DataFrame({'x1': X[:, 0], 'x2': X[:, 1], 'y': y})\nprint('数据前5行:')\nprint(df.head())\n\n# TODO: 创建并训练多元回归模型\n# model = LinearRegression()\n# model.fit(X, y)\n\n# TODO: 预测\n# y_pred = model.predict(X)\n\n# TODO: 计算R²值\n# r2 = r2_score(y, y_pred)\n\nprint('多元回归分析完成')\n",
+            answer: "# 多元回归分析练习\nimport pandas as pd\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import r2_score\n\n# 创建模拟数据\nnp.random.seed(42)\nX = np.random.rand(100, 2)  # 两个自变量\ny = 2 + 3 * X[:, 0] + 5 * X[:, 1] + np.random.randn(100) * 0.1  # 因变量\n\ndf = pd.DataFrame({'x1': X[:, 0], 'x2': X[:, 1], 'y': y})\nprint('数据前5行:')\nprint(df.head())\n\n# 创建并训练多元回归模型\nmodel = LinearRegression()\nmodel.fit(X, y)\n\n# 预测\ny_pred = model.predict(X)\ndf['y_pred'] = y_pred\n\n# 计算R²值\nr2 = r2_score(y, y_pred)\n\nprint('多元回归分析完成')\nprint('模型系数:', model.coef_)\nprint('模型截距:', model.intercept_)\nprint('R²值:', r2)\nprint('预测结果前5行:')\nprint(df.head())\n\n# 预测新值\nnew_X = np.array([[0.5, 0.5], [0.2, 0.8], [0.9, 0.1]])\nnew_y_pred = model.predict(new_X)\nprint('\n预测新值:')\nfor i, pred in enumerate(new_y_pred):\n    print(f'x1={new_X[i][0]:.2f}, x2={new_X[i][1]:.2f}, 预测y={pred:.2f}')\n",
+            difficulty: "中等"
+          }
+        ];
+      } else if (lessonId === '7') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习7：模型评估与选择",
+            description: "回答关于模型评估与选择的问题",
+            difficulty: "中等",
+            question: "1. 请列举至少3个回归模型的评估指标，并解释它们的含义。\n\n2. 什么是交叉验证？它的作用是什么？\n\n3. 如何选择合适的预测模型？\n\n4. 模型部署和监控的重要性是什么？",
+            answer: "1. 回归模型的评估指标：\n- MAE（平均绝对误差）：预测值与实际值绝对差的平均值，反映预测的平均误差大小。\n- MSE（均方误差）：预测值与实际值差的平方的平均值，对大误差更敏感。\n- RMSE（均方根误差）：MSE的平方根，单位与因变量相同，更直观。\n- R²值：模型解释因变量变异的比例，取值范围0-1，越接近1越好。\n\n2. 交叉验证是一种模型评估方法，将数据分成多个子集，用一部分作为训练集，另一部分作为测试集，重复多次以评估模型性能。作用：减少过拟合风险，更准确评估模型泛化能力。\n\n3. 选择合适的预测模型的方法：\n- 基于数据特性选择模型类型\n- 使用交叉验证评估不同模型\n- 考虑模型复杂度和解释性\n- 考虑计算效率和部署成本\n- 结合业务需求和实际应用场景\n\n4. 模型部署和监控的重要性：\n- 确保模型在实际环境中正常运行\n- 及时发现模型性能下降\n- 适应数据分布变化\n- 确保模型符合业务需求\n- 持续改进模型性能\n- 满足合规要求"
+          }
+        ];
+      } else if (lessonId === '8') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习8：预测模型实战",
+            description: "回答关于预测模型实战的问题",
+            difficulty: "中等",
+            question: "1. 一个完整的预测模型项目包括哪些步骤？\n\n2. 数据预处理在预测模型中的重要性是什么？\n\n3. 特征工程对预测模型性能有什么影响？\n\n4. 如何将预测模型的结果转化为业务价值？",
+            answer: "1. 完整的预测模型项目步骤：\n- 项目定义和目标设定\n- 数据收集和理解\n- 数据预处理和清洗\n- 特征工程\n- 模型选择和训练\n- 模型评估和优化\n- 模型部署\n- 模型监控和维护\n\n2. 数据预处理的重要性：\n- 提高数据质量，减少噪声和异常值\n- 确保数据格式正确，符合模型要求\n- 处理缺失值，避免模型训练失败\n- 标准化或归一化数据，提高模型收敛速度\n- 减少数据冗余，提高模型效率\n\n3. 特征工程对预测模型性能的影响：\n- 提取更有价值的特征，提高模型预测能力\n- 减少无关特征，降低模型复杂度\n- 捕获变量间的非线性关系\n- 提高模型的可解释性\n- 减少过拟合风险\n\n4. 将预测模型结果转化为业务价值的方法：\n- 制定基于预测结果的业务策略\n- 优化资源分配和规划\n- 识别业务机会和风险\n- 自动化决策流程\n- 持续监控和评估业务影响\n- 与其他业务系统集成"
+          }
+        ];
+      } else if (lessonId === '9') {
+        return [
+          {
+            id: 1,
+            type: "code",
+            title: "练习9：销售预测",
+            description: "学习销售预测模型的实现",
+            template: `# 销售预测练习
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+# 设置中文字体
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+
+# 创建模拟销售数据
+dates = pd.date_range('2023-01-01', '2023-12-31', freq='M')
+# 生成带有趋势和季节性的销售数据
+trend = np.linspace(1000, 2000, len(dates))
+seasonality = 300 * np.sin(np.arange(len(dates)) * 2 * np.pi / 12)
+noise = np.random.normal(0, 50, len(dates))
+sales = trend + seasonality + noise
+
+df = pd.DataFrame({'日期': dates, '销售额': sales})
+# 添加月份特征
+df['月份'] = df['日期'].dt.month
+
+print('销售数据:')
+print(df)
+
+# TODO: 准备特征和目标变量
+# X = df[['月份']].values
+# y = df['销售额'].values
+
+# TODO: 创建并训练模型
+# model = LinearRegression()
+# model.fit(X, y)
+
+# TODO: 预测
+# y_pred = model.predict(X)
+
+print('销售预测完成')
+`,
+            answer: `# 销售预测练习\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.linear_model import LinearRegression\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# 创建模拟销售数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\n# 生成带有趋势和季节性的销售数据\ntrend = np.linspace(1000, 2000, len(dates))\nseasonality = 300 * np.sin(np.arange(len(dates)) * 2 * np.pi / 12)\nnoise = np.random.normal(0, 50, len(dates))\nsales = trend + seasonality + noise\n\ndf = pd.DataFrame({'日期': dates, '销售额': sales})\n\n# 添加月份特征\ndf['月份'] = df['日期'].dt.month\n# 添加时间趋势特征\ndf['时间趋势'] = np.arange(len(df))\n\nprint('销售数据:')\nprint(df)\n\n# 准备特征和目标变量\nX = df[['月份', '时间趋势']].values\ny = df['销售额'].values\n\n# 创建并训练模型\nmodel = LinearRegression()\nmodel.fit(X, y)\n\n# 预测\ny_pred = model.predict(X)\ndf['预测销售额'] = y_pred\n\nprint('销售预测完成')\nprint('模型系数:', model.coef_)\nprint('模型截距:', model.intercept_)\nprint('预测结果:')\nprint(df[['日期', '销售额', '预测销售额']])\n\n# 预测未来3个月\nfuture_dates = pd.date_range('2024-01-01', '2024-03-01', freq='M')\nfuture_df = pd.DataFrame({'日期': future_dates, '月份': future_dates.month, '时间趋势': np.arange(len(df), len(df)+3)})\nfuture_pred = model.predict(future_df[['月份', '时间趋势']].values)\nfuture_df['预测销售额'] = future_pred\n\nprint('\n未来3个月预测:')
+print(future_df[['日期', '预测销售额']])
+`,
+            difficulty: "中等",
+          }
+        ];
+      } else if (lessonId === '10') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习10：库存预测",
+            description: "回答关于库存预测的问题",
+            difficulty: "中等",
+            question: "1. 库存预测的重要性是什么？\n\n2. 库存预测需要考虑哪些因素？\n\n3. 常用的库存预测方法有哪些？\n\n4. 如何评估库存预测的准确性？",
+            answer: "1. 库存预测的重要性：\n- 优化库存水平，减少库存积压\n- 避免缺货，提高客户满意度\n- 降低库存成本，提高资金利用效率\n- 优化采购计划，提高供应链效率\n- 支持生产和销售计划\n\n2. 库存预测需要考虑的因素：\n- 历史销售数据\n- 季节性和周期性因素\n- 促销活动和营销计划\n- 市场趋势和竞争情况\n- 供应 lead time\n- 产品生命周期\n- 外部因素（经济环境、天气等）\n\n3. 常用的库存预测方法：\n- 移动平均法\n- 指数平滑法\n- ARIMA模型\n- 线性回归\n- 需求预测软件\n- 机器学习方法\n\n4. 评估库存预测准确性的方法：\n- MAE（平均绝对误差）\n- MSE（均方误差）\n- RMSE（均方根误差）\n- MAPE（平均绝对百分比误差）\n- 预测准确率\n- 缺货率\n- 库存周转率"
+          }
+        ];
+      } else if (lessonId === '11') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习11：客户流失预测",
+            description: "回答关于客户流失预测的问题",
+            difficulty: "中等",
+            question: "1. 客户流失预测的重要性是什么？\n\n2. 客户流失预测需要哪些数据？\n\n3. 常用的客户流失预测模型有哪些？\n\n4. 如何使用客户流失预测结果制定客户保留策略？",
+            answer: "1. 客户流失预测的重要性：\n- 识别高风险流失客户，提前采取措施\n- 降低客户获取成本，提高客户终身价值\n- 改善客户服务，提高客户满意度\n- 优化营销策略，提高营销效果\n- 增强企业竞争力\n\n2. 客户流失预测需要的数据：\n- 客户基本信息（年龄、性别、地区等）\n- 交易数据（购买频率、购买金额、最近购买时间等）\n- 服务使用数据（使用频率、使用时长、功能使用情况等）\n- 客户互动数据（客服接触、投诉记录、反馈等）\n- 市场数据（竞争对手信息、市场趋势等）\n\n3. 常用的客户流失预测模型：\n- 逻辑回归\n- 决策树\n- 随机森林\n- 支持向量机\n- 神经网络\n- XGBoost\n\n4. 使用客户流失预测结果制定客户保留策略：\n- 对高风险客户进行个性化沟通\n- 提供针对性的优惠和激励\n- 改善产品或服务质量\n- 加强客户关系管理\n- 定期监控客户行为变化\n- 持续优化预测模型"
+          }
+        ];
+      } else if (lessonId === '12') {
+        return [
+          {
+            id: 1,
+            type: "text",
+            title: "练习12：预测模型项目总结",
+            description: "回答关于预测模型项目总结的问题",
+            difficulty: "简单",
+            question: "1. 预测模型项目的成功因素有哪些？\n\n2. 预测模型项目中常见的挑战有哪些？\n\n3. 预测模型的未来发展趋势是什么？\n\n4. 如何持续改进预测模型的性能？",
+            answer: "1. 预测模型项目的成功因素：\n- 明确的业务目标和需求\n- 高质量的数据\n- 合适的模型选择\n- 有效的特征工程\n- 严格的模型评估\n- 成功的模型部署\n- 持续的模型监控\n- 跨部门协作\n\n2. 预测模型项目中常见的挑战：\n- 数据质量问题\n- 数据获取困难\n- 模型过拟合\n- 模型解释性差\n- 部署环境限制\n- 业务需求变化\n- 模型性能下降\n- 资源和时间限制\n\n3. 预测模型的未来发展趋势：\n- 自动化机器学习（AutoML）\n- 深度学习在预测中的应用\n- 实时预测\n- 边缘计算\n- 集成学习\n- 可解释AI\n- 联邦学习\n- 混合模型\n\n4. 持续改进预测模型性能的方法：\n- 定期更新模型\n- 监控模型性能\n- 收集新数据\n- 优化特征工程\n- 尝试新的模型算法\n- A/B测试\n- 结合业务反馈\n- 持续学习和创新"
+          }
+        ];
+      }
+    }
+    
     // 课程8: 商业数据分析
     if (id === '8') {
       if (lessonId === '1') {
@@ -1255,7 +1443,7 @@ print('    print(item)')
         });
         const data = await response.json();
         // 轮询获取结果
-        const resultResponse = await fetch(`https://judge0-ce.p.rapidapi.com/submissions/${data.token}`, {
+        const resultResponse = await fetch('https://judge0-ce.p.rapidapi.com/submissions/' + data.token, {
           headers: {
             'X-RapidAPI-Key': 'your-api-key',
             'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
@@ -1269,7 +1457,7 @@ print('    print(item)')
     } finally {
       setIsRunning(false);
     }
-  };
+  }
 
   // 复制代码
   const copyCode = () => {
