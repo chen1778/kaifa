@@ -1000,7 +1000,7 @@ const LessonDetail: React.FC = () => {
         {/* 课程大纲总结 */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">课程大纲总结</h2>
-          <div className="prose max-w-none">
+          <div className="space-y-4">
             {(() => {
               const lines = currentLesson.content.split('\n');
               const sections = [];
@@ -1027,18 +1027,21 @@ const LessonDetail: React.FC = () => {
                 sections.push(currentSection);
               }
               
-              return sections.map((section, sectionIndex) => (
-                <div key={sectionIndex} className="mb-4">
-                  <h4 className="text-md font-medium text-gray-800 mb-2">{section.title}</h4>
-                  {section.points.length > 0 && (
-                    <div className="ml-4">
-                      {section.points.map((point, pointIndex) => (
-                        <p key={pointIndex} className="text-gray-600 mb-1">{point}</p>
-                      ))}
+              return sections.map((section, sectionIndex) => {
+                const question = section.title.replace(/:$/, '');
+                const summary = section.points.length > 0 
+                  ? section.points.join('、')
+                  : '本部分内容需要重点掌握';
+                
+                return (
+                  <div key={sectionIndex} className="border border-gray-200 rounded-lg p-4">
+                    <div className="font-medium text-gray-800 mb-2">{question}</div>
+                    <div className="text-gray-600 bg-gray-50 p-3 rounded-md">
+                      <strong>答案：</strong>{summary}
                     </div>
-                  )}
-                </div>
-              ));
+                  </div>
+                );
+              });
             })()}
           </div>
         </div>
