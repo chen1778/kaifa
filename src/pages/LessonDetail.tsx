@@ -1027,21 +1027,20 @@ const LessonDetail: React.FC = () => {
                 sections.push(currentSection);
               }
               
-              return sections.map((section, sectionIndex) => {
-                const question = section.title.replace(/:$/, '');
-                const summary = section.points.length > 0 
-                  ? section.points.join('、')
-                  : '本部分内容需要重点掌握';
-                
-                return (
-                  <div key={sectionIndex} className="border border-gray-200 rounded-lg p-4">
-                    <div className="font-medium text-gray-800 mb-2">{question}</div>
-                    <div className="text-gray-600 bg-gray-50 p-3 rounded-md">
-                      <strong>答案：</strong>{summary}
-                    </div>
+              return sections.map((section, sectionIndex) => (
+                <div key={sectionIndex} className="border border-gray-200 rounded-lg p-4">
+                  <div className="font-medium text-gray-800">
+                    {section.title}
+                    {section.points.length > 0 && (
+                      <div className="mt-2 ml-6 space-y-1">
+                        {section.points.map((point, pointIndex) => (
+                          <div key={pointIndex} className="text-gray-600">- {point}</div>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                );
-              });
+                </div>
+              ));
             })()}
           </div>
         </div>
