@@ -90,6 +90,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：数据概览和基本统计",
             description: "创建电商销售数据并进行基本统计分析",
             template: "# 商业数据分析案例：数据概览和基本统计\nimport pandas as pd\nimport numpy as np\n\n# 模拟电商销售数据\ndata = {\n    '订单ID': range(1, 51),\n    '日期': pd.date_range('2023-01-01', periods=50),\n    '产品类别': np.random.choice(['电子产品', '服装', '家居用品', '食品'], 50),\n    '销售额': np.random.randint(100, 1000, 50),\n    '客户年龄': np.random.randint(18, 65, 50)\n}\n\ndf = pd.DataFrame(data)\n\n# TODO: 1. 查看数据前5行\nprint('数据前5行:')\n\n# TODO: 2. 查看数据基本统计信息\nprint('\n数据基本统计:')\n\n# TODO: 3. 计算总销售额和平均订单金额\nprint('\n总销售额:')\nprint('平均订单金额:')\n",
@@ -106,6 +107,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：数据分析概述",
             description: "了解数据分析的基本概念和流程",
             template: "# 数据分析概述\n\n# 打印数据分析的基本步骤\nprint('数据分析的基本步骤:')\n# TODO: 列出数据分析的基本步骤\n",
@@ -117,6 +119,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：数据导入与导出",
             description: "学习如何导入和导出各种格式的数据",
             template: "# 数据导入与导出\nimport pandas as pd\n\n# 创建示例数据\ndata = {'名称': ['产品A', '产品B', '产品C'], '价格': [100, 200, 300], '销量': [10, 20, 30]}\ndf = pd.DataFrame(data)\n\n# 打印数据\nprint('原始数据:')\nprint(df)\n\n# TODO: 将数据导出为CSV文件\nprint('\n数据已导出为CSV文件')\n",
@@ -128,6 +131,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：数据清洗基础",
             description: "学习数据清洗的基本方法和技巧",
             template: "# 数据清洗基础\nimport pandas as pd\nimport numpy as np\n\n# 创建含有缺失值的示例数据\ndata = {'名称': ['产品A', '产品B', None, '产品D'], '价格': [100, np.nan, 300, 400], '销量': [10, 20, None, 40]}\ndf = pd.DataFrame(data)\n\nprint('原始数据:')\nprint(df)\n\n# TODO: 处理缺失值\nprint('\n处理后的数据:')\n",
@@ -139,6 +143,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：数据探索分析",
             description: "学习如何探索和分析数据",
             template: "# 数据探索分析\nimport pandas as pd\nimport numpy as np\n\n# 创建示例数据\ndata = {'产品类别': ['电子产品', '服装', '家居用品', '食品', '电子产品', '服装'], '销售额': [1000, 500, 800, 300, 1200, 600], '利润': [200, 100, 160, 60, 240, 120]}\ndf = pd.DataFrame(data)\n\nprint('原始数据:')\nprint(df)\n\n# TODO: 按产品类别分组分析\nprint('\n按产品类别分析:')\n",
@@ -150,6 +155,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：数据可视化实践",
             description: "通过实际案例学习数据可视化",
             template: "# 数据可视化实践\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 创建示例数据\ndates = pd.date_range('2023-01-01', '2023-12-31', freq='M')\nsales = [1000, 1200, 900, 1100, 1300, 1250, 1400, 1500, 1350, 1450, 1600, 1700]\ndf = pd.DataFrame({'月份': dates, '销售额': sales})\n\n# 设置中文字体\nplt.rcParams['font.sans-serif'] = ['SimHei']\nplt.rcParams['axes.unicode_minus'] = False\n\n# TODO: 创建销售额折线图\nprint('销售额数据:')\nprint(df)\n",
@@ -161,6 +167,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：统计分析基础",
             description: "学习基本的统计分析方法",
             template: "# 统计分析基础\nimport pandas as pd\nimport numpy as np\n\n# 创建示例数据\ndata = {'销售额': np.random.normal(1000, 200, 100), '利润': np.random.normal(200, 50, 100)}\ndf = pd.DataFrame(data)\n\nprint('数据基本统计:')\nprint(df.describe())\n\n# TODO: 计算相关系数\nprint('\n相关系数:')\n",
@@ -172,6 +179,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：商业案例分析",
             description: "通过商业案例学习数据分析的应用",
             template: "# 商业案例分析\nimport pandas as pd\nimport numpy as np\n\n# 模拟电商销售数据\ndata = {\n    '日期': pd.date_range('2023-01-01', periods=30),\n    '产品类别': np.random.choice(['电子产品', '服装', '家居用品'], 30),\n    '销售额': np.random.randint(500, 2000, 30),\n    '促销活动': np.random.choice(['无', '有'], 30, p=[0.7, 0.3])\n}\n\ndf = pd.DataFrame(data)\n\n# TODO: 分析促销活动对销售额的影响\nprint('促销活动效果分析:')\n",
@@ -183,6 +191,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：项目实践准备",
             description: "准备进行数据分析项目实践",
             template: "# 项目实践准备\n\n# 项目主题：电商销售数据分析\nprint('项目实践准备:')\nprint('1. 确定项目目标')\nprint('2. 收集数据')\nprint('3. 制定分析计划')\nprint('4. 准备分析工具')\n\n# TODO: 列出项目实施的具体步骤\nprint('\n项目实施步骤:')\n",
@@ -194,6 +203,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：项目实施",
             description: "实施数据分析项目",
             template: "# 项目实施\nimport pandas as pd\nimport numpy as np\n\n# 模拟电商销售数据\ndata = {\n    '订单ID': range(1, 101),\n    '日期': pd.date_range('2023-01-01', periods=100),\n    '产品类别': np.random.choice(['电子产品', '服装', '家居用品', '食品'], 100),\n    '销售额': np.random.randint(100, 2000, 100),\n    '客户年龄': np.random.randint(18, 65, 100),\n    '地区': np.random.choice(['北京', '上海', '广州', '深圳'], 100)\n}\n\ndf = pd.DataFrame(data)\n\n# TODO: 进行数据分析\nprint('项目实施分析:')\n",
@@ -205,6 +215,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：项目展示与总结",
             description: "展示项目成果并总结学习内容",
             template: "# 项目展示与总结\n\n# 项目主题：电商销售数据分析\nprint('项目展示与总结:')\nprint('1. 项目背景')\nprint('2. 数据来源')\nprint('3. 分析方法')\n\n# TODO: 总结项目成果和学习收获\nprint('\n项目成果:')\nprint('\n学习收获:')\n",
@@ -391,6 +402,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：基本统计分析",
             description: "对销售数据进行基本统计分析",
             template: "# 基本统计分析\nimport pandas as pd\nimport numpy as np\n\n# 模拟销售数据\ndata = {\n    '日期': pd.date_range('2023-01-01', periods=30),\n    '销售额': np.random.randint(800, 1500, 30),\n    '客户数': np.random.randint(20, 50, 30),\n    '产品类别': np.random.choice(['A', 'B', 'C'], 30)\n}\n\ndf = pd.DataFrame(data)\n\n# 基本统计分析\nprint('销售数据基本统计:')\nprint(df.describe())\n\n# 按产品类别分析\nprint('\n按产品类别销售分析:')\nprint(df.groupby('产品类别')['销售额'].sum())\n",
@@ -402,6 +414,7 @@ const LessonDetail: React.FC = () => {
         return [
           {
             id: 1,
+            type: "code",
             title: "练习1：促销活动效果分析",
             description: "分析不同促销活动对销售的影响",
             template: "# 商业数据分析案例：促销活动效果分析\nimport pandas as pd\nimport numpy as np\n\n# 模拟零售企业数据\ndata = {\n    '日期': pd.date_range('2023-01-01', periods=100),\n    '销售额': np.random.randint(5000, 20000, 100),\n    '客流量': np.random.randint(100, 500, 100),\n    '促销活动': np.random.choice(['无', '节日促销', '会员日', '清仓活动'], 100, p=[0.6, 0.15, 0.15, 0.1])\n}\n\ndf = pd.DataFrame(data)\n\n# TODO: 1. 查看不同促销活动的平均销售额\nprint('不同促销活动的平均销售额:')\n\n# TODO: 2. 查看不同促销活动的平均客流量\nprint('\n不同促销活动的平均客流量:')\n",
@@ -982,6 +995,18 @@ const LessonDetail: React.FC = () => {
               </div>
             </div>
           )}
+        </div>
+
+        {/* 课程大纲总结 */}
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">课程大纲总结</h2>
+          <div className="prose max-w-none">
+            {currentLesson.content.split('\n').filter(line => line.trim().startsWith('1. ') || line.trim().startsWith('2. ') || line.trim().startsWith('3. ') || line.trim().startsWith('4. ') || line.trim().startsWith('5. ')).map((line, index) => (
+              <div key={index} className="mb-3">
+                <h4 className="text-md font-medium text-gray-800">{line.trim()}</h4>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* 互动练习 */}
