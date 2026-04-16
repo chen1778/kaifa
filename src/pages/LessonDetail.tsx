@@ -1001,11 +1001,45 @@ const LessonDetail: React.FC = () => {
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">课程大纲总结</h2>
           <div className="prose max-w-none">
-            {currentLesson.content.split('\n').filter(line => line.trim().startsWith('1. ') || line.trim().startsWith('2. ') || line.trim().startsWith('3. ') || line.trim().startsWith('4. ') || line.trim().startsWith('5. ')).map((line, index) => (
-              <div key={index} className="mb-3">
-                <h4 className="text-md font-medium text-gray-800">{line.trim()}</h4>
-              </div>
-            ))}
+            {(() => {
+              const lines = currentLesson.content.split('\n');
+              const sections = [];
+              let currentSection = null;
+              
+              lines.forEach((line, lineIndex) => {
+                const trimmedLine = line.trim();
+                if (trimmedLine.startsWith('1. ') || trimmedLine.startsWith('2. ') || trimmedLine.startsWith('3. ') || trimmedLine.startsWith('4. ') || trimmedLine.startsWith('5. ')) {
+                  if (currentSection) {
+                    sections.push(currentSection);
+                  }
+                  currentSection = {
+                    title: trimmedLine,
+                    points: []
+                  };
+                } else if (trimmedLine.startsWith('   - ') && currentSection) {
+                  currentSection.points.push(trimmedLine.substring(4));
+                } else if (trimmedLine.length > 0 && currentSection) {
+                  currentSection.points.push(trimmedLine);
+                }
+              });
+              
+              if (currentSection) {
+                sections.push(currentSection);
+              }
+              
+              return sections.map((section, sectionIndex) => (
+                <div key={sectionIndex} className="mb-4">
+                  <h4 className="text-md font-medium text-gray-800 mb-2">{section.title}</h4>
+                  {section.points.length > 0 && (
+                    <div className="ml-4">
+                      {section.points.map((point, pointIndex) => (
+                        <p key={pointIndex} className="text-gray-600 mb-1">{point}</p>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ));
+            })()}
           </div>
         </div>
 
