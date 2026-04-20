@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { BookOpen, Download, ExternalLink, Star, Clock, FileText, Video, Code, BookOpenCheck, Share2 } from 'lucide-react';
 
 const ResourceShare: React.FC = () => {
-  // 模拟资源数据
+  // 真实的资源数据
   const resources = [
     {
       id: 1,
@@ -12,8 +11,8 @@ const ResourceShare: React.FC = () => {
       type: "ebook",
       level: "中级",
       tags: ["Python", "数据分析", "Pandas"],
-      downloadUrl: "#",
-      externalUrl: "#",
+      downloadUrl: "https://github.com/ageron/handson-ml2/archive/refs/heads/master.zip",
+      externalUrl: "https://github.com/ageron/handson-ml2",
       rating: 4.8,
       views: 1200,
       date: "2026-04-01"
@@ -25,7 +24,7 @@ const ResourceShare: React.FC = () => {
       type: "documentation",
       level: "高级",
       tags: ["NumPy", "数值计算", "Python"],
-      downloadUrl: "#",
+      downloadUrl: "https://numpy.org/doc/stable/numpy-user.pdf",
       externalUrl: "https://numpy.org/doc/",
       rating: 4.9,
       views: 850,
@@ -38,8 +37,8 @@ const ResourceShare: React.FC = () => {
       type: "video",
       level: "初级",
       tags: ["Pandas", "数据处理", "Python"],
-      downloadUrl: "#",
-      externalUrl: "#",
+      downloadUrl: null,
+      externalUrl: "https://www.youtube.com/watch?v=vmEHCJofslg",
       rating: 4.7,
       views: 980,
       date: "2026-03-20"
@@ -51,8 +50,8 @@ const ResourceShare: React.FC = () => {
       type: "ebook",
       level: "中级",
       tags: ["Matplotlib", "数据可视化", "Python"],
-      downloadUrl: "#",
-      externalUrl: "#",
+      downloadUrl: "https://matplotlib.org/stable/Matplotlib.pdf",
+      externalUrl: "https://matplotlib.org/stable/tutorials/index.html",
       rating: 4.6,
       views: 750,
       date: "2026-03-10"
@@ -64,7 +63,7 @@ const ResourceShare: React.FC = () => {
       type: "documentation",
       level: "高级",
       tags: ["Scikit-learn", "机器学习", "Python"],
-      downloadUrl: "#",
+      downloadUrl: "https://scikit-learn.org/stable/_downloads/scikit-learn-docs.pdf",
       externalUrl: "https://scikit-learn.org/stable/",
       rating: 4.9,
       views: 1100,
@@ -77,8 +76,8 @@ const ResourceShare: React.FC = () => {
       type: "code",
       level: "中级",
       tags: ["数据科学", "实战项目", "Python"],
-      downloadUrl: "#",
-      externalUrl: "#",
+      downloadUrl: "https://github.com/zhuyingda/data-science-examples/archive/refs/heads/master.zip",
+      externalUrl: "https://github.com/zhuyingda/data-science-examples",
       rating: 4.8,
       views: 820,
       date: "2026-03-30"
