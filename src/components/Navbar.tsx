@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useStore } from '../store';
-import { Menu, X, User, LogOut, Home, BookOpen, Code, Briefcase, Trophy } from 'lucide-react';
+import { Menu, X, User, LogOut, Home, BookOpen, Code, Briefcase, Trophy, Share2 } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const { user, logout, isLoading } = useStore();
@@ -38,6 +38,9 @@ const Navbar: React.FC = () => {
             </Link>
             <Link to="/achievements" className="text-gray-700 hover:text-blue-600 transition-colors">
               <Trophy className="h-5 w-5 inline mr-1" /> 成就
+            </Link>
+            <Link to="/resources" className="text-gray-700 hover:text-blue-600 transition-colors">
+              <Share2 className="h-5 w-5 inline mr-1" /> 资源
             </Link>
 
             {user ? (
@@ -80,6 +83,7 @@ const Navbar: React.FC = () => {
             <Link to="/practice" className="block text-gray-700 hover:text-blue-600 transition-colors">练习</Link>
             <Link to="/projects" className="block text-gray-700 hover:text-blue-600 transition-colors">项目</Link>
             <Link to="/achievements" className="block text-gray-700 hover:text-blue-600 transition-colors">成就</Link>
+            <Link to="/resources" className="block text-gray-700 hover:text-blue-600 transition-colors">资源</Link>
 
             {user ? (
               <div className="pt-3 border-t border-gray-200">
