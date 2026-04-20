@@ -18,14 +18,20 @@ const PythonEditor: React.FC = () => {
     const loadPyodide = async () => {
       try {
         setPyodideLoading(true);
-        // 尝试使用最新版本的Pyodide
+        // 预加载提示
+        setOutput('正在加载Python环境，请稍候...');
+        
+        // 尝试使用更轻量级的Pyodide版本
         const { loadPyodide } = await import('pyodide');
         const pyodide = await loadPyodide({
-          indexURL: "https://cdn.jsdelivr.net/pyodide/v0.26.1/full/" // 使用稳定版本
+          indexURL: "https://cdn.jsdelivr.net/pyodide/v0.26.1/full/", // 使用稳定版本
+          packages: [] // 不自动加载任何包，加快启动速度
         });
-        // 只加载必要的包，避免可能的I/O问题
+        
+        // 只在需要时加载包
         pyodideRef.current = pyodide;
         setPyodideLoaded(true);
+        setOutput('Python环境加载完成！');
       } catch (error) {
         console.error('Pyodide加载失败:', error);
         setError('错误: Pyodide加载失败，请刷新页面重试');
@@ -147,15 +153,24 @@ sys.stderr = sys.__stderr__
               <div className="flex items-center justify-between">
                 <h2 className="font-semibold text-gray-700">代码编辑</h2>
                 {pyodideLoading && (
-                  <span className="text-sm text-gray-500">Pyodide加载中...</span>
+                  <div className="flex items-center">
+                    <span className="text-sm text-gray-500 mr-2">Python环境加载中...</span>
+                    <div className="w-20 bg-gray-200 rounded-full h-2">
+                      <div className="bg-blue-600 h-2 rounded-full animate-pulse" style={{ width: '60%' }}></div>
+                    </div>
+                  </div>
+                )}
+                {pyodideLoaded && (
+                  <span className="text-sm text-green-600">Python环境已就绪</span>
                 )}
               </div>
-              <div className="border border-gray-300 rounded-md bg-gray-50">
+              <div className={`border ${pyodideLoading ? 'border-gray-300' : 'border-gray-300'} rounded-md bg-gray-50`}>
                 <textarea
                   ref={codeEditorRef}
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
-                  className="w-full p-4 text-gray-800 font-mono text-sm min-h-[400px] resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  disabled={pyodideLoading}
+                  className={`w-full p-4 text-gray-800 font-mono text-sm min-h-[400px] resize-y focus:outline-none focus:ring-2 focus:ring-blue-500 ${pyodideLoading ? 'bg-gray-100 cursor-not-allowed' : ''}`}
                   spellCheck={false}
                   autoFocus
                 />
