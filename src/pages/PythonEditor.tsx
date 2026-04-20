@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, Play, CheckCircle2, RotateCcw, Code, Terminal } from 'lucide-react';
 
 const PythonEditor: React.FC = () => {
-  const [code, setCode] = useState('# 在这里输入Python代码\nprint("Hello, Python!")\n\n# 示例：计算斐波那契数列\ndef fibonacci(n):\n    if n <= 1:\n        return n\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n# 测试斐波那契函数\nprint("斐波那契数列前10项：")\nfor i in range(10):\n    print(fibonacci(i))');
+  const [code, setCode] = useState('# 在这里输入Python代码\nprint("Hello, Python!")\n\n# 示例1：计算斐波那契数列\ndef fibonacci(n):\n    if n <= 1:\n        return n\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n# 测试斐波那契函数\nprint("斐波那契数列前10项：")\nfor i in range(10):\n    print(fibonacci(i))\n\n# 示例2：使用NumPy\nimport numpy as np\n\n# 创建数组\narr = np.array([1, 2, 3, 4, 5])\nprint("\nNumPy数组：", arr)\nprint("数组和：", np.sum(arr))\nprint("数组平均值：", np.mean(arr))');
+  const [error, setError] = useState('');
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -44,22 +45,31 @@ const PythonEditor: React.FC = () => {
 
     setIsRunning(true);
     setIsCompleted(false);
-    setOutput('运行中...');
+    setOutput('');
+    setError('');
 
     try {
       // 重定向标准输出
+      const outputBuffer: string[] = [];
+      const errorBuffer: string[] = [];
+
       pyodideRef.current.setStdout({ write: (text: string) => {
-        setOutput(prev => prev + text);
+        outputBuffer.push(text);
       }});
       pyodideRef.current.setStderr({ write: (text: string) => {
-        setOutput(prev => prev + '错误: ' + text);
+        errorBuffer.push(text);
       }});
 
       // 执行代码
       await pyodideRef.current.runPython(code);
       setIsCompleted(true);
-    } catch (error) {
-      setOutput(prev => prev + '\n错误: ' + error);
+      setOutput(outputBuffer.join(''));
+      if (errorBuffer.length > 0) {
+        setError(errorBuffer.join(''));
+      }
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      setError('执行错误: ' + errorMessage);
     } finally {
       setIsRunning(false);
     }
@@ -68,6 +78,7 @@ const PythonEditor: React.FC = () => {
   // 清除输出
   const clearOutput = () => {
     setOutput('');
+    setError('');
     setIsCompleted(false);
   };
 
@@ -141,8 +152,13 @@ const PythonEditor: React.FC = () => {
                 运行结果
               </h2>
               <div className="border border-gray-300 rounded-md bg-gray-900 text-gray-100 p-4 font-mono text-sm min-h-[400px] overflow-auto">
-                {output || '点击"运行"按钮执行代码...'}
-                {isCompleted && (
+                {output || error || '点击"运行"按钮执行代码...'}
+                {error && (
+                  <div className="mt-2 text-red-400 flex items-center">
+                    <span className="font-semibold">执行失败</span>
+                  </div>
+                )}
+                {isCompleted && !error && (
                   <div className="mt-2 text-green-400 flex items-center">
                     <CheckCircle2 className="h-4 w-4 mr-1" />
                     执行完成
