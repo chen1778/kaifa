@@ -20,7 +20,6 @@ const PythonEditor: React.FC = () => {
       setOutput('使用本地执行模式...\n');
       
       // 简单的Python到JavaScript转换（仅支持基本语法）
-      // 首先处理函数定义
       let jsCode = code
         // 替换print语句
         .replace(/print\((.*?)\)/g, 'console.log($1)')
@@ -31,7 +30,9 @@ const PythonEditor: React.FC = () => {
         // 替换else语句
         .replace(/else:/g, '} else {')
         // 替换for循环
-        .replace(/for\s+(\w+)\s+in\s+range\((.*?)\):/g, 'for (let $1 = 0; $1 < $2; $1++) {');
+        .replace(/for\s+(\w+)\s+in\s+range\((.*?)\):/g, 'for (let $1 = 0; $1 < $2; $1++) {')
+        // 移除所有注释
+        .replace(/#.*$/gm, '');
       
       // 处理代码块闭合
       const lines = jsCode.split('\n');
@@ -57,8 +58,6 @@ const PythonEditor: React.FC = () => {
           else if (cleanLine.startsWith('}')) {
             indentLevel = Math.max(0, indentLevel - 1);
           }
-        } else {
-          processedLines.push('');
         }
       }
       
