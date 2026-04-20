@@ -20,6 +20,7 @@ const PythonEditor: React.FC = () => {
       setOutput('使用本地执行模式...\n');
       
       // 简单的Python到JavaScript转换（仅支持基本语法）
+      // 首先处理函数定义
       let jsCode = code
         // 替换print语句
         .replace(/print\((.*?)\)/g, 'console.log($1)')
@@ -30,22 +31,47 @@ const PythonEditor: React.FC = () => {
         // 替换else语句
         .replace(/else:/g, '} else {')
         // 替换for循环
-        .replace(/for\s+(\w+)\s+in\s+range\((.*?)\):/g, 'for (let $1 = 0; $1 < $2; $1++) {')
-        // 处理缩进
-        .split('\n')
-        .map(line => {
-          // 移除行尾的冒号
-          line = line.replace(/:$/, '');
-          // 处理缩进（简单版本）
-          const indentMatch = line.match(/^(\s*)/);
-          const indent = indentMatch ? indentMatch[1] : '';
-          const content = line.trim();
-          return indent + content;
-        })
-        .join('\n');
+        .replace(/for\s+(\w+)\s+in\s+range\((.*?)\):/g, 'for (let $1 = 0; $1 < $2; $1++) {');
       
-      // 确保代码块正确闭合
-      jsCode = jsCode + '\n'; // 添加末尾换行
+      // 处理代码块闭合
+      const lines = jsCode.split('\n');
+      const processedLines = [];
+      let indentLevel = 0;
+      
+      for (const line of lines) {
+        const trimmedLine = line.trim();
+        
+        // 移除行尾的冒号
+        const cleanLine = trimmedLine.replace(/:$/, '');
+        
+        if (cleanLine) {
+          // 添加适当的缩进
+          const indent = '  '.repeat(indentLevel);
+          processedLines.push(indent + cleanLine);
+          
+          // 检查是否需要增加缩进
+          if (cleanLine.endsWith('{')) {
+            indentLevel++;
+          }
+          // 检查是否需要减少缩进
+          else if (cleanLine.startsWith('}')) {
+            indentLevel = Math.max(0, indentLevel - 1);
+          }
+        } else {
+          processedLines.push('');
+        }
+      }
+      
+      // 确保所有代码块都闭合
+      while (indentLevel > 0) {
+        processedLines.push('  '.repeat(indentLevel - 1) + '}');
+        indentLevel--;
+      }
+      
+      jsCode = processedLines.join('\n');
+      
+      // 确保代码末尾有换行
+      jsCode = jsCode + '\n';
       
       // 捕获console.log输出
       const originalConsoleLog = console.log;
