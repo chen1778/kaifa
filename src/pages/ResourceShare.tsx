@@ -2,30 +2,30 @@ import React from 'react';
 import { BookOpen, Download, ExternalLink, Star, Clock, FileText, Video, Code, BookOpenCheck, Share2 } from 'lucide-react';
 
 const ResourceShare: React.FC = () => {
-  // 真实的资源数据
+  // 精选的学习资源数据
   const resources = [
     {
       id: 1,
-      title: "Python数据分析实战",
-      description: "从入门到精通的Python数据分析实战指南，包含大量实战案例",
+      title: "Python数据分析实战教程",
+      description: "从入门到精通的Python数据分析实战指南，包含大量实战案例和练习",
       type: "ebook",
       level: "中级",
       tags: ["Python", "数据分析", "Pandas"],
-      downloadUrl: "https://github.com/ageron/handson-ml2/archive/refs/heads/master.zip",
-      externalUrl: "https://github.com/ageron/handson-ml2",
+      downloadUrl: "https://www.python.org/doc/",
+      externalUrl: "https://www.runoob.com/python3/python3-tutorial.html",
       rating: 4.8,
       views: 1200,
       date: "2026-04-01"
     },
     {
       id: 2,
-      title: "NumPy官方文档",
-      description: "NumPy库的官方文档，包含详细的API说明和示例",
+      title: "NumPy学习指南",
+      description: "NumPy库的完整学习指南，包含详细的API说明和丰富的示例代码",
       type: "documentation",
       level: "高级",
       tags: ["NumPy", "数值计算", "Python"],
-      downloadUrl: "https://numpy.org/doc/stable/numpy-user.pdf",
-      externalUrl: "https://numpy.org/doc/",
+      downloadUrl: null,
+      externalUrl: "https://www.runoob.com/numpy/numpy-tutorial.html",
       rating: 4.9,
       views: 850,
       date: "2026-03-15"
@@ -33,38 +33,38 @@ const ResourceShare: React.FC = () => {
     {
       id: 3,
       title: "Pandas视频教程",
-      description: "Pandas库的视频教程，从基础到高级应用",
+      description: "Pandas库的完整视频教程，从基础到高级应用的全面讲解",
       type: "video",
       level: "初级",
       tags: ["Pandas", "数据处理", "Python"],
       downloadUrl: null,
-      externalUrl: "https://www.youtube.com/watch?v=vmEHCJofslg",
+      externalUrl: "https://www.runoob.com/pandas/pandas-tutorial.html",
       rating: 4.7,
       views: 980,
       date: "2026-03-20"
     },
     {
       id: 4,
-      title: "Matplotlib数据可视化",
-      description: "Matplotlib库的使用指南，学习如何创建各种数据可视化图表",
+      title: "Matplotlib数据可视化教程",
+      description: "Matplotlib库的使用指南，学习如何创建各种精美的数据可视化图表",
       type: "ebook",
       level: "中级",
       tags: ["Matplotlib", "数据可视化", "Python"],
-      downloadUrl: "https://matplotlib.org/stable/Matplotlib.pdf",
-      externalUrl: "https://matplotlib.org/stable/tutorials/index.html",
+      downloadUrl: null,
+      externalUrl: "https://www.runoob.com/matplotlib/matplotlib-tutorial.html",
       rating: 4.6,
       views: 750,
       date: "2026-03-10"
     },
     {
       id: 5,
-      title: "Scikit-learn机器学习",
-      description: "Scikit-learn库的使用指南，包含机器学习算法的实现",
+      title: "Scikit-learn机器学习教程",
+      description: "Scikit-learn库的完整学习指南，包含各种机器学习算法的实现和应用",
       type: "documentation",
       level: "高级",
       tags: ["Scikit-learn", "机器学习", "Python"],
-      downloadUrl: "https://scikit-learn.org/stable/_downloads/scikit-learn-docs.pdf",
-      externalUrl: "https://scikit-learn.org/stable/",
+      downloadUrl: null,
+      externalUrl: "https://scikit-learn.org.cn/",
       rating: 4.9,
       views: 1100,
       date: "2026-03-25"
@@ -72,12 +72,12 @@ const ResourceShare: React.FC = () => {
     {
       id: 6,
       title: "数据科学实战项目",
-      description: "多个数据科学实战项目，包含完整的代码和分析过程",
+      description: "多个数据科学实战项目，包含完整的代码实现和详细的分析过程",
       type: "code",
       level: "中级",
       tags: ["数据科学", "实战项目", "Python"],
-      downloadUrl: "https://github.com/zhuyingda/data-science-examples/archive/refs/heads/master.zip",
-      externalUrl: "https://github.com/zhuyingda/data-science-examples",
+      downloadUrl: null,
+      externalUrl: "https://www.kaggle.com/",
       rating: 4.8,
       views: 820,
       date: "2026-03-30"
