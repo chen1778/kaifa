@@ -20,15 +20,32 @@ const PythonEditor: React.FC = () => {
       setOutput('使用本地执行模式...\n');
       
       // 简单的Python到JavaScript转换（仅支持基本语法）
-      const jsCode = code
+      let jsCode = code
+        // 替换print语句
         .replace(/print\((.*?)\)/g, 'console.log($1)')
+        // 替换函数定义
         .replace(/def (\w+)\((.*?)\):/g, 'function $1($2) {')
-        .replace(/:\n/g, '\n')
+        // 替换if语句
         .replace(/if (.*?):/g, 'if ($1) {')
+        // 替换else语句
         .replace(/else:/g, '} else {')
-        .replace(/for (.*?) in (.*?):/g, 'for (let $1 of $2) {')
-        .replace(/range\((.*?)\)/g, 'Array.from({length: $1}, (_, i) => i)')
-        .replace(/}/g, '}\n');
+        // 替换for循环
+        .replace(/for\s+(\w+)\s+in\s+range\((.*?)\):/g, 'for (let $1 = 0; $1 < $2; $1++) {')
+        // 处理缩进
+        .split('\n')
+        .map(line => {
+          // 移除行尾的冒号
+          line = line.replace(/:$/, '');
+          // 处理缩进（简单版本）
+          const indentMatch = line.match(/^(\s*)/);
+          const indent = indentMatch ? indentMatch[1] : '';
+          const content = line.trim();
+          return indent + content;
+        })
+        .join('\n');
+      
+      // 确保代码块正确闭合
+      jsCode = jsCode + '\n'; // 添加末尾换行
       
       // 捕获console.log输出
       const originalConsoleLog = console.log;
