@@ -42,6 +42,9 @@ const Navbar: React.FC = () => {
             <Link to="/resources" className="text-gray-700 hover:text-blue-600 transition-colors">
               <Share2 className="h-5 w-5 inline mr-1" /> 资源
             </Link>
+            <Link to="/python-editor" className="text-gray-700 hover:text-blue-600 transition-colors">
+              <Code className="h-5 w-5 inline mr-1" /> Python编辑器
+            </Link>
 
             {user ? (
               <div className="flex items-center space-x-4">
@@ -84,6 +87,7 @@ const Navbar: React.FC = () => {
             <Link to="/projects" className="block text-gray-700 hover:text-blue-600 transition-colors">项目</Link>
             <Link to="/achievements" className="block text-gray-700 hover:text-blue-600 transition-colors">成就</Link>
             <Link to="/resources" className="block text-gray-700 hover:text-blue-600 transition-colors">资源</Link>
+            <Link to="/python-editor" className="block text-gray-700 hover:text-blue-600 transition-colors">Python编辑器</Link>
 
             {user ? (
               <div className="pt-3 border-t border-gray-200">
