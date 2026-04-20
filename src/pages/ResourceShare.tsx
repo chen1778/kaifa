@@ -11,7 +11,7 @@ const ResourceShare: React.FC = () => {
       type: "ebook",
       level: "中级",
       tags: ["Python", "数据分析", "Pandas"],
-      downloadUrl: "https://www.python.org/doc/",
+      downloadUrl: null,
       externalUrl: "https://www.runoob.com/python3/python3-tutorial.html",
       rating: 4.8,
       views: 1200,
