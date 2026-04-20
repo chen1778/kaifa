@@ -16,11 +16,13 @@ const PythonEditor: React.FC = () => {
     setOutput('运行中...');
 
     try {
-      // 使用客户端JavaScript模拟简单的Python执行
-      setOutput('使用本地执行模式...\n');
-      
       // 简单的Python到JavaScript转换（仅支持基本语法）
-      let jsCode = code
+      // 首先处理代码，移除注释并规范化格式
+      let processedCode = code
+        // 移除所有注释
+        .replace(/#.*$/gm, '')
+        // 移除空行
+        .replace(/^\s*$/gm, '')
         // 替换print语句
         .replace(/print\((.*?)\)/g, 'console.log($1)')
         // 替换函数定义
@@ -30,32 +32,26 @@ const PythonEditor: React.FC = () => {
         // 替换else语句
         .replace(/else:/g, '} else {')
         // 替换for循环
-        .replace(/for\s+(\w+)\s+in\s+range\((.*?)\):/g, 'for (let $1 = 0; $1 < $2; $1++) {')
-        // 移除所有注释
-        .replace(/#.*$/gm, '');
+        .replace(/for\s+(\w+)\s+in\s+range\((.*?)\):/g, 'for (let $1 = 0; $1 < $2; $1++) {');
       
-      // 处理代码块闭合
-      const lines = jsCode.split('\n');
-      const processedLines = [];
+      // 处理缩进和代码块
+      const lines = processedCode.split('\n');
+      const jsLines = [];
       let indentLevel = 0;
       
       for (const line of lines) {
         const trimmedLine = line.trim();
-        
-        // 移除行尾的冒号
-        const cleanLine = trimmedLine.replace(/:$/, '');
-        
-        if (cleanLine) {
+        if (trimmedLine) {
           // 添加适当的缩进
           const indent = '  '.repeat(indentLevel);
-          processedLines.push(indent + cleanLine);
+          jsLines.push(indent + trimmedLine);
           
           // 检查是否需要增加缩进
-          if (cleanLine.endsWith('{')) {
+          if (trimmedLine.endsWith('{')) {
             indentLevel++;
           }
           // 检查是否需要减少缩进
-          else if (cleanLine.startsWith('}')) {
+          else if (trimmedLine.startsWith('}')) {
             indentLevel = Math.max(0, indentLevel - 1);
           }
         }
@@ -63,14 +59,11 @@ const PythonEditor: React.FC = () => {
       
       // 确保所有代码块都闭合
       while (indentLevel > 0) {
-        processedLines.push('  '.repeat(indentLevel - 1) + '}');
+        jsLines.push('  '.repeat(indentLevel - 1) + '}');
         indentLevel--;
       }
       
-      jsCode = processedLines.join('\n');
-      
-      // 确保代码末尾有换行
-      jsCode = jsCode + '\n';
+      const jsCode = jsLines.join('\n');
       
       // 捕获console.log输出
       const originalConsoleLog = console.log;
@@ -86,7 +79,7 @@ const PythonEditor: React.FC = () => {
       // 恢复console.log
       console.log = originalConsoleLog;
       
-      setOutput('本地执行结果:\n' + logOutput);
+      setOutput('执行结果:\n' + logOutput);
       setIsCompleted(true);
     } catch (err) {
       setOutput('执行错误: ' + (err instanceof Error ? err.message : String(err)));
