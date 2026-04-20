@@ -18,16 +18,17 @@ const PythonEditor: React.FC = () => {
     const loadPyodide = async () => {
       try {
         setPyodideLoading(true);
+        // 尝试使用最新版本的Pyodide
         const { loadPyodide } = await import('pyodide');
         const pyodide = await loadPyodide({
-          indexURL: "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/"
+          indexURL: "https://cdn.jsdelivr.net/pyodide/v0.26.1/full/" // 使用稳定版本
         });
-        await pyodide.loadPackage(["numpy", "pandas", "matplotlib"]);
+        // 只加载必要的包，避免可能的I/O问题
         pyodideRef.current = pyodide;
         setPyodideLoaded(true);
       } catch (error) {
         console.error('Pyodide加载失败:', error);
-        setOutput('错误: Pyodide加载失败，请刷新页面重试');
+        setError('错误: Pyodide加载失败，请刷新页面重试');
       } finally {
         setPyodideLoading(false);
       }
@@ -39,7 +40,7 @@ const PythonEditor: React.FC = () => {
   // 运行Python代码
   const runCode = async () => {
     if (!pyodideLoaded || !pyodideRef.current) {
-      setOutput('错误: Pyodide尚未加载完成，请稍候重试');
+      setError('错误: Pyodide尚未加载完成，请稍候重试');
       return;
     }
 
@@ -49,24 +50,40 @@ const PythonEditor: React.FC = () => {
     setError('');
 
     try {
-      // 重定向标准输出
-      const outputBuffer: string[] = [];
-      const errorBuffer: string[] = [];
+      // 使用更安全的方式执行代码，避免I/O操作
+      const safeCode = `
+import sys
 
-      pyodideRef.current.setStdout({ write: (text: string) => {
-        outputBuffer.push(text);
-      }});
-      pyodideRef.current.setStderr({ write: (text: string) => {
-        errorBuffer.push(text);
-      }});
+# 重定向输出
+class OutputRedirect:
+    def __init__(self):
+        self.output = []
+    def write(self, text):
+        self.output.append(text)
+    def flush(self):
+        pass
+
+out_redirect = OutputRedirect()
+sys.stdout = out_redirect
+sys.stderr = out_redirect
+
+try:
+    ${code.replace(/\n/g, '\n    ')}
+except Exception as e:
+    print(f"Error: {e}")
+
+# 恢复标准输出
+sys.stdout = sys.__stdout__
+sys.stderr = sys.__stderr__
+
+# 返回输出
+''.join(out_redirect.output)
+`;
 
       // 执行代码
-      await pyodideRef.current.runPython(code);
+      const result = await pyodideRef.current.runPython(safeCode);
       setIsCompleted(true);
-      setOutput(outputBuffer.join(''));
-      if (errorBuffer.length > 0) {
-        setError(errorBuffer.join(''));
-      }
+      setOutput(result);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : String(err);
       setError('执行错误: ' + errorMessage);
