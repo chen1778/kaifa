@@ -3,50 +3,49 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, Play, CheckCircle2, RotateCcw, Code, Terminal } from 'lucide-react';
 
 const PythonEditor: React.FC = () => {
-  const [code, setCode] = useState('# 在这里输入Python代码\nprint("Hello, Python!")\n\n# 示例1：计算斐波那契数列\ndef fibonacci(n):\n    if n <= 1:\n        return n\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n# 测试斐波那契函数\nprint("斐波那契数列前10项：")\nfor i in range(10):\n    print(fibonacci(i))\n\n# 示例2：使用NumPy\nimport numpy as np\n\n# 创建数组\narr = np.array([1, 2, 3, 4, 5])\nprint("\nNumPy数组：", arr)\nprint("数组和：", np.sum(arr))\nprint("数组平均值：", np.mean(arr))');
+  const [code, setCode] = useState('# 在这里输入Python代码\nprint("Hello, Python!")\n\n# 示例1：计算斐波那契数列\ndef fibonacci(n):\n    if n <= 1:\n        return n\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n# 测试斐波那契函数\nprint("斐波那契数列前10项：")\nfor i in range(10):\n    print(fibonacci(i))');
   const [error, setError] = useState('');
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const codeEditorRef = useRef<HTMLTextAreaElement>(null);
-  const pyodideRef = useRef<any>(null);
-  const [pyodideLoaded, setPyodideLoaded] = useState(false);
-  const [pyodideLoading, setPyodideLoading] = useState(true);
+  const [pythonLoaded, setPythonLoaded] = useState(false);
+  const [pythonLoading, setPythonLoading] = useState(true);
 
-  // 加载Pyodide
+  // 加载Brython
   useEffect(() => {
-    const loadPyodide = async () => {
+    const loadBrython = async () => {
       try {
-        setPyodideLoading(true);
-        // 预加载提示
+        setPythonLoading(true);
         setOutput('正在加载Python环境，请稍候...');
         
-        // 尝试使用更轻量级的Pyodide版本
-        const { loadPyodide } = await import('pyodide');
-        const pyodide = await loadPyodide({
-          indexURL: "https://cdn.jsdelivr.net/pyodide/v0.26.1/full/", // 使用稳定版本
-          packages: [] // 不自动加载任何包，加快启动速度
-        });
-        
-        // 只在需要时加载包
-        pyodideRef.current = pyodide;
-        setPyodideLoaded(true);
-        setOutput('Python环境加载完成！');
+        // 动态加载Brython
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/brython@3.12.0/brython.min.js';
+        script.onload = () => {
+          setPythonLoaded(true);
+          setOutput('Python环境加载完成！');
+          setPythonLoading(false);
+        };
+        script.onerror = () => {
+          setError('错误: Python环境加载失败，请刷新页面重试');
+          setPythonLoading(false);
+        };
+        document.head.appendChild(script);
       } catch (error) {
-        console.error('Pyodide加载失败:', error);
-        setError('错误: Pyodide加载失败，请刷新页面重试');
-      } finally {
-        setPyodideLoading(false);
+        console.error('Brython加载失败:', error);
+        setError('错误: Python环境加载失败，请刷新页面重试');
+        setPythonLoading(false);
       }
     };
 
-    loadPyodide();
+    loadBrython();
   }, []);
 
   // 运行Python代码
   const runCode = async () => {
-    if (!pyodideLoaded || !pyodideRef.current) {
-      setError('错误: Pyodide尚未加载完成，请稍候重试');
+    if (!pythonLoaded) {
+      setError('错误: Python环境尚未加载完成，请稍候重试');
       return;
     }
 
@@ -56,11 +55,13 @@ const PythonEditor: React.FC = () => {
     setError('');
 
     try {
-      // 使用更安全的方式执行代码，避免I/O操作
-      const safeCode = `
+      // 使用Brython执行Python代码
+      window['__python_output'] = '';
+      
+      // 重定向输出的代码
+      const wrappedCode = `
 import sys
 
-# 重定向输出
 class OutputRedirect:
     def __init__(self):
         self.output = []
@@ -74,20 +75,24 @@ sys.stdout = out_redirect
 sys.stderr = out_redirect
 
 try:
-    ${code.replace(/\n/g, '\n    ')}
+${code.split('\n').map(line => `    ${line}`).join('\n')}
 except Exception as e:
     print(f"Error: {e}")
+
+# 保存输出
+__python_output = ''.join(out_redirect.output)
 
 # 恢复标准输出
 sys.stdout = sys.__stdout__
 sys.stderr = sys.__stderr__
-
-# 返回输出
-''.join(out_redirect.output)
 `;
 
       // 执行代码
-      const result = await pyodideRef.current.runPython(safeCode);
+      await window['brython']();
+      window['eval'](wrappedCode);
+      
+      // 获取输出
+      const result = window['__python_output'] || '';
       setIsCompleted(true);
       setOutput(result);
     } catch (err) {
@@ -127,7 +132,7 @@ sys.stderr = sys.__stderr__
             <div className="flex space-x-3">
               <button
                 onClick={runCode}
-                disabled={isRunning || !pyodideLoaded}
+                disabled={isRunning || !pythonLoaded}
                 className="flex items-center bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
                 {isRunning ? (
@@ -152,7 +157,7 @@ sys.stderr = sys.__stderr__
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <h2 className="font-semibold text-gray-700">代码编辑</h2>
-                {pyodideLoading && (
+                {pythonLoading && (
                   <div className="flex items-center">
                     <span className="text-sm text-gray-500 mr-2">Python环境加载中...</span>
                     <div className="w-20 bg-gray-200 rounded-full h-2">
@@ -160,17 +165,17 @@ sys.stderr = sys.__stderr__
                     </div>
                   </div>
                 )}
-                {pyodideLoaded && (
+                {pythonLoaded && (
                   <span className="text-sm text-green-600">Python环境已就绪</span>
                 )}
               </div>
-              <div className={`border ${pyodideLoading ? 'border-gray-300' : 'border-gray-300'} rounded-md bg-gray-50`}>
+              <div className={`border ${pythonLoading ? 'border-gray-300' : 'border-gray-300'} rounded-md bg-gray-50`}>
                 <textarea
                   ref={codeEditorRef}
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
-                  disabled={pyodideLoading}
-                  className={`w-full p-4 text-gray-800 font-mono text-sm min-h-[400px] resize-y focus:outline-none focus:ring-2 focus:ring-blue-500 ${pyodideLoading ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                  disabled={pythonLoading}
+                  className={`w-full p-4 text-gray-800 font-mono text-sm min-h-[400px] resize-y focus:outline-none focus:ring-2 focus:ring-blue-500 ${pythonLoading ? 'bg-gray-100 cursor-not-allowed' : ''}`}
                   spellCheck={false}
                   autoFocus
                 />
